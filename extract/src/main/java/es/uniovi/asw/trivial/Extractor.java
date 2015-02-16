@@ -1,4 +1,4 @@
-package es.uniovi.asw.trivial;
+package main.java.es.uniovi.asw.trivial;
 
 public class Extractor {
 	
