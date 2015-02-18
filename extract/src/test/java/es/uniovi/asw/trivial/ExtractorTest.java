@@ -12,5 +12,6 @@ public class ExtractorTest {
 		Extractor ext = new Extractor();
 	   // assertThat(ext.run(args)).isEqualTo(0);
 	  }
+//Prueba
 
 }
