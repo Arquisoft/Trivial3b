@@ -4,15 +4,19 @@ import java.util.Arrays;
 
 public class Pregunta {
 
+	// Numero de respuestas de la pregunta, incluyedo la respuesta correcta
+	public static final int NUM_ANSWERS = 4;
+
 	private Category category;
 	private String queryText;
 	private String correctAnswer;
 	private String[] wrongAnswers;
-	
-	
-	public Pregunta(Category category, String queryText, String correctAnswer,
-			String[] wrongAnswers) {
-		super();
+
+	public Pregunta() {
+		wrongAnswers = new String[NUM_ANSWERS - 1];
+	}
+
+	public Pregunta(Category category, String queryText, String correctAnswer, String[] wrongAnswers) {
 		this.category = category;
 		this.queryText = queryText;
 		this.correctAnswer = correctAnswer;

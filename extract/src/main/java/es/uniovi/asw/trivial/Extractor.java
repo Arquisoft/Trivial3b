@@ -39,6 +39,9 @@ public class Extractor {
 	}
 
 	public static void main(String[] args) {
+		// Para probar el parser GIFT, descomentar esto
+		// System.out.println(new Extractor().extract("../Preguntas.gift", "gift", null));
+
 		Extractor ex = new Extractor();
 
 		if (args.length < 3) {

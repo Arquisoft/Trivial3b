@@ -8,8 +8,16 @@ public class JSONSerializer implements Serializer {
 
 	@Override
 	public String serialize(List<Pregunta> preguntas) {
-		// TODO Auto-generated method stub
-		return null;
+		// Version cutre para ir probando que va
+
+		String out = "";
+
+		for (Pregunta pregunta : preguntas) {
+			out += pregunta + "\n";
+		}
+
+		out += preguntas.size();
+		return out;
 	}
 
 }
