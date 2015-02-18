@@ -1,6 +1,10 @@
 package es.uniovi.asw.trivial.parsers;
 
+import java.util.List;
+
+import es.uniovi.asw.trivial.preguntas.Pregunta;
+
 public interface Parser {
-	void parse(String file);
+	List<Pregunta> parse(String file);
 
 }

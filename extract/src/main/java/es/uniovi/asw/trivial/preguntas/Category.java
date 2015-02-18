@@ -13,7 +13,7 @@ public enum Category {
 	CIENCIAYTECNOLOGIA{
 		@Override
 	    public String toString() {
-	      return "Ciencias y Tecnolog�a";
+	      return "Ciencias y Tecnología";
 	    }
 	},
 	ESPECTACULOSYENTRETENIMIENTO

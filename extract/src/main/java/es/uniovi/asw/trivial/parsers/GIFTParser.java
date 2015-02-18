@@ -1,13 +1,14 @@
 package es.uniovi.asw.trivial.parsers;
 
-public class GIFTParser implements Parser{
+import java.util.List;
+
+import es.uniovi.asw.trivial.preguntas.Pregunta;
+
+public class GIFTParser implements Parser {
 
 	@Override
-	public void parse(String file) {
+	public List<Pregunta> parse(String file) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-
-	
-	
 }
