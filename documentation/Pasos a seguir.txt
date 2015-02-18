@@ -1,0 +1,27 @@
+1-. Identificar Stakeholders
+
+	Para identificar los intereses de los stakeholders, se utiliza la metodología (Diseño de interacción) que indica que si no están en el sistema se recurre. Se da un rol o papel a cada participante del equipo para que defienda dicho rol
+
+2-. Identificar RF y RNF
+
+3-. Identificar atributos de calidad a través de los RNF
+
+4-. Identificar escenarios de calidad
+
+5-. Relacionar los escenarios de calidad con los Stakeholders
+
+
+
+
+
+6-. Vistas del sistema y documentación generada por la herramienta CASE
+
+	Para cada vista se definen módulos que tengan que ver con los escenarios de calidad que afectan a dicha vista
+
+
+
+
+
+7-. Empezar la implementación (Importante hacer pruebas)
+
+	Todos los componentes se convierten en paquetes
