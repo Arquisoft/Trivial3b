@@ -1,10 +1,10 @@
-package main.java.es.uniovi.asw.trivial.preguntas;
+package es.uniovi.asw.trivial.preguntas;
 
 public enum Category {
 
 	DEPORTES, 
 	
-	GEOGRAFÍA, 
+	GEOGRAFIA, 
 	
 	HISTORIA,
 	
@@ -13,9 +13,9 @@ public enum Category {
 	CIENCIAYTECNOLOGIA{
 		@Override
 	    public String toString() {
-	      return "Ciencias y Tecnología";
+	      return "Ciencias y Tecnologï¿½a";
 	    }
 	},
-	ESPECTÁCULOSYENTRETENIMIENTO
+	ESPECTACULOSYENTRETENIMIENTO
 	
 }

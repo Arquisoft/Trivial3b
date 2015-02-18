@@ -1,4 +1,4 @@
-package main.java.es.uniovi.asw.trivial.parsers;
+package es.uniovi.asw.trivial.parsers;
 
 import java.io.BufferedReader;
 import java.io.File;

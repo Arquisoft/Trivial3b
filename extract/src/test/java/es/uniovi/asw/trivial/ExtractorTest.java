@@ -1,6 +1,6 @@
-package test.java.es.uniovi.asw.trivial;
+package es.uniovi.asw.trivial;
 
-import main.java.es.uniovi.asw.trivial.Extractor;
+import es.uniovi.asw.trivial.Extractor;
 
 import org.junit.Test;
 

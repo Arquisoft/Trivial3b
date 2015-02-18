@@ -1,4 +1,4 @@
-package main.java.es.uniovi.asw.trivial.preguntas;
+package es.uniovi.asw.trivial.preguntas;
 
 import java.util.Arrays;
 
