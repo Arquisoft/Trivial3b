@@ -1,29 +1,23 @@
- <?xml version = "1.0" encoding = "UTF-8"> 
+<?xml version = "1.0" encoding = "UTF-8"?> 
 <question> 
 	<questiondata> 
-		<questiontype>multiplechoice</questiontype> 
-		<questiontext>Quien creo la tabla periodica</questiontext>
-		<questionanswer id=1 score=100 text="Dmitri Ivanovich Mendeleiev"/>
-		<questionanswer id=2 score=0 text ="Santo Tomas de Aquino"/>  
-		<questionanswer id=3 score=0 text="Pitagoras De Samos"/> 
-		<questionanswer id=4 score=0 text="Charles Babbage"/>
-		<correctanswer> 
-			<correctanswerid>1</correctanswerid> 
-		</correctanswer> 
-		<randomption>True<randomoption> 
+		<questioncategory>ciencia y tecnologia</questioncategory> 
+		<questiontext>¿Quien creo la tabla periodica?</questiontext>
+		<questionanswer id="1" text="Dmitri Ivanovich Mendeleiev"/>
+		<questionanswer id="2" text="Santo Tomas de Aquino"/>  
+		<questionanswer id="3" text="Pitagoras De Samos"/> 
+		<questionanswer id="4" text="Charles Babbage"/>
+		<correctanswerid>1</correctanswerid> 
+	</questiondata> 
 	<questiondata> 
-	<questiondata> 
-		<questiontype>multiplechoice</questiontype> 
-		<questiontext>Como se llama el satelite de la tierra</questiontext>
-		<questionanswer id=1 score=100 text="Luna"/>
-		<questionanswer id=2 score=0 text ="Marte"/>  
-		<questionanswer id=3 score=0 text="Venus"/> 
-		<questionanswer id=4 score=0 text="Jupiter"/>
-		<correctanswer> 
-			<correctanswerid>1</correctanswerid> 
-		</correctanswer> 
-		<randomption>True<randomoption> 
-	<questiondata> 
+		<questioncategory>ciencia y tecnologia</questioncategory> 
+		<questiontext>¿Como se llama el satelite de la tierra?</questiontext>
+		<questionanswer id="1" text="Luna"/>
+		<questionanswer id="2" text="Marte"/>  
+		<questionanswer id="3" text="Venus"/> 
+		<questionanswer id="4" text="Jupiter"/>
+		<correctanswerid>1</correctanswerid> 
+	</questiondata> 
 </question>
 
 

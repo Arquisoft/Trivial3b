@@ -2,6 +2,15 @@ package es.uniovi.asw.trivial.preguntas;
 
 import java.util.Arrays;
 
+/**
+ * Clase Pregunta que almacena los siguientes atributos de la pregunta:
+ * 	-Texto
+ * 	-Categoria
+ * 	-Respuesta correcta
+ * 	-Respuesta incorrecta
+ * @author Jose Manuel Garcia Fernandez
+ *
+ */
 public class Pregunta {
 
 	// Numero de respuestas de la pregunta, incluyedo la respuesta correcta
@@ -71,5 +80,17 @@ public class Pregunta {
 				+ Arrays.toString(wrongAnswers) + "]";
 	}
 	
+	/**
+	 * Devuelve un String en formato JSON con todos los datos de la pregunta
+	 * @return String en formato JSON
+	 */
+	public String getJSON(){
+		String cadena="{\ncategory: "+getCategory()+",\ntext: "+getQueryText()+",\ncorrectAnswer: "+getCorrectAnswer();
+		for (String s : wrongAnswers) {
+			cadena+=",\nwrongAnswer: "+s;
+		}
+		cadena+="\n}";
+		return cadena;
+	}
 	
 }
