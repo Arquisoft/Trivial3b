@@ -108,7 +108,7 @@ public class XMLParser implements Parser {
             
             //ponemos el texto y l acategoria a la nueva pregunta
             preguntaActual.setQueryText(questionText);
-			preguntaActual.setCategory(getCat(category));
+			preguntaActual.setCategory(Category.parse(category));
             
             NodeList answers=emp.getElementsByTagName("questionanswer"); 
             Element ans = null;
@@ -144,29 +144,4 @@ public class XMLParser implements Parser {
         }
         return new ArrayList<Pregunta>(preguntas.values());
 	}
-	
-	private static Category getCat(String categ) {
-		categ = categ.toLowerCase();
-
-		if (categ.contains("arte"))
-			return Category.ARTEYLITERATURA;
-
-		if (categ.contains("ciencia"))
-			return Category.CIENCIAYTECNOLOGIA;
-
-		if (categ.contains("deportes"))
-			return Category.DEPORTES;
-
-		if (categ.contains("entretenimiento"))
-			return Category.ESPECTACULOSYENTRETENIMIENTO;
-
-		if (categ.contains("geograf"))
-			return Category.GEOGRAFIA;
-
-		if (categ.contains("historia"))
-			return Category.HISTORIA;
-
-		return null;
-	}
-
 }

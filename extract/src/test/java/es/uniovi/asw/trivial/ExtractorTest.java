@@ -4,27 +4,25 @@ import java.util.List;
 
 import org.junit.Test;
 
+import es.uniovi.asw.trivial.parsers.GIFTParser;
 import es.uniovi.asw.trivial.parsers.XMLParser;
 import es.uniovi.asw.trivial.preguntas.Pregunta;
+import es.uniovi.asw.trivial.serializers.JSONSerializer;
 
 public class ExtractorTest {
 	
 	@Test
 	public void emptyExtractor() {
-		String args[] = {};
-		Extractor ext = new Extractor();
-	   // assertThat(ext.run(args)).isEqualTo(0);
+		// GIFT
+		List<Pregunta> preguntasGIFT = new GIFTParser().parse("src/main/resources/preguntas.gift");
+		String preguntasGIFTenJSON = new JSONSerializer().serialize(preguntasGIFT);
 
-		
-		XMLParser parser=new XMLParser();
-		List<Pregunta> a = parser.parse("src/main/resources/preguntas.xml");
-		
-		for (Pregunta question : a) {
+		System.out.println(preguntasGIFTenJSON);
 
-			System.out.println(question.getJSON());
-		}
-		
-	  }
-//Prueba
+		// XML
+		List<Pregunta> preguntasXML = new XMLParser().parse("src/main/resources/preguntas.xml");
+		String preguntasXMLenJSON = new JSONSerializer().serialize(preguntasXML);
 
+		System.out.println(preguntasXMLenJSON);
+	}
 }

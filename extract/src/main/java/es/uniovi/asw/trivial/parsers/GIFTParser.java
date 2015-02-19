@@ -97,7 +97,7 @@ public class GIFTParser implements Parser {
 				String titulo = trim(linea.split("\\{")[0]);
 
 				preguntaActual.setQueryText(titulo);
-				preguntaActual.setCategory(getCat(categoriaActual));
+				preguntaActual.setCategory(Category.parse(categoriaActual));
 
 				if (categoriaActual == null) {
 					System.err.println("Una pregunta en linea " + i
@@ -161,29 +161,5 @@ public class GIFTParser implements Parser {
 
 	private static String trim(String in) {
 		return CharMatcher.WHITESPACE.trimFrom(in);
-	}
-
-	private static Category getCat(String categ) {
-		categ = categ.toLowerCase();
-
-		if (categ.contains("arte"))
-			return Category.ARTEYLITERATURA;
-
-		if (categ.contains("ciencia"))
-			return Category.CIENCIAYTECNOLOGIA;
-
-		if (categ.contains("deportes"))
-			return Category.DEPORTES;
-
-		if (categ.contains("entretenimiento"))
-			return Category.ESPECTACULOSYENTRETENIMIENTO;
-
-		if (categ.contains("geograf"))
-			return Category.GEOGRAFIA;
-
-		if (categ.contains("historia"))
-			return Category.HISTORIA;
-
-		return null;
 	}
 }
