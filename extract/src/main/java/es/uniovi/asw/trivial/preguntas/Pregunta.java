@@ -78,19 +78,5 @@ public class Pregunta {
 		return "Pregunta [category=" + category + ", queryText=" + queryText
 				+ ", correctAnswer=" + correctAnswer + ", wrongAnswers="
 				+ Arrays.toString(wrongAnswers) + "]";
-	}
-	
-	/**
-	 * Devuelve un String en formato JSON con todos los datos de la pregunta
-	 * @return String en formato JSON
-	 */
-	public String getJSON(){
-		String cadena="{\ncategory: "+getCategory()+",\ntext: "+getQueryText()+",\ncorrectAnswer: "+getCorrectAnswer();
-		for (String s : wrongAnswers) {
-			cadena+=",\nwrongAnswer: "+s;
-		}
-		cadena+="\n}";
-		return cadena;
-	}
-	
+	}	
 }

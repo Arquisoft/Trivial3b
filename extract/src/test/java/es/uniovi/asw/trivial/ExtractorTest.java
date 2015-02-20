@@ -7,10 +7,11 @@ import org.junit.Test;
 import es.uniovi.asw.trivial.parsers.GIFTParser;
 import es.uniovi.asw.trivial.parsers.XMLParser;
 import es.uniovi.asw.trivial.preguntas.Pregunta;
+import es.uniovi.asw.trivial.saver.MongoSaver;
 import es.uniovi.asw.trivial.serializers.JSONSerializer;
 
 public class ExtractorTest {
-	
+
 	@Test
 	public void emptyExtractor() {
 		// GIFT
@@ -24,5 +25,8 @@ public class ExtractorTest {
 		String preguntasXMLenJSON = new JSONSerializer().serialize(preguntasXML);
 
 		System.out.println(preguntasXMLenJSON);
+
+		// MongoDB
+		new MongoSaver().save(preguntasGIFTenJSON);
 	}
 }

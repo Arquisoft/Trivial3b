@@ -13,6 +13,12 @@
 	</properties>
 
 	<dependencies>
+		<!--MongoDB Driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.13.0</version>
+		</dependency>
 
 		<!--Logging -->
 		<dependency>
