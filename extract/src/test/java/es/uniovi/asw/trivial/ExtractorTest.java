@@ -15,7 +15,10 @@ public class ExtractorTest {
 	@Test
 	public void emptyList(){ // Comprueba que la lista no está vacía
 		List<Pregunta> preguntasGIFT = new GIFTParser().parse("src/main/resources/preguntas.gift");
-		assertEquals(0, preguntasGIFT.size());
+		assertNotEquals(0, preguntasGIFT.size());
+		List<Pregunta> preguntasXML = new XMLParser().parse("src/main/resources/preguntas.xml");
+		assertNotEquals(0, preguntasXML.size());
+
 	}
 	
 	@Test
@@ -38,6 +41,29 @@ public class ExtractorTest {
 		}
 	}	
 	
+
+	@Test
+	public void correctAnswers(){
+		List<Pregunta> preguntasGIFT = new GIFTParser().parse("src/main/resources/preguntas.gift");
+		List<Pregunta> preguntasXML = new XMLParser().parse("src/main/resources/preguntas.xml");
+
+		for (Pregunta pregunta: preguntasGIFT){
+			assertNotNull(pregunta.getWrongAnswers());
+				for (String respuesta: pregunta){
+					assertTrue(respuesta!="");
+				}
+			assertTrue(pregunta.getCorrectAnswer()!="");			
+		}
+
+		for (Pregunta pregunta: preguntasXML) {
+			assertNotNull(pregunta.getWrongAnswers());
+				for (String respuesta: pregunta){
+					assertTrue(respuesta!="");
+				}
+			assertTrue(pregunta.getCorrectAnswer()!="");			
+		}
+	}
+
 	@Test
 	public void emptyExtractor() {
 		// GIFT
@@ -53,6 +79,8 @@ public class ExtractorTest {
 		System.out.println(preguntasXMLenJSON);
 
 		// MongoDB
-		new MongoSaver().save(preguntasGIFTenJSON);
+		MongoSaver ms = new MongoSaver();
+		ms.save(preguntasGIFTenJSON);
+		//ms.save(preguntasXMLenJSON);
 	}
 }
