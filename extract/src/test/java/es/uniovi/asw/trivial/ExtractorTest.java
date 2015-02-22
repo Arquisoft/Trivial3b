@@ -13,7 +13,7 @@ import es.uniovi.asw.trivial.serializers.JSONSerializer;
 public class ExtractorTest {	
 
 	@Test
-	public void emptyList(){ // Comprueba que la lista no est· vacÌa
+	public void emptyList(){ // Comprueba que la lista no est√° vac√≠a
 		List<Pregunta> preguntasGIFT = new GIFTParser().parse("src/main/resources/preguntas.gift");
 		assertNotEquals(0, preguntasGIFT.size());
 		List<Pregunta> preguntasXML = new XMLParser().parse("src/main/resources/preguntas.xml");
@@ -49,7 +49,7 @@ public class ExtractorTest {
 
 		for (Pregunta pregunta: preguntasGIFT){
 			assertNotNull(pregunta.getWrongAnswers());
-				for (String respuesta: pregunta){
+				for (String respuesta: pregunta.getWrongAnswers()){
 					assertTrue(respuesta!="");
 				}
 			assertTrue(pregunta.getCorrectAnswer()!="");			
@@ -57,7 +57,7 @@ public class ExtractorTest {
 
 		for (Pregunta pregunta: preguntasXML) {
 			assertNotNull(pregunta.getWrongAnswers());
-				for (String respuesta: pregunta){
+				for (String respuesta: pregunta.getWrongAnswers()){
 					assertTrue(respuesta!="");
 				}
 			assertTrue(pregunta.getCorrectAnswer()!="");			
