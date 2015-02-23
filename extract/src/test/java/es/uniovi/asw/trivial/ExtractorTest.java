@@ -1,5 +1,7 @@
 package es.uniovi.asw.trivial;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -26,7 +28,7 @@ public class ExtractorTest {
 		List<Pregunta> preguntasGIFT = new GIFTParser().parse("src/main/resources/preguntas.gift");
 		
 		for(int i = 0; i < preguntasGIFT.size(); i++){
-			Pregunta pregunta = preguntas.get(i);
+			Pregunta pregunta = preguntasGIFT.get(i);
 			assertNull("Mensaje OPCIONAL por si es null", pregunta);
 		}
 	}
@@ -36,7 +38,7 @@ public class ExtractorTest {
 		List<Pregunta> preguntasGIFT = new GIFTParser().parse("src/main/resources/preguntas.gift");
 		
 		for(int i = 0; i < preguntasGIFT.size(); i++){
-			Pregunta pregunta = preguntas.get(i);
+			Pregunta pregunta = preguntasGIFT.get(i);
 			assertTrue(pregunta.getQueryText()!="");
 		}
 	}	
@@ -81,6 +83,6 @@ public class ExtractorTest {
 		// MongoDB
 		MongoSaver ms = new MongoSaver();
 		ms.save(preguntasGIFTenJSON);
-		//ms.save(preguntasXMLenJSON);
+		ms.save(preguntasXMLenJSON);
 	}
 }
