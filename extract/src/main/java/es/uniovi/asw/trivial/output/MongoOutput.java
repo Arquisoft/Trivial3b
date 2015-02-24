@@ -1,4 +1,4 @@
-package es.uniovi.asw.trivial.saver;
+package es.uniovi.asw.trivial.output;
 
 import java.net.UnknownHostException;
 
@@ -29,13 +29,13 @@ import com.mongodb.util.JSON;
  * @author Daniel García García
  *
  */
-public class MongoSaver {
+public class MongoOutput implements Output {
 
 	private static final String MONGO_URL = "localhost";
 	private static final int MONGO_PORT = 27017;
 
-	public void save(String json) {
-
+	@Override
+	public void save(String out) {
 		try {
 			// Creamos la conexion
 			MongoClient mongo = new MongoClient(MONGO_URL, MONGO_PORT);
@@ -48,7 +48,7 @@ public class MongoSaver {
 			collection.createIndex(new BasicDBObject("question", 1), "question", true);
 
 			// Obtenemos la lista de objetos a partir del JSON
-			BasicDBList dbList = (BasicDBList) JSON.parse(json);
+			BasicDBList dbList = (BasicDBList) JSON.parse(out);
 
 			// Y los insertamos, si están repetidas, damos un aviso
 			for (Object object : dbList) {

@@ -1,9 +1,13 @@
 package es.uniovi.asw.trivial.parsers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
 
 import com.google.common.base.CharMatcher;
 
@@ -51,7 +55,12 @@ public class GIFTParser implements Parser {
 
 	@Override
 	public List<Pregunta> parse(String fileName) {
-		String file = ReadFile.readFile(fileName);
+		String file;
+		try {
+			file = FileUtils.readFileToString(new File(fileName), "UTF-8");
+		} catch (IOException e) {
+			throw new IllegalArgumentException("No es posible abrir el archivo");
+		}
 
 		// Dividimos el archivo en lineaas
 		String[] lineas = file.split("[\r\n]");

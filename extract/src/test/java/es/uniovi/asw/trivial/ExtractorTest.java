@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import es.uniovi.asw.trivial.output.MongoOutput;
 import es.uniovi.asw.trivial.parsers.GIFTParser;
 import es.uniovi.asw.trivial.parsers.XMLParser;
 import es.uniovi.asw.trivial.preguntas.Pregunta;
-import es.uniovi.asw.trivial.saver.MongoSaver;
 import es.uniovi.asw.trivial.serializers.JSONSerializer;
 
 public class ExtractorTest {	
@@ -29,7 +29,7 @@ public class ExtractorTest {
 		
 		for(int i = 0; i < preguntasGIFT.size(); i++){
 			Pregunta pregunta = preguntasGIFT.get(i);
-			assertNull("Mensaje OPCIONAL por si es null", pregunta);
+			assertNotNull("Mensaje OPCIONAL por si es null", pregunta);
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class ExtractorTest {
 		System.out.println(preguntasXMLenJSON);
 
 		// MongoDB
-		MongoSaver ms = new MongoSaver();
+		MongoOutput ms = new MongoOutput();
 		ms.save(preguntasGIFTenJSON);
 		ms.save(preguntasXMLenJSON);
 	}
