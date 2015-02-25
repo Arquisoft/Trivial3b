@@ -29,17 +29,17 @@ import es.uniovi.asw.trivial.preguntas.Pregunta;
  * Esta clase se encarga de parsear el formato XML de preguntas y respuestas
  * multiples. El formato es el siguiente:
  * 
- * <code>
+ * {@code
  * 	<questiondata> 
-		<questioncategory>Categoria</questioncategory> 
-		<questiontext>Pregunta</questiontext>
-		<questionanswer id="1" text="Respuesa 1"/>
-		<questionanswer id="2" text="Respuesta 2"/>  
-		<questionanswer id="3" text="Respuesta 3"/> 
-		<questionanswer id="4" text="Respuesta 4"/>
-		<correctanswerid>Id de la respuesta correcta</correctanswerid> 
-	</questiondata> 
- * <code>
+ *		<questioncategory>Categoria</questioncategory> 
+ *		<questiontext>Pregunta</questiontext>
+ *		<questionanswer id="1" text="Respuesa 1"/>
+ *		<questionanswer id="2" text="Respuesta 2"/>  
+ *		<questionanswer id="3" text="Respuesta 3"/> 
+ *		<questionanswer id="4" text="Respuesta 4"/>
+ *		<correctanswerid>Id de la respuesta correcta</correctanswerid> 
+ *	</questiondata> 
+ * }
  * 
  * El orden de las respuestas no es importante.
  * odas las preguntas necesitan una categoria.

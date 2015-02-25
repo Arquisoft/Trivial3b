@@ -1,4 +1,4 @@
-# Trivial3b
+# Trivial3b [![Build Status](https://travis-ci.org/Arquisoft/Trivial3b.svg?branch=master)](https://travis-ci.org/Arquisoft/Trivial3b)
 ## Equipo formado por: 
 | Apellido1 | Apellido2        | Nombre                 | DNI   | Id | Usuario Github |
 |-----------|------------------|------------------------|-------|--------|----------------|
