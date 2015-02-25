@@ -81,7 +81,7 @@ public class XMLParser implements Parser {
 	        
 	        result = expr.evaluate(doc, XPathConstants.NODESET);
 			
-		} catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException e1) {
+		} catch (Exception e) {
 			System.out.println("Error en l aprertura del fichero");
 		} 
 		
