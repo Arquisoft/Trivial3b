@@ -15,8 +15,8 @@ import es.uniovi.asw.trivial.preguntas.Pregunta;
  * {
  *   "question": "Pregunta",
  *   "category": "Categoría",
- *   "correct": "Respuesta correcta",
- *   "incorrect": [
+ *   "correctAnswer": "Respuesta correcta",
+ *   "wrongAnswers": [
  *     "Respuesta falsa",
  *     "Otra respuesta falsa",
  *     "Otra falsa más"

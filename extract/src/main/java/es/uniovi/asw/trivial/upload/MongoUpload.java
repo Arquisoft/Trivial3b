@@ -1,4 +1,4 @@
-package es.uniovi.asw.trivial.output;
+package es.uniovi.asw.trivial.upload;
 
 import java.net.UnknownHostException;
 
@@ -29,16 +29,21 @@ import com.mongodb.util.JSON;
  * @author Daniel García García
  *
  */
-public class MongoOutput implements Output {
+public class MongoUpload implements Uploader {
 
-	private static final String MONGO_URL = "localhost";
-	private static final int MONGO_PORT = 27017;
+	private static final String DEFAULT_MONGO = "localhost:27017";
+	private String server = DEFAULT_MONGO;
+
+	public MongoUpload(String server) {
+		if (server != null)
+			this.server = server;
+	}
 
 	@Override
-	public void save(String out) {
+	public void upload(String content) {
 		try {
 			// Creamos la conexion
-			MongoClient mongo = new MongoClient(MONGO_URL, MONGO_PORT);
+			MongoClient mongo = new MongoClient(server);
 
 			// Obtenemos la base de datos y la coleccion
 			DB db = mongo.getDB("trivial");
@@ -48,14 +53,15 @@ public class MongoOutput implements Output {
 			collection.createIndex(new BasicDBObject("question", 1), "question", true);
 
 			// Obtenemos la lista de objetos a partir del JSON
-			BasicDBList dbList = (BasicDBList) JSON.parse(out);
+			BasicDBList dbList = (BasicDBList) JSON.parse(content);
 
 			// Y los insertamos, si están repetidas, damos un aviso
 			for (Object object : dbList) {
 				try {
 					collection.insert((DBObject) object);
 				} catch (DuplicateKeyException e) {
-					System.err.println("Pregunta duplicada, saltando");
+					System.err.println("Pregunta duplicada, saltando: "
+							+ ((BasicDBObject) object).getString("question"));
 				}
 			}
 

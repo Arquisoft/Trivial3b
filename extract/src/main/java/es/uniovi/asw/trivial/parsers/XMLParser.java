@@ -1,7 +1,6 @@
 package es.uniovi.asw.trivial.parsers;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,17 +9,14 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import es.uniovi.asw.trivial.preguntas.Category;
 import es.uniovi.asw.trivial.preguntas.Pregunta;
@@ -107,7 +103,7 @@ public class XMLParser implements Parser {
             		preguntaInvalida=true;
             
             //ponemos el texto y l acategoria a la nueva pregunta
-            preguntaActual.setQueryText(questionText);
+            preguntaActual.setQuestion(questionText);
 			preguntaActual.setCategory(Category.parse(category));
             
             NodeList answers=emp.getElementsByTagName("questionanswer"); 
@@ -134,11 +130,11 @@ public class XMLParser implements Parser {
 			}
 
 			if (!preguntaInvalida) {
-				if (preguntas.containsKey(preguntaActual.getQueryText())) {
+				if (preguntas.containsKey(preguntaActual.getQuestion())) {
 					System.err.println("La pregunta en linea " + i + " es repetida, saltando");
 				}
 
-				preguntas.put(preguntaActual.getQueryText(), preguntaActual);
+				preguntas.put(preguntaActual.getQuestion(), preguntaActual);
 				preguntaActual = null;
 			}
         }

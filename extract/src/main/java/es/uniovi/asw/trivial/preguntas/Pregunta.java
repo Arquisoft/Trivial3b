@@ -17,7 +17,7 @@ public class Pregunta {
 	public static final int NUM_ANSWERS = 4;
 
 	private Category category;
-	private String queryText;
+	private String question;
 	private String correctAnswer;
 	private String[] wrongAnswers;
 
@@ -25,58 +25,48 @@ public class Pregunta {
 		wrongAnswers = new String[NUM_ANSWERS - 1];
 	}
 
-	public Pregunta(Category category, String queryText, String correctAnswer, String[] wrongAnswers) {
+	public Pregunta(Category category, String question, String correctAnswer, String[] wrongAnswers) {
 		this.category = category;
-		this.queryText = queryText;
+		this.question = question;
 		this.correctAnswer = correctAnswer;
 		this.wrongAnswers = wrongAnswers;
 	}
-
 
 	public Category getCategory() {
 		return category;
 	}
 
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-
-	public String getQueryText() {
-		return queryText;
+	public String getQuestion() {
+		return question;
 	}
 
-
-	public void setQueryText(String queryText) {
-		this.queryText = queryText;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
-
 
 	public String getCorrectAnswer() {
 		return correctAnswer;
 	}
 
-
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
-
 
 	public String[] getWrongAnswers() {
 		return wrongAnswers;
 	}
 
-
 	public void setWrongAnswers(String[] wrongAnswers) {
 		this.wrongAnswers = wrongAnswers;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Pregunta [category=" + category + ", queryText=" + queryText
-				+ ", correctAnswer=" + correctAnswer + ", wrongAnswers="
-				+ Arrays.toString(wrongAnswers) + "]";
-	}	
+		return "Pregunta [category=" + category + ", question=" + question + ", correctAnswer="
+				+ correctAnswer + ", wrongAnswers=" + Arrays.toString(wrongAnswers) + "]";
+	}
 }

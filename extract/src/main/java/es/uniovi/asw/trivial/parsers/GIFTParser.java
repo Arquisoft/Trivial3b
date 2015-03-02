@@ -1,18 +1,15 @@
 package es.uniovi.asw.trivial.parsers;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-
 import com.google.common.base.CharMatcher;
 
 import es.uniovi.asw.trivial.preguntas.Category;
 import es.uniovi.asw.trivial.preguntas.Pregunta;
+import es.uniovi.asw.trivial.util.FileUtil;
 
 /**
  * Esta clase se encarga de parsear el formato GIFT de preguntas y respuestas
@@ -55,12 +52,7 @@ public class GIFTParser implements Parser {
 
 	@Override
 	public List<Pregunta> parse(String fileName) {
-		String file;
-		try {
-			file = FileUtils.readFileToString(new File(fileName), "UTF-8");
-		} catch (IOException e) {
-			throw new IllegalArgumentException("No es posible abrir el archivo");
-		}
+		String file = FileUtil.getFile(fileName);
 
 		// Dividimos el archivo en lineaas
 		String[] lineas = file.split("[\r\n]");
@@ -105,7 +97,7 @@ public class GIFTParser implements Parser {
 
 				String titulo = trim(linea.split("\\{")[0]);
 
-				preguntaActual.setQueryText(titulo);
+				preguntaActual.setQuestion(titulo);
 				preguntaActual.setCategory(Category.parse(categoriaActual));
 
 				if (categoriaActual == null) {
@@ -155,11 +147,11 @@ public class GIFTParser implements Parser {
 				}
 
 				if (!preguntaInvalida) {
-					if (preguntas.containsKey(preguntaActual.getQueryText())) {
+					if (preguntas.containsKey(preguntaActual.getQuestion())) {
 						System.err.println("La pregunta en linea " + i + " es repetida, saltando");
 					}
 
-					preguntas.put(preguntaActual.getQueryText(), preguntaActual);
+					preguntas.put(preguntaActual.getQuestion(), preguntaActual);
 					preguntaActual = null;
 				}
 			}

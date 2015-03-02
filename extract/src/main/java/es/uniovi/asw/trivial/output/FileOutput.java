@@ -1,9 +1,6 @@
 package es.uniovi.asw.trivial.output;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
+import es.uniovi.asw.trivial.util.FileUtil;
 
 public class FileOutput implements Output {
 
@@ -18,11 +15,7 @@ public class FileOutput implements Output {
 	}
 
 	@Override
-	public void save(String out) {
-		try {
-			FileUtils.writeStringToFile(new File(file), out);
-		} catch (IOException e) {
-			System.err.println("No ha sido posible guardar su fichero");
-		}
+	public void output(String content) {
+		FileUtil.saveFile(file, content);
 	}
 }
