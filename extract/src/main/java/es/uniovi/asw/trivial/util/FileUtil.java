@@ -7,9 +7,6 @@ import org.apache.commons.io.FileUtils;
 
 public class FileUtil {
 
-    private FileUtil() {
-    }
-
     public static final String getFile(String location) {
         try {
             return FileUtils.readFileToString(new File(location), "UTF-8");
@@ -22,7 +19,8 @@ public class FileUtil {
         try {
             FileUtils.writeStringToFile(new File(location), content, "UTF-8");
         } catch (IOException e) {
-            System.err.println("No ha sido posible guardar su fichero");
+            throw new IllegalArgumentException("No ha sido posible "
+                    + "guardar su fichero");
         }
     }
 }
