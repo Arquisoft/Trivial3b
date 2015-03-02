@@ -6,6 +6,6 @@ import es.uniovi.asw.trivial.preguntas.Pregunta;
 
 public interface Serializer {
 
-	String serialize(List<Pregunta> preguntas);
+    String serialize(List<Pregunta> preguntas);
 
 }

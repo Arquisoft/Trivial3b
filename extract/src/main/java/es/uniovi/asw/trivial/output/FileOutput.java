@@ -4,18 +4,19 @@ import es.uniovi.asw.trivial.util.FileUtil;
 
 public class FileOutput implements Output {
 
-	private String file;
+    private String file;
 
-	public FileOutput(String file) {
-		if (file == null)
-			throw new IllegalArgumentException(
-					"La salida en fichero requiere un fichero de salida!");
+    public FileOutput(String file) {
+        if (file == null) {
+            throw new IllegalArgumentException(
+                    "La salida en fichero requiere un fichero de salida!");
+        }
 
-		this.file = file;
-	}
+        this.file = file;
+    }
 
-	@Override
-	public void output(String content) {
-		FileUtil.saveFile(file, content);
-	}
+    @Override
+    public void output(String content) {
+        FileUtil.saveFile(file, content);
+    }
 }

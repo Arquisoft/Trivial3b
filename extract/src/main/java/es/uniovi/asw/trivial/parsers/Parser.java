@@ -5,6 +5,5 @@ import java.util.List;
 import es.uniovi.asw.trivial.preguntas.Pregunta;
 
 public interface Parser {
-	List<Pregunta> parse(String file);
-
+    List<Pregunta> parse(String file);
 }

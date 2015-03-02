@@ -10,7 +10,7 @@ import es.uniovi.asw.trivial.preguntas.Pregunta;
 /**
  * Clase encargada de serializar una lista de preguntas a formato JSON. La
  * salida consiste de un array de objetos JSON con el siguiente formato:
- * 
+ *
  * <code>
  * {
  *   "question": "Pregunta",
@@ -23,15 +23,15 @@ import es.uniovi.asw.trivial.preguntas.Pregunta;
  *   ]
  * }
  * </code>
- * 
+ *
  * @author Daniel García García
  *
  */
 public class JSONSerializer implements Serializer {
 
-	@Override
-	public String serialize(List<Pregunta> preguntas) {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		return gson.toJson(preguntas);
-	}
+    @Override
+    public String serialize(List<Pregunta> preguntas) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(preguntas);
+    }
 }

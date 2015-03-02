@@ -7,19 +7,22 @@ import org.apache.commons.io.FileUtils;
 
 public class FileUtil {
 
-	public static String getFile(String location) {
-		try {
-			return FileUtils.readFileToString(new File(location), "UTF-8");
-		} catch (IOException e) {
-			throw new IllegalArgumentException("No es posible abrir el archivo");
-		}
-	}
+    private FileUtil() {
+    }
 
-	public static void saveFile(String location, String content) {
-		try {
-			FileUtils.writeStringToFile(new File(location), content, "UTF-8");
-		} catch (IOException e) {
-			System.err.println("No ha sido posible guardar su fichero");
-		}
-	}
+    public static final String getFile(String location) {
+        try {
+            return FileUtils.readFileToString(new File(location), "UTF-8");
+        } catch (IOException e) {
+            throw new IllegalArgumentException("No se puede abrir el archivo");
+        }
+    }
+
+    public static final void saveFile(String location, String content) {
+        try {
+            FileUtils.writeStringToFile(new File(location), content, "UTF-8");
+        } catch (IOException e) {
+            System.err.println("No ha sido posible guardar su fichero");
+        }
+    }
 }

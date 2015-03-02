@@ -2,44 +2,49 @@ package es.uniovi.asw.trivial.preguntas;
 
 public enum Category {
 
-	DEPORTES, 
-	
-	GEOGRAFIA, 
-	
-	HISTORIA,
-	
-	ARTEYLITERATURA,
-	
-	CIENCIAYTECNOLOGIA{
-		@Override
-	    public String toString() {
-	      return "Ciencias y Tecnología";
-	    }
-	},
-	ESPECTACULOSYENTRETENIMIENTO;
+    DEPORTES,
 
+    GEOGRAFIA,
 
-	public static Category parse(String categ) {
-		categ = categ.toLowerCase();
+    HISTORIA,
 
-		if (categ.contains("arte"))
-			return Category.ARTEYLITERATURA;
+    ARTEYLITERATURA,
 
-		if (categ.contains("ciencia"))
-			return Category.CIENCIAYTECNOLOGIA;
+    CIENCIAYTECNOLOGIA {
+        @Override
+        public String toString() {
+            return "Ciencias y Tecnología";
+        }
+    },
+    ESPECTACULOSYENTRETENIMIENTO;
 
-		if (categ.contains("deportes"))
-			return Category.DEPORTES;
+    public static Category parse(String categ) {
+        categ = categ.toLowerCase();
 
-		if (categ.contains("entretenimiento"))
-			return Category.ESPECTACULOSYENTRETENIMIENTO;
+        if (categ.contains("arte")) {
+            return Category.ARTEYLITERATURA;
+        }
 
-		if (categ.contains("geograf"))
-			return Category.GEOGRAFIA;
+        if (categ.contains("ciencia")) {
+            return Category.CIENCIAYTECNOLOGIA;
+        }
 
-		if (categ.contains("historia"))
-			return Category.HISTORIA;
+        if (categ.contains("deportes")) {
+            return Category.DEPORTES;
+        }
 
-		return null;
-	}
+        if (categ.contains("entretenimiento")) {
+            return Category.ESPECTACULOSYENTRETENIMIENTO;
+        }
+
+        if (categ.contains("geograf")) {
+            return Category.GEOGRAFIA;
+        }
+
+        if (categ.contains("historia")) {
+            return Category.HISTORIA;
+        }
+
+        return null;
+    }
 }
