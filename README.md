@@ -3,7 +3,7 @@
 | Apellido1 | Apellido2        | Nombre                 | DNI   | Id | Usuario Github |
 |-----------|------------------|------------------------|-------|--------|----------------|
 |Alcalá|Pérez|Joel|71726901K|UO226321|[alcalaperez](https://github.com/alcalaperez)|
-|Fernandez|Moran|Raul|71668734K|UO180365|[uo180365](https://github.com/uo180365)|
+|Fernández|Morán|Raúl|71668734K|UO180365|[uo180365](https://github.com/uo180365)|
 |García|García|Daniel|71737498S|UO231763|[dani-garcia](https://github.com/dani-garcia)|
 |Llana|Pérez|Sergio|32891035T|UO229817|[sergiollana](https://github.com/sergiollana)|
 |López|Soto|Jairo|71775486F|UO218230|[JairoLopez](https://github.com/JairoLopez)|
