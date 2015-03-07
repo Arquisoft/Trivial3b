@@ -18,8 +18,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import es.uniovi.asw.trivial.preguntas.Category;
-import es.uniovi.asw.trivial.preguntas.Pregunta;
+import es.uniovi.asw.model.Category;
+import es.uniovi.asw.model.Pregunta;
 
 /**
  * Esta clase se encarga de parsear el formato XML de preguntas y respuestas

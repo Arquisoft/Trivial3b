@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.google.common.base.CharMatcher;
 
-import es.uniovi.asw.trivial.preguntas.Category;
-import es.uniovi.asw.trivial.preguntas.Pregunta;
+import es.uniovi.asw.model.Category;
+import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.trivial.util.FileUtil;
 
 /**

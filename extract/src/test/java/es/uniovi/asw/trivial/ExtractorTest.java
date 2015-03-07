@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.trivial.parsers.GIFTParser;
 import es.uniovi.asw.trivial.parsers.XMLParser;
-import es.uniovi.asw.trivial.preguntas.Pregunta;
 
 public class ExtractorTest {
 
