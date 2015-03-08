@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import es.uniovi.asw.model.Pregunta;
+import es.uniovi.asw.trivial.preguntas.Pregunta;
 
 /**
  * Clase encargada de serializar una lista de preguntas a formato JSON. La

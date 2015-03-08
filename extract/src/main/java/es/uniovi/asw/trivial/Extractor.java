@@ -2,12 +2,12 @@ package es.uniovi.asw.trivial;
 
 import java.util.List;
 
-import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.trivial.output.FileOutput;
 import es.uniovi.asw.trivial.output.Output;
 import es.uniovi.asw.trivial.parsers.GIFTParser;
 import es.uniovi.asw.trivial.parsers.Parser;
 import es.uniovi.asw.trivial.parsers.XMLParser;
+import es.uniovi.asw.trivial.preguntas.Pregunta;
 import es.uniovi.asw.trivial.serializers.JSONSerializer;
 import es.uniovi.asw.trivial.serializers.Serializer;
 import es.uniovi.asw.trivial.upload.MongoUpload;
