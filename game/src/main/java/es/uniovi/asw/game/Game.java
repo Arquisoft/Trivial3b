@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.uniovi.asw.model.Casilla;
-import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Graph;
 import es.uniovi.asw.model.Player;
 import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.model.Tablero;
+import es.uniovi.asw.questions.MongoQuestions;
 
 public class Game {
 	
+	private MongoQuestions mongoQuestions = new MongoQuestions();
+	
 	private List<Player> players = new ArrayList<Player>();;
-	private Graph tablero;
+	private Graph<Casilla> tablero;
 	
 	public static void main(String[] args) {
 		System.out.println("Juego");
@@ -30,7 +32,7 @@ public class Game {
 	 */
 	public void addPlayer(Player p){
 		players.add(p);
-		p.setPosition((Casilla) tablero.getNodes()[0]);
+		p.setPosition(tablero.getNodes()[0]);
 	}
 	
 	
@@ -51,9 +53,6 @@ public class Game {
 	 * @return pregunta acorde a la categoria de la casilla
 	 */
 	public Pregunta getPregunta(Casilla c){
-		
-		//crear el dao y obtener objeto pregunta a partir de la categoria
-		c.getCategoria();
-		return null;
+		return mongoQuestions.getQuestion(c.getCategoria());
 	}
 }
