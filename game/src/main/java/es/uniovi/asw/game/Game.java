@@ -2,6 +2,7 @@ package es.uniovi.asw.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import es.uniovi.asw.model.Casilla;
 import es.uniovi.asw.model.Graph;
@@ -25,7 +26,6 @@ public class Game {
 		tablero =Tablero.getTablero(var);
 	}
 	
-	
 	/**
 	 * Metodo que añade un jugador a l apartida y lo coloca en la casilla de salida
 	 * @param p jugador nuevo. 
@@ -34,8 +34,6 @@ public class Game {
 		players.add(p);
 		p.setPosition(tablero.getNodes()[0]);
 	}
-	
-	
 	
 	/**
 	 * Cambia la posicion de un jugador al final del turno
@@ -54,5 +52,13 @@ public class Game {
 	 */
 	public Pregunta getPregunta(Casilla c){
 		return mongoQuestions.getQuestion(c.getCategoria());
+	}
+	
+	/**
+	 * Devuelve la tirada del dado aleatoriamente
+	 * @return numero del dado entre 1 y 6
+	 */
+	public int getTirada(){
+		return new Random().nextInt(6) +1;
 	}
 }
