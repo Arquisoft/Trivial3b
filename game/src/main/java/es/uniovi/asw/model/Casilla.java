@@ -11,6 +11,16 @@ public class Casilla {
 		this.id = id;
 		this.categoria = categoria;
 	}
+
+
+	public Category getCategoria() {
+		return categoria;
+	}
+
+
+	public void setCategoria(Category categoria) {
+		this.categoria = categoria;
+	}
 	
 	
 
