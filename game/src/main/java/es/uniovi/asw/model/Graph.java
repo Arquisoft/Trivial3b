@@ -1,6 +1,8 @@
 package es.uniovi.asw.model;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graph<T> {
     private T[] nodes; // Vector de nodos
@@ -757,4 +759,22 @@ public class Graph<T> {
             return -1.0;
         }
     }
+    
+    
+    /**
+     * Devuelve una lista con todos los nodos destino para los caminos de longitud k desde un nodo determinado 
+     * @param node
+     * @param length
+     * @return
+     */
+    public List<T> getNodesDestino(T node, double length){
+    	double [] longCaminos=this.dijkstra(node);
+    	List<T> nodes=new ArrayList<T>();
+    	for(int i=0;i<longCaminos.length;i++){
+    		if(longCaminos[i]==length)
+    			nodes.add(this.nodes[i]);
+    	}
+    	return nodes;
+    }
+    
 }

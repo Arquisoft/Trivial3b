@@ -26,6 +26,13 @@ public class Game {
 		tablero =Tablero.getTablero(var);
 	}
 	
+	
+	
+	
+	public Graph<Casilla> getTablero() {
+		return tablero;
+	}
+
 	/**
 	 * Metodo que añade un jugador a l apartida y lo coloca en la casilla de salida
 	 * @param p jugador nuevo. 
@@ -61,4 +68,6 @@ public class Game {
 	public int getTirada(){
 		return new Random().nextInt(6) +1;
 	}
+	
+
 }

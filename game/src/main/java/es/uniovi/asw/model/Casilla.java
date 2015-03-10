@@ -24,6 +24,11 @@ public class Casilla {
 	public void setCategoria(Category categoria) {
 		this.categoria = categoria;
 	}
+
+	@Override
+	public String toString() {
+		return "Casilla [id=" + id + ", categoria=" + categoria + "]";
+	}
 	
 	
 
