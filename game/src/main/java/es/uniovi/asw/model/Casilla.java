@@ -1,25 +1,23 @@
 package es.uniovi.asw.model;
 
 public class Casilla {
-	
+
 	private int id;
 	private Category categoria;
-	
-	
+
 	public Casilla(int id, Category categoria) {
 		super();
 		this.id = id;
 		this.categoria = categoria;
 	}
-	
-	public int getId(){
+
+	public int getId() {
 		return id;
 	}
 
 	public Category getCategoria() {
 		return categoria;
 	}
-
 
 	public void setCategoria(Category categoria) {
 		this.categoria = categoria;
@@ -29,7 +27,4 @@ public class Casilla {
 	public String toString() {
 		return "Casilla [id=" + id + ", categoria=" + categoria + "]";
 	}
-	
-	
-
 }

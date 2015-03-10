@@ -19,7 +19,7 @@ public class GameTest {
 
 		Graph<Casilla> tablero = game.getTablero();
 
-		Casilla c = ((Casilla) tablero.getNode(0));
+		Casilla c = tablero.getNode(0);
 
 		List<Casilla> lista = tablero.getNodesDestino(c, 2.0);
 
@@ -36,6 +36,5 @@ public class GameTest {
 
 		// Todavia no están los radios centrales
 		// assertTrue(lista2.contains(tablero.getNode(72)));
-
 	}
 }

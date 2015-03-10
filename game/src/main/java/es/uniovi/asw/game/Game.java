@@ -38,6 +38,16 @@ public class Game {
 		players.add(p);
 		p.setPosition(tablero.getNode(0));
 	}
+	
+	/**
+	 * Devuelve una lista con los posibles movimientos del jugador
+	 * @param p el jugador
+	 * @param steps numero de pasos
+	 * @return lista de casillas posibles
+	 */
+	public List<Casilla> getPossibleMoves(Player p, int steps) {
+		return tablero.getNodesDestino(p.getPosition(), steps);
+	}
 
 	/**
 	 * Cambia la posicion de un jugador al final del turno
