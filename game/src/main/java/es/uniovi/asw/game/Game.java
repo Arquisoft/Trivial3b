@@ -17,6 +17,7 @@ public class Game {
 
 	private List<Player> players = new ArrayList<Player>();
 	private Graph<Casilla> tablero;
+	private Integer jugadorActivo=null;
 
 	public static void main(String[] args) {
 		System.out.println("Juego");
@@ -31,12 +32,15 @@ public class Game {
 	}
 
 	/**
-	 * Metodo que añade un jugador a l apartida y lo coloca en la casilla de salida
+	 * Metodo que añade un jugador a la partida y lo coloca en la casilla de salida
 	 * @param p jugador nuevo.
 	 */
 	public void addPlayer(Player p) {
+		if(jugadorActivo==null)
+			jugadorActivo=players.size();
 		players.add(p);
 		p.setPosition(tablero.getNode(0));
+		
 	}
 	
 	/**
@@ -73,5 +77,19 @@ public class Game {
 	 */
 	public int getTirada() {
 		return new Random().nextInt(6) + 1;
+	}
+	
+	/**
+	 * Metodo encargado de cambiar el jugador activo, el que pasara a ser el de la posicion siguiente del array 
+	 * En caso de que no haya vuelve el turno al primero. 
+	 * @return player, nuevo jugador activo. 
+	 */ 
+	public Player cambiarJugadorActivo(){
+		this.jugadorActivo++;
+		if(jugadorActivo>players.size()){
+			jugadorActivo=0;
+			return players.get(0);
+		}
+		return players.get(this.jugadorActivo);
 	}
 }
