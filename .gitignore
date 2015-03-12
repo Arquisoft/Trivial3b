@@ -23,3 +23,8 @@ local.properties
 .buildpath
 .target
 .texlipse
+
+.idea
+*.lck
+*.log
+localDB.properties

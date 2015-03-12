@@ -1,4 +1,4 @@
-package es.uniovi.asw.model;
+package es.uniovi.asw.graph;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -1,23 +1,20 @@
 package es.uniovi.asw.game;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.Test;
 
+import es.uniovi.asw.graph.Graph;
 import es.uniovi.asw.model.Casilla;
-import es.uniovi.asw.model.Graph;
+import es.uniovi.asw.model.Tablero;
 
 public class GameTest {
 
 	@Test
 	public void test() {
-		assertEquals(1, 1);
-
-		Game game = new Game(1);
-
-		Graph<Casilla> tablero = game.getTablero();
+		Graph<Casilla> tablero = Tablero.getTablero(1);
 
 		Casilla c = tablero.getNode(0);
 

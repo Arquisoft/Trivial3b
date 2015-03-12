@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import es.uniovi.asw.model.Graph;
+import es.uniovi.asw.graph.Graph;
 
 public class AlumnoGraphTest {
     double infinito = Double.POSITIVE_INFINITY;

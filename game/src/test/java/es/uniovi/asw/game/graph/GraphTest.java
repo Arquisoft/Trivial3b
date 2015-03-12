@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import es.uniovi.asw.model.Graph;
+import es.uniovi.asw.graph.Graph;
 
 public class GraphTest {
     @Test
