@@ -1,0 +1,12 @@
+[
+  {
+    "category": "DEPORTES",
+    "question": "Question",
+    "correctAnswer": "Correct",
+    "wrongAnswers": [
+      "Wrong1",
+      "Wrong2",
+      "Wrong3"
+    ]
+  }
+]
