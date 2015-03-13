@@ -1,103 +1,299 @@
-<!doctype html>
+<!--A Design by W3layouts 
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
+<title>Spirit8 Bootstarp Website Template | Home :: w3layouts</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+</head>
+<body> 
+<!--header-->
+	<div class="header">
+		<div class="container">
+			<div class="header-top">				
+				<div class="top-nav">
+					<span class="menu"> </span>
+					<ul>
+						<li class="active" ><a href="#" class="scroll">Inicio<label class="line"> </label></a></li>
+						<li><a href="#about" class="scroll">Proyecto<label class="line"> </label></a></li>
+						<li><a href="#services" class="scroll">Servicios<label class="line in-line"> </label></a></li>
+						<li><a href="#manual" class="scroll">Manual<label class="line in-line"> </label></a></li>
+						<li><a href="#contact" class="scroll">Autores <label class="line in-line"> </label></a></li>
+					</ul>
+					<!-- script-nav -->
+			<script>
+			$("span.menu").click(function(){
+				$(".top-nav ul").slideToggle(500, function(){
+				});
+			});
+			</script>
+					</script>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="header-matter">
+				<h2>BIENVENIDO AL <span>TRIVIAL3B</span></h2>				
+				<a href="#about" class="scroll" ><img src="images/down.png" class="scroll" alt="" /></a>
+			</div>
+		</div>
+	</div>
+	<!--content-->
+	<div class="container">
+		<div class="container">
+			<div class="about" id="about">				
+					<img class="red"  src="images/Trivial.png" alt="" />				
+				<div class="about-left left-about">
+					<small>Trivial</small>
+					<h3><span>Descripción</span> del proyecto</h3>
+					<p>El objetivo del proyecto es desarrollar el mítico juego de sobremesa, denominado trivial, para poder jugarlo desde el PC tanto en local como en red. En esta página se irán informando de los cambios
+					que se realizaran en el proyecto. A continuación ofrecemos una serie de enlaces para que puedan bajar el proyecto y probarlo, para así ayudarnos a mejorar.</p>
+					<ul>
+						<li><a href="https://codeload.github.com/Arquisoft/Trivial3b/legacy.zip/master"><label> </label>Descargar ZIP</a></li>
+						<li><a href="https://codeload.github.com/Arquisoft/Trivial3b/legacy.tar.gz/master"><label> </label>Descargar TAR</a></li>
+						<li><a href="https://github.com/Arquisoft/Trivial3b"><label> </label>Ver en GitHub</a></li>
+					</ul>					
+				</div>
+				<div class="clearfix"> </div>
+			</div>		
+<!---->
+		<div class="services" id="services">
+			 <div class="container">
+				 <div class="services-grid">
+					<h3>Servicios <span>usados para el proyecto </span></h3>
+					<img src="images/li-in.png" alt="" />					
+				</div>
+				<div class="ser-grid">
+					<div class="container">
+						<img src="images/eclipse.png" alt="" />							
+						<p>Eclipse es un programa informático compuesto por un conjunto de herramientas de programación de código abierto multiplataforma para desarrollar. Esta plataforma, típicamente ha sido usada para desarrollar entornos de desarrollo integrados (IDE), como el IDE de Java llamado Java Development Toolkit (JDT) y el compilador (ECJ) 
+						que se entrega como parte de Eclipse (y que son usados también para desarrollar el mismo Eclipse). Sin embargo, también se puede usar para otros tipos de aplicaciones cliente, como BitTorrent o Azureus. Eclipse es también una comunidad de usuarios, extendiendo constantemente las áreas de aplicación cubiertas.
+						Eclipse fue desarrollado originalmente por IBM como el sucesor de su familia de herramientas para VisualAge. Eclipse es ahora desarrollado por la Fundación Eclipse, una organización independiente sin ánimo de lucro que fomenta una comunidad de código abierto y un conjunto de productos complementarios, capacidades y servicios.
+						Eclipse fue liberado originalmente bajo la Common Public License, pero después fue re-licenciado bajo la Eclipse Public License.</p>
+					 </div>	
+					<div class="container">
+						<img src="images/mongo.png" alt="" />							
+						<p>MongoDB es un sistema de base de datos NoSQL orientado a documentos, desarrollado bajo el concepto de código abierto. MongoDB forma parte de la nueva familia de sistemas de base de datos NoSQL. En vez de guardar los datos en tablas como se hace en las base de datos relacionales, MongoDB guarda estructuras de datos en documentos tipo JSON 
+						con un esquema dinámico (MongoDB llama ese formato BSON), haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida. El desarrollo de MongoDB empezó en octubre de 2007 por la compañía de software 10gen. Ahora MongoDB es una base de datos lista para su uso en producción y con muchas características. Esta base de 
+						datos se utiliza mucho en la industria. El código binario está disponible para los sistemas operativos Windows, Linux, OS X y Solaris.</p>
+					 </div>					 
+				<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>	
+<!---->		
+			<!-- Script for gallery Here -->
+				<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+					<script type="text/javascript">
+					$(function () {
+						
+						var filterList = {
+						
+							init: function () {
+							
+								// MixItUp plugin
+								// http://mixitup.io
+								$('#portfoliolist').mixitup({
+									targetSelector: '.portfolio',
+									filterSelector: '.filter',
+									effects: ['fade'],
+									easing: 'snap',
+									// call the hover effect
+									onMixEnd: filterList.hoverEffect()
+								});				
+							
+							},
+							
+							hoverEffect: function () {
+							
+								// Simple parallax effect
+								$('#portfoliolist .portfolio').hover(
+									function () {
+										$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+										$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
+									},
+									function () {
+										$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+										$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
+									}		
+								);				
+							
+							}
+				
+						};
+						
+						// Run the show!
+						filterList.init();
+					});	
+					</script>
+			<!-- Gallery Script Ends -->
+			</div>
+		</div>
+		<!--content-->	
+		<div class="manual" id="manual">
+			 <div class="container">
+				 <div class="services-grid">
+					<h3>Manual <span>de usuario </span></h3>
+					<img src="images/li-in.png" alt="" />					
+				</div>
+				<div class="ser-grid">
+					<div class="container">						
+						<p>El propósito de este manual es facilitar al usuario el uso de la aplicación y la consulta de la información que se administra en la aplicación Trivial3b. La aplicación, en un primer paso, se encarga de leer ficheros con los 
+						enunciados y respuestas de preguntas, procesas dichas preguntas indicando si hay errores o son correctas y guardarlas un fichero intermedio de salida.<br> 
+						En un segundo paso, se encarga de subir esas preguntas (una vez el operario las haya revisado, si así lo desea) a una base de datos MongoDB.<br>
+						1-Implementación del sistema<br>
+							a)	Requerimientos de hardware:<br>
+								a.	Ordenador.<br>
+							b)	Requerimientos de software:<br>
+								a.	Sistema operativo con Java 1.7+.<br>
+								b.	Una base MongoDB en local (Para usar el guardado en base de datos)<br>
+						2-Ingresando al sistema.<br>
+						Ejecuta la aplicación trivial3b.jar, a través de la ventana de comandos con la orden java –jar trivial3b.jar <modo> <parámetros>.<br>
+						3-Funcionalidad general.<br>
+						La forma de utilizar esta aplicación es la misma que cualquier otra de tipo bash, ésta, en concreto, precisa de al menos tres parámetros para funcionar correctamente. El formato de entrada sería:</p>
+						<pre>Uso: java -jar extract.jar <modo> <parámetros>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+Modos:
+ - extract: Extrae las preguntas a un fichero de salida
+	 - Parámetros: <entrada> <formato-entrada> <salida> <formato-salida>
+	 Los formatos de entrada son: gift, xml
+	 Los formatos de salida son: json
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Trivial3b by Arquisoft</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-   <div class="wraper">
-		<h1>Trivial3b</h1>
-		
-	<ul class="nav nav-pills">
-	  <li role="presentation" class="active"><a href="https://github.com/Arquisoft/Trivial3b/tarball/master" class="download-button tar"><span>Descargar TAR</span></a></li>
-	  <li role="presentation" class="active"><a href="https://github.com/Arquisoft/Trivial3b/zipball/master" class="download-button zip"><span>Descargar ZIP</span></a></li>
-	  <li role="presentation" class="active"><a href="https://github.com/Arquisoft/Trivial3b" class="code">Ver Trivial3b en GitHub</a></li>
-	</ul>
-   </div>
-         
-<h2><a id="Bienvenido a la página del Trivial3b" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bienvenido a la página del Trivial3b</h2>
-
-<p>En esta página se podrán ver los avances del proyecto, concretamente un trivial. En la página está disponible el código del proyecto para ser descargado para uso personal.</p>
-
-<h3><a id="Autores" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Autores</h3>
-
+ - upload: Sube las preguntas extraídas a la base de datos
+	 - Parámetros: <entrada> <servidor>
+	 El servidor es de tipo url:puerto
+	 En caso de omisión se supondrá localhost:27017
+</pre>
+<p>El significado de dichos parámetros es el siguiente:<br>
+•	entrada: Ubicación del fichero en el cuál se encuentran las preguntas.<br>
+•	formato-entrada: Formato del fichero de entrada.<br>
+•	fichero-salida: En caso de salida a fichero, para indicar la ruta del fichero de salida.<br>
+•	formato-salida: formato del fichero en el que queremos que la aplicación nos devuelva las preguntas (de momento solo está JSON).<br>
+Una vez ejecutado dicho comando con el primero de los modos, el programa se encarga de generar la salida con el formato correspondiente y de guardarla en un fichero.
+Cuando el usuario lo vea oportuno, con el segundo de los modos es posible guardar los datos de ese fichero en una base de datos MongoDB en formato JSON.
+Si alguna de las preguntas procesadas tiene un formato incorrecto o algún fallo (p ej.: no tiene respuesta correcta) la aplicación generará un mensaje de error e ignorará la pregunta, pero seguirá con el procesamiento del resto de preguntas.</p>
+					 </div>									 
+				<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>			
+<!---->
+	<!---->
+		<div class="contact" id="contact">
+			 <div class="container">
+				 <div class="contact-grid">
+					<h3>Autores <span>de la aplicación </span></h3>
+					<img src="images/li-in.png" alt="" />					
+				</div>	
+			 		<div class="contact" id="contact">
 <div class="panel panel-default">   
   <table class="table">
     <thead>		
 		<th>Nombre</th>
 		<th>Apellidos</th>
-		<th>UO</th>	
-		<th>DNI</th>	
+		<th>UO</th>				
 	</thead>
 	<tbody>
 		<tr>
 			<td>Joel</td>
 			<td>Pérez Alcalá</td>
-			<td>UO226321</td>
-			<td>71726901K</td>
+			<td>UO226321</td>			
 		</tr>
 		<tr>
 			<td>Raúl</td>
 			<td>Morán Fernández</td>
-			<td>UO180365</td>	
-			<td>71668734K</td>			
+			<td>UO180365</td>							
 		</tr>
 		<tr>
 			<td>Daniel</td>
 			<td>García García</td>
-			<td>UO231763</td>	
-			<td>71737498S</td>
+			<td>UO231763</td>			
 		</tr>
 		<tr>
 			<td>Sergio</td>
 			<td>Llana Pérez</td>
-			<td>UO229817</td>
-			<td>32891035T</td>
+			<td>UO229817</td>			
 		</tr>
 		<tr>
 			<td>Jairo</td>
 			<td>López Soto</td>
-			<td>UO218230</td>	
-			<td>71775486F</td>
+			<td>UO218230</td>			
 		</tr>
 		<tr>
 			<td>Cecilia</td>
 			<td>Cueto Tudela</td>
-			<td>UO229678</td>
-			<td>53509210D</td>
+			<td>UO229678</td>			
 		</tr>	
 		<tr>
 			<td>Cristian Javier</td>
 			<td>Santos Navia</td>
-			<td>UO229778</td>
-			<td>32892096A</td>
+			<td>UO229778</td>			
 		</tr>
 		<tr>
 			<td>José Manuel</td>
 			<td>Fernández García</td>
-			<td>UO231490</td>
-			<td>9449976N</td>
+			<td>UO231490</td>			
 		</tr>
 	</tbody>
   </table>
-</div>    
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/Arquisoft">Arquisoft</a></p>        
-      </footer>   
-    <script src="javascripts/scale.fix.js"></script>    
-  </body>
+</div> 
+		</div>
+			</div>
+		<!--footer-->
+	<div class="footer">
+		<div class="container">
+				<div class="footer-class">
+					 <p class="footer-grid">&copy; 2014 Template by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+					 <ul class="social-ic-icons">
+						<li class="facebook"><a href="#"><span> </span></a></li>
+						<li class="twitter"><a href="#"><span> </span></a></li>
+						<li class="gmail"><a href="#"><span> </span></a></li>
+						<li class="inline"><a href="#"><span> </span></a></li>
+						<li class="browser"><a href="#"><span> </span></a></li>
+					</ul>
+				<div class="clearfix"> </div>
+			 	</div>
+		 </div>
+		 <script type="text/javascript">
+						$(document).ready(function() {
+							/*
+							var defaults = {
+					  			containerID: 'toTop', // fading element id
+								containerHoverID: 'toTopHover', // fading element hover id
+								scrollSpeed: 1200,
+								easingType: 'linear' 
+					 		};
+							*/
+							
+							$().UItoTop({ easingType: 'easeOutQuart' });
+							
+						});
+					</script>
+				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	 </div>
+</body>
 </html>
