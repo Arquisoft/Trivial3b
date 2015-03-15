@@ -47,7 +47,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		ResultSet rs = null;
 		try {
 
-			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICASJUGADOR_FINDALL"));
+			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_FINDALL"));
 
 			rs = ps.executeQuery();
 			List<Map<String, Object>> estadisticasJugador = new ArrayList();
@@ -73,7 +73,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 
 		PreparedStatement ps = null;
 		try{
-			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICA_INSERT"));
+			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_INSERT"));
 			ps.setInt(1, (Integer) estadistica.get("IDJUGADOR"));
 			ps.setInt(2,(Integer) estadistica.get("IDPREGUNTA"));
 			ps.setInt(3,(Integer) estadistica.get("ACIERTOS"));
@@ -87,5 +87,65 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		finally {
 			Jdbc.close(ps);
 		}		
-	}	
+	}
+	
+	/**
+	 * Guarda el resultado de una pregunta +1acierto/fallo
+	 */
+	@Override
+	public void guardarResultado(Map<String, Object> estadistica, boolean acertada) {
+		PreparedStatement ps = null;
+		try{
+			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_GUARDARRESULTADO"));
+			if(acertada){
+				ps.setInteger(1,1+(Integer) estadistica.get("ACIERTOS"));
+				ps.setString(2,(Integer) estadistica.get("FALLOS"));
+			}else{
+				ps.setInteger(1,(Integer) estadistica.get("ACIERTOS"));
+				ps.setInteger(2,1+(Integer) estadistica.get("FALLOS"));
+			}
+
+			ps.setString(3,(String) estadistica.get("IDJUGADOR"));
+			ps.setString(4,(String) estadistica.get("IDPREGUNTA"));
+
+			ps.executeUpdate();
+
+		}catch (SQLException e){
+			throw new RuntimeException(e);
+		}
+		finally {
+			Jdbc.close(ps);
+		}		
+	}
+	
+	/**
+	 * Busca una estadistica por su jugador y pregunta
+	 */
+	@Override
+	public Map<String, Object> findByJyP(int idJugador, int idPregunta) {
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+
+			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_FINDBYJugadorYPregunta"));
+			ps.setInteger(1, idJugador);
+			ps.setInteger(2, idPregunta);
+
+			rs = ps.executeQuery();
+			Map<String, Object> estadistica;
+			if (rs.next()) {
+
+				estadistica = load(rs);
+
+				return estadistica;
+			}
+			else return null;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			Jdbc.close(rs, ps);
+		}
+	}
 }
