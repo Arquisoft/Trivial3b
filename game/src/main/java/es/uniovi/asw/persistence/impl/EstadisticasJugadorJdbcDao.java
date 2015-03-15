@@ -18,10 +18,10 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 
 		Map<String, Object> estadisticaJugador = new HashMap<>();
 
-		categoria.put("IDJUGADOR", rs.getLong("IDJUGADOR"));
-		categoria.put("IDPREGUNTA", rs.getString("IDPREGUNTA"));
-		categoria.put("ACIERTOS", rs.getDouble("ACIERTOS"));
-		categoria.put("FALLOS", rs.getDouble("FALLOS"));
+		estadisticaJugador.put("IDJUGADOR", rs.getInt("IDJUGADOR"));
+		estadisticaJugador.put("IDPREGUNTA", rs.getInt("IDPREGUNTA"));
+		estadisticaJugador.put("ACIERTOS", rs.getInt("ACIERTOS"));
+		estadisticaJugador.put("FALLOS", rs.getInt("FALLOS"));
 
 		return estadisticaJugador;
 	}
@@ -54,6 +54,30 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		} finally {
 			Jdbc.close(rs, ps);
 		}
+	}
+	
+	/**
+	 * inserta una estadistica
+	 */
+	@Override
+	public void insertar(Map<String, Object> estadistica) {
+
+		PreparedStatement ps = null;
+		try{
+			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICA_INSERT"));
+			ps.setInt(1,(int) estadistica.get("IDJUGADOR"));
+			ps.setInt(2,(int) estadistica.get("IDPREGUNTA"));
+			ps.setInt(3,(int) estadistica.get("ACIERTOS"));
+			ps.setInt(4,(int) estadistica.get("FALLOS"));
+
+			ps.executeUpdate();
+
+		}catch (SQLException e){
+			throw new RuntimeException(e);
+		}
+		finally {
+			Jdbc.close(ps);
+		}		
 	}
 
 }
