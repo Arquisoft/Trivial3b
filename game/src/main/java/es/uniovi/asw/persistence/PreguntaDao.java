@@ -1,5 +1,7 @@
 package es.uniovi.asw.persistence;
 
-public interface PreguntaDao {
+import java.sql.Connection;
 
+public interface PreguntaDao {
+	void setConnection(Connection con);
 }

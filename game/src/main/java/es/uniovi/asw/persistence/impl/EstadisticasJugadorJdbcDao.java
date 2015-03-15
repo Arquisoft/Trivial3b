@@ -1,6 +1,17 @@
 package es.uniovi.asw.persistence.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import es.uniovi.asw.persistence.EstadisticasJugadorDao;
+import es.uniovi.asw.util.Conf;
+import es.uniovi.asw.util.Jdbc;
 
 public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 	
@@ -16,7 +27,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 	 */
 	private Map<String, Object> load(ResultSet rs) throws SQLException {
 
-		Map<String, Object> estadisticaJugador = new HashMap<>();
+		Map<String, Object> estadisticaJugador = new HashMap();
 
 		estadisticaJugador.put("IDJUGADOR", rs.getInt("IDJUGADOR"));
 		estadisticaJugador.put("IDPREGUNTA", rs.getInt("IDPREGUNTA"));
@@ -39,11 +50,9 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICASJUGADOR_FINDALL"));
 
 			rs = ps.executeQuery();
-			List<Map<String, Object>> estadisticasJugador = new ArrayList<>();
+			List<Map<String, Object>> estadisticasJugador = new ArrayList();
 			while (rs.next()) {
-
 				Map<String, Object> estadisticaJugador = load(rs);
-
 				estadisticasJugador.add(estadisticaJugador);
 			}
 
@@ -65,10 +74,10 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		PreparedStatement ps = null;
 		try{
 			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICA_INSERT"));
-			ps.setInt(1,(int) estadistica.get("IDJUGADOR"));
-			ps.setInt(2,(int) estadistica.get("IDPREGUNTA"));
-			ps.setInt(3,(int) estadistica.get("ACIERTOS"));
-			ps.setInt(4,(int) estadistica.get("FALLOS"));
+			ps.setInt(1, (Integer) estadistica.get("IDJUGADOR"));
+			ps.setInt(2,(Integer) estadistica.get("IDPREGUNTA"));
+			ps.setInt(3,(Integer) estadistica.get("ACIERTOS"));
+			ps.setInt(4,(Integer) estadistica.get("FALLOS"));
 
 			ps.executeUpdate();
 
@@ -78,6 +87,5 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		finally {
 			Jdbc.close(ps);
 		}		
-	}
-
+	}	
 }
