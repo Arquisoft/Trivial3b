@@ -1,8 +1,17 @@
 package es.uniovi.asw.persistence.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import es.uniovi.asw.persistence.PreguntaDao;
+import es.uniovi.asw.util.Conf;
+import es.uniovi.asw.util.Jdbc;
 
 public class PreguntaJdbcDao implements PreguntaDao {
 
@@ -18,7 +27,7 @@ public class PreguntaJdbcDao implements PreguntaDao {
 	 */
 	private Map<String, Object> load(ResultSet rs) throws SQLException {
 
-		Map<String, Object> pregunta = new HashMap();
+		Map<String, Object> pregunta = new HashMap<String, Object>();
 
 		pregunta.put("ID", rs.getInt("ID"));
 		pregunta.put("CATEGORIA", rs.getString("CATEGORIA"));
@@ -38,10 +47,10 @@ public class PreguntaJdbcDao implements PreguntaDao {
 		ResultSet rs = null;
 		try {
 
-			ps = conexion.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDALL"));
+			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDALL"));
 
 			rs = ps.executeQuery();
-			List<Map<String, Object>> preguntas = new ArrayList();
+			List<Map<String, Object>> preguntas = new ArrayList<Map<String, Object>>();
 			while (rs.next()) {
 				Map<String, Object> pregunta = load(rs);
 				preguntas.add(pregunta);
@@ -64,7 +73,7 @@ public class PreguntaJdbcDao implements PreguntaDao {
 
 		PreparedStatement ps = null;
 		try{
-			ps = conexion.prepareStatement(Conf.get("SQL_PREGUNTAS_INSERT"));
+			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_INSERT"));
 			ps.setInt(1, (Integer) pregunta.get("ID"));
 			ps.setInt(2,(Integer) pregunta.get("CATEGORIA"));
 			ps.setInt(3,(Integer) pregunta.get("ACIERTOS"));
@@ -88,13 +97,13 @@ public class PreguntaJdbcDao implements PreguntaDao {
 	public void guardarResultado(Map<String, Object> pregunta, boolean acertada) {
 		PreparedStatement ps = null;
 		try{
-			ps = conexion.prepareStatement(Conf.get("SQL_PREGUNTAS_GUARDARRESULTADO"));
+			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_GUARDARRESULTADO"));
 			if(acertada){
-				ps.setInteger(1,1+(Integer) pregunta.get("ACIERTOS"));
-				ps.setString(2,(Integer) pregunta.get("FALLOS"));
+				ps.setInt(1,1+(Integer) pregunta.get("ACIERTOS"));
+				ps.setInt(2,(Integer) pregunta.get("FALLOS"));
 			}else{
-				ps.setInteger(1,(Integer) pregunta.get("ACIERTOS"));
-				ps.setString(2,1+(Integer) pregunta.get("FALLOS"));
+				ps.setInt(1,(Integer) pregunta.get("ACIERTOS"));
+				ps.setInt(2,1+(Integer) pregunta.get("FALLOS"));
 			}
 
 			ps.setLong(3,(Long) pregunta.get("ID"));
@@ -119,8 +128,8 @@ public class PreguntaJdbcDao implements PreguntaDao {
 		ResultSet rs = null;
 		try {
 
-			ps = conexion.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDBYID"));
-			ps.setInteger(1, idPregunta);
+			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDBYID"));
+			ps.setInt(1, idPregunta);
 
 			rs = ps.executeQuery();
 			Map<String, Object> pregunta;
@@ -138,6 +147,4 @@ public class PreguntaJdbcDao implements PreguntaDao {
 			Jdbc.close(rs, ps);
 		}
 	}
-
-
 }

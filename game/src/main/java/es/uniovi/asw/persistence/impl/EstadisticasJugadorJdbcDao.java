@@ -27,7 +27,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 	 */
 	private Map<String, Object> load(ResultSet rs) throws SQLException {
 
-		Map<String, Object> estadisticaJugador = new HashMap();
+		Map<String, Object> estadisticaJugador = new HashMap<String, Object>();
 
 		estadisticaJugador.put("IDJUGADOR", rs.getInt("IDJUGADOR"));
 		estadisticaJugador.put("IDPREGUNTA", rs.getInt("IDPREGUNTA"));
@@ -50,7 +50,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_FINDALL"));
 
 			rs = ps.executeQuery();
-			List<Map<String, Object>> estadisticasJugador = new ArrayList();
+			List<Map<String, Object>> estadisticasJugador = new ArrayList<Map<String, Object>>();
 			while (rs.next()) {
 				Map<String, Object> estadisticaJugador = load(rs);
 				estadisticasJugador.add(estadisticaJugador);
@@ -98,11 +98,11 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		try{
 			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_GUARDARRESULTADO"));
 			if(acertada){
-				ps.setInteger(1,1+(Integer) estadistica.get("ACIERTOS"));
-				ps.setString(2,(Integer) estadistica.get("FALLOS"));
+				ps.setInt(1,1+(Integer) estadistica.get("ACIERTOS"));
+				ps.setInt(2,(Integer) estadistica.get("FALLOS"));
 			}else{
-				ps.setInteger(1,(Integer) estadistica.get("ACIERTOS"));
-				ps.setInteger(2,1+(Integer) estadistica.get("FALLOS"));
+				ps.setInt(1,(Integer) estadistica.get("ACIERTOS"));
+				ps.setInt(2,1+(Integer) estadistica.get("FALLOS"));
 			}
 
 			ps.setString(3,(String) estadistica.get("IDJUGADOR"));
@@ -129,8 +129,8 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao{
 		try {
 
 			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_FINDBYJugadorYPregunta"));
-			ps.setInteger(1, idJugador);
-			ps.setInteger(2, idPregunta);
+			ps.setInt(1, idJugador);
+			ps.setInt(2, idPregunta);
 
 			rs = ps.executeQuery();
 			Map<String, Object> estadistica;

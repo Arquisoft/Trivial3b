@@ -27,7 +27,7 @@ public class JugadorJdbcDao implements JugadorDao {
 	 */
 	private Map<String, Object> load(ResultSet rs) throws SQLException {
 
-		Map<String, Object> player = new HashMap();
+		Map<String, Object> player = new HashMap<String, Object>();
 
 		player.put("ID", rs.getInt("ID"));
 		player.put("USER", rs.getString("USER"));
@@ -50,7 +50,7 @@ public class JugadorJdbcDao implements JugadorDao {
 			ps = con.prepareStatement(Conf.get("SQL_PLAYERS_FINDALL"));
 
 			rs = ps.executeQuery();
-			List<Map<String, Object>> players = new ArrayList();
+			List<Map<String, Object>> players = new ArrayList<Map<String, Object>>();
 			while (rs.next()) {
 				Map<String, Object> player = load(rs);
 				players.add(player);
