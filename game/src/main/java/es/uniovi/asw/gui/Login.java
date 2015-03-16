@@ -1,4 +1,5 @@
-import java.awt.BorderLayout;
+package es.uniovi.asw.gui;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,15 +25,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.SpinnerDateModel;
-
-import java.util.Date;
-import java.util.Calendar;
-
 
 public class Login extends JFrame {
-
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    
+    private JPanel contentPane;
 	private JTextField txU1;
 	private JTextField txP1;
 	private JTextField txU2;
@@ -117,7 +114,7 @@ public class Login extends JFrame {
 		spinner.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Numero de jugadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				int jugadores = (int) spinner.getValue();
+				int jugadores = (Integer) spinner.getValue();
 				actualizarNumeroJugadores(jugadores);
 			}
 		});
