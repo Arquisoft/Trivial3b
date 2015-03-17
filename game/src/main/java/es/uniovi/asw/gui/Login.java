@@ -147,7 +147,7 @@ public class Login extends JFrame {
 		spinner.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Numero de jugadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				int jugadores = (int) spinner.getValue();
+				int jugadores = (Integer) spinner.getValue();
 				actualizarNumeroJugadores(jugadores);
 			}
 		});
