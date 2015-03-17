@@ -26,10 +26,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+
 public class Login extends JFrame {
-    private static final long serialVersionUID = 1L;
-    
-    private JPanel contentPane;
+
+	/**
+	 * 
+	 */
+	private JPanel contentPane;
 	private JTextField txU1;
 	private JTextField txP1;
 	private JTextField txU2;
@@ -42,6 +45,12 @@ public class Login extends JFrame {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JTextField txU5;
+	private JPasswordField txP5;
+	private JTextField txU6;
+	private JPasswordField txP6;
 
 
 	/**
@@ -53,6 +62,7 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -72,26 +82,49 @@ public class Login extends JFrame {
 			habilitarComponentes(panel_2, false);
 			habilitarComponentes(panel_3, false);
 			habilitarComponentes(panel_4, false);
+			habilitarComponentes(panel_5, false);
+			habilitarComponentes(panel_6, false);
+
 
 		} else if(jugadores == 2){
 			habilitarComponentes(panel_1, true);
 			habilitarComponentes(panel_2, true);
 			habilitarComponentes(panel_3, false);
 			habilitarComponentes(panel_4, false);
+			habilitarComponentes(panel_5, false);
+			habilitarComponentes(panel_6, false);
 
 		} else if(jugadores == 3){
 			habilitarComponentes(panel_1, true);
 			habilitarComponentes(panel_2, true);
 			habilitarComponentes(panel_3, true);
 			habilitarComponentes(panel_4, false);
+			habilitarComponentes(panel_5, false);
+			habilitarComponentes(panel_6, false);
 
-		}
-		
-		else if(jugadores == 4){
+		} else if(jugadores == 4){
 			habilitarComponentes(panel_1, true);
 			habilitarComponentes(panel_2, true);
 			habilitarComponentes(panel_3, true);
 			habilitarComponentes(panel_4, true);
+			habilitarComponentes(panel_5, false);
+			habilitarComponentes(panel_6, false);
+
+		} else if(jugadores == 5){
+			habilitarComponentes(panel_1, true);
+			habilitarComponentes(panel_2, true);
+			habilitarComponentes(panel_3, true);
+			habilitarComponentes(panel_4, true);
+			habilitarComponentes(panel_5, true);
+			habilitarComponentes(panel_6, false);
+
+		} else if(jugadores == 6){
+			habilitarComponentes(panel_1, true);
+			habilitarComponentes(panel_2, true);
+			habilitarComponentes(panel_3, true);
+			habilitarComponentes(panel_4, true);
+			habilitarComponentes(panel_5, true);
+			habilitarComponentes(panel_6, true);
 
 		}
 	}
@@ -102,7 +135,7 @@ public class Login extends JFrame {
 	public Login() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 565, 517);
+		setBounds(100, 100, 565, 703);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -114,12 +147,12 @@ public class Login extends JFrame {
 		spinner.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 3, true), "Numero de jugadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				int jugadores = (Integer) spinner.getValue();
+				int jugadores = (int) spinner.getValue();
 				actualizarNumeroJugadores(jugadores);
 			}
 		});
-		spinner.setModel(new SpinnerNumberModel(1, 1, 4, 1));
-		spinner.setBounds(23, 397, 170, 59);
+		spinner.setModel(new SpinnerNumberModel(2, 2, 6, 1));
+		spinner.setBounds(23, 595, 170, 59);
 		contentPane.add(spinner);
 		
 		panel_1 = new JPanel();
@@ -153,24 +186,20 @@ public class Login extends JFrame {
 		contentPane.add(panel_2);
 		
 		txU2 = new JTextField();
-		txU2.setEnabled(false);
 		txU2.setColumns(10);
 		txU2.setBounds(259, 18, 247, 20);
 		panel_2.add(txU2);
 		
 		txP2 = new JPasswordField();
-		txP2.setEnabled(false);
 		txP2.setColumns(10);
 		txP2.setBounds(259, 49, 247, 20);
 		panel_2.add(txP2);
 		
 		JLabel label = new JLabel("Introduzca su usuario");
-		label.setEnabled(false);
 		label.setBounds(101, 21, 148, 14);
 		panel_2.add(label);
 		
 		JLabel lblPasswordUsuario = new JLabel("Password usuario 2");
-		lblPasswordUsuario.setEnabled(false);
 		lblPasswordUsuario.setBounds(101, 52, 129, 14);
 		panel_2.add(lblPasswordUsuario);
 		
@@ -236,7 +265,7 @@ public class Login extends JFrame {
 				System.exit(0);
 			}
 		});
-		btSalir.setBounds(321, 423, 97, 33);
+		btSalir.setBounds(321, 616, 97, 33);
 		contentPane.add(btSalir);
 		
 		JButton btJugar = new JButton("Jugar");
@@ -244,7 +273,63 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btJugar.setBounds(442, 423, 97, 33);
+		btJugar.setBounds(442, 616, 97, 33);
 		contentPane.add(btJugar);
+		
+		panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 4, true), "Jugador 5", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_5.setBounds(23, 397, 516, 80);
+		contentPane.add(panel_5);
+		
+		txU5 = new JTextField();
+		txU5.setEnabled(false);
+		txU5.setColumns(10);
+		txU5.setBounds(259, 18, 247, 20);
+		panel_5.add(txU5);
+		
+		txP5 = new JPasswordField();
+		txP5.setEnabled(false);
+		txP5.setColumns(10);
+		txP5.setBounds(259, 49, 247, 20);
+		panel_5.add(txP5);
+		
+		JLabel label_1 = new JLabel("Introduzca su usuario");
+		label_1.setEnabled(false);
+		label_1.setBounds(100, 21, 149, 14);
+		panel_5.add(label_1);
+		
+		JLabel lblPasswordUsuario_3 = new JLabel("Password usuario 5");
+		lblPasswordUsuario_3.setEnabled(false);
+		lblPasswordUsuario_3.setBounds(100, 52, 130, 14);
+		panel_5.add(lblPasswordUsuario_3);
+		
+		panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 4, true), "Jugador 6", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_6.setBounds(23, 494, 516, 80);
+		contentPane.add(panel_6);
+		
+		txU6 = new JTextField();
+		txU6.setEnabled(false);
+		txU6.setColumns(10);
+		txU6.setBounds(259, 18, 247, 20);
+		panel_6.add(txU6);
+		
+		txP6 = new JPasswordField();
+		txP6.setEnabled(false);
+		txP6.setColumns(10);
+		txP6.setBounds(259, 49, 247, 20);
+		panel_6.add(txP6);
+		
+		JLabel label_5 = new JLabel("Introduzca su usuario");
+		label_5.setEnabled(false);
+		label_5.setBounds(97, 21, 152, 14);
+		panel_6.add(label_5);
+		
+		JLabel lblPasswordUsuario_4 = new JLabel("Password usuario 6");
+		lblPasswordUsuario_4.setEnabled(false);
+		lblPasswordUsuario_4.setBounds(97, 52, 134, 14);
+		panel_6.add(lblPasswordUsuario_4);
 	}
 }
