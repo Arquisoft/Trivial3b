@@ -1,187 +1,105 @@
 package es.uniovi.asw.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import es.uniovi.asw.graph.Graph;
+import es.uniovi.asw.util.FileUtil;
 
 public class Tablero {
+    public static final int CIRCULAR = 1;
 
-    public static Graph<Casilla> getTablero(int a) {
-        switch (a) {
-            case 1:// grafo circular
-                return creaGrafoCircular();
+    public static void main(String... args) {
+        getTablero(CIRCULAR);
+    }
+
+    public static Graph<Casilla> getTablero(int type) {
+        switch (type) {
+            case CIRCULAR:
+                return cargaGrafo("src/main/resources/grafoCircular.txt");
 
             default:
                 return null;
         }
     }
 
-    private static Graph<Casilla> creaGrafoCircular() {
-        Graph<Casilla> tablero = new Graph<Casilla>(73);
+    private static Graph<Casilla> cargaGrafo(String location) {
+        String file = FileUtil.getFile(location);
 
-        Casilla c1 = new Casilla(1, Category.DEPORTES, TipoCasilla.QUESITO);
-        Casilla c2 = new Casilla(2, Category.CIENCIAYTECNOLOGIA);
-        Casilla c3 = new Casilla(3, TipoCasilla.TIRADAEXTRA);
-        Casilla c4 = new Casilla(4, Category.ESPECTACULOSYENTRETENIMIENTO);
-        Casilla c5 = new Casilla(5, Category.GEOGRAFIA);
-        Casilla c6 = new Casilla(6, TipoCasilla.TIRADAEXTRA);
-        Casilla c7 = new Casilla(7, Category.ARTEYLITERATURA);
-        Casilla c8 = new Casilla(8, Category.HISTORIA, TipoCasilla.QUESITO);
-        Casilla c9 = new Casilla(9, Category.ARTEYLITERATURA);
-        Casilla c10 = new Casilla(10, TipoCasilla.TIRADAEXTRA);
-        Casilla c11 = new Casilla(11, Category.CIENCIAYTECNOLOGIA);
-        Casilla c12 = new Casilla(12, Category.DEPORTES);
-        Casilla c13 = new Casilla(13, TipoCasilla.TIRADAEXTRA);
-        Casilla c14 = new Casilla(14, Category.GEOGRAFIA);
-        Casilla c15 = new Casilla(15, Category.ESPECTACULOSYENTRETENIMIENTO,
-                TipoCasilla.QUESITO);
-        Casilla c16 = new Casilla(16, Category.GEOGRAFIA);
-        Casilla c17 = new Casilla(17, TipoCasilla.TIRADAEXTRA);
-        Casilla c18 = new Casilla(18, Category.ARTEYLITERATURA);
-        Casilla c19 = new Casilla(19, Category.HISTORIA);
-        Casilla c20 = new Casilla(20, TipoCasilla.TIRADAEXTRA);
-        Casilla c21 = new Casilla(21, Category.DEPORTES);
-        Casilla c22 = new Casilla(22, Category.CIENCIAYTECNOLOGIA,
-                TipoCasilla.QUESITO);
-        Casilla c23 = new Casilla(23, Category.DEPORTES);
-        Casilla c24 = new Casilla(24, TipoCasilla.TIRADAEXTRA);
-        Casilla c25 = new Casilla(25, Category.GEOGRAFIA);
-        Casilla c26 = new Casilla(26, Category.ESPECTACULOSYENTRETENIMIENTO);
-        Casilla c27 = new Casilla(27, TipoCasilla.TIRADAEXTRA);
-        Casilla c28 = new Casilla(28, Category.HISTORIA);
-        Casilla c29 = new Casilla(29, Category.ARTEYLITERATURA,
-                TipoCasilla.QUESITO);
-        Casilla c30 = new Casilla(30, Category.HISTORIA);
-        Casilla c31 = new Casilla(31, TipoCasilla.TIRADAEXTRA);
-        Casilla c32 = new Casilla(32, Category.DEPORTES);
-        Casilla c33 = new Casilla(33, Category.CIENCIAYTECNOLOGIA);
-        Casilla c34 = new Casilla(34, TipoCasilla.TIRADAEXTRA);
-        Casilla c35 = new Casilla(35, Category.ESPECTACULOSYENTRETENIMIENTO);
-        Casilla c36 = new Casilla(36, Category.GEOGRAFIA, TipoCasilla.QUESITO);
-        Casilla c37 = new Casilla(37, Category.ESPECTACULOSYENTRETENIMIENTO);
-        Casilla c38 = new Casilla(38, TipoCasilla.TIRADAEXTRA);
-        Casilla c39 = new Casilla(39, Category.HISTORIA);
-        Casilla c40 = new Casilla(40, Category.ARTEYLITERATURA);
-        Casilla c41 = new Casilla(41, TipoCasilla.TIRADAEXTRA);
-        Casilla c42 = new Casilla(42, Category.CIENCIAYTECNOLOGIA);
+        // Dividimos el archivo en lineaas
+        String[] lineas = file.split("[\r\n]");
 
-        tablero.addNode(c1);
-        tablero.addNode(c2);
-        tablero.addNode(c3);
-        tablero.addNode(c4);
-        tablero.addNode(c5);
-        tablero.addNode(c6);
-        tablero.addNode(c7);
-        tablero.addNode(c8);
-        tablero.addNode(c9);
-        tablero.addNode(c10);
-        tablero.addNode(c11);
-        tablero.addNode(c12);
-        tablero.addNode(c13);
-        tablero.addNode(c14);
-        tablero.addNode(c15);
-        tablero.addNode(c16);
-        tablero.addNode(c17);
-        tablero.addNode(c18);
-        tablero.addNode(c19);
-        tablero.addNode(c20);
-        tablero.addNode(c21);
-        tablero.addNode(c22);
-        tablero.addNode(c23);
-        tablero.addNode(c24);
-        tablero.addNode(c25);
-        tablero.addNode(c26);
-        tablero.addNode(c27);
-        tablero.addNode(c28);
-        tablero.addNode(c29);
-        tablero.addNode(c30);
-        tablero.addNode(c31);
-        tablero.addNode(c32);
-        tablero.addNode(c33);
-        tablero.addNode(c34);
-        tablero.addNode(c35);
-        tablero.addNode(c36);
-        tablero.addNode(c37);
-        tablero.addNode(c38);
-        tablero.addNode(c39);
-        tablero.addNode(c40);
-        tablero.addNode(c41);
-        tablero.addNode(c42);
+        List<String> nodos = new ArrayList<String>();
+        List<String> aristas = new ArrayList<String>();
 
-        tablero.addEdge(c1, c2, 1);
-        tablero.addEdge(c2, c1, 1);
-        tablero.addEdge(c2, c3, 1);
-        tablero.addEdge(c3, c2, 1);
-        tablero.addEdge(c3, c4, 1);
-        tablero.addEdge(c4, c3, 1);
-        tablero.addEdge(c4, c5, 1);
-        tablero.addEdge(c5, c4, 1);
-        tablero.addEdge(c5, c6, 1);
-        tablero.addEdge(c6, c5, 1);
-        tablero.addEdge(c6, c7, 1);
-        tablero.addEdge(c7, c6, 1);
-        tablero.addEdge(c7, c8, 1);
-        tablero.addEdge(c8, c7, 1);
-        tablero.addEdge(c8, c9, 1);
-        tablero.addEdge(c9, c8, 1);
-        tablero.addEdge(c9, c10, 1);
-        tablero.addEdge(c10, c9, 1);
-        tablero.addEdge(c10, c11, 1);
-        tablero.addEdge(c11, c10, 1);
-        tablero.addEdge(c11, c12, 1);
-        tablero.addEdge(c12, c11, 1);
-        tablero.addEdge(c12, c13, 1);
-        tablero.addEdge(c13, c12, 1);
-        tablero.addEdge(c13, c14, 1);
-        tablero.addEdge(c14, c13, 1);
-        tablero.addEdge(c14, c15, 1);
-        tablero.addEdge(c15, c14, 1);
-        tablero.addEdge(c15, c16, 1);
-        tablero.addEdge(c16, c17, 1);
-        tablero.addEdge(c17, c18, 1);
-        tablero.addEdge(c18, c17, 1);
-        tablero.addEdge(c18, c19, 1);
-        tablero.addEdge(c19, c18, 1);
-        tablero.addEdge(c19, c20, 1);
-        tablero.addEdge(c20, c19, 1);
-        tablero.addEdge(c21, c20, 1);
-        tablero.addEdge(c20, c21, 1);
-        tablero.addEdge(c21, c22, 1);
-        tablero.addEdge(c22, c21, 1);
-        tablero.addEdge(c22, c23, 1);
-        tablero.addEdge(c23, c24, 1);
-        tablero.addEdge(c24, c25, 1);
-        tablero.addEdge(c25, c24, 1);
-        tablero.addEdge(c25, c26, 1);
-        tablero.addEdge(c26, c25, 1);
-        tablero.addEdge(c26, c27, 1);
-        tablero.addEdge(c27, c26, 1);
-        tablero.addEdge(c27, c28, 1);
-        tablero.addEdge(c28, c27, 1);
-        tablero.addEdge(c28, c29, 1);
-        tablero.addEdge(c29, c30, 1);
-        tablero.addEdge(c30, c31, 1);
-        tablero.addEdge(c31, c30, 1);
-        tablero.addEdge(c31, c32, 1);
-        tablero.addEdge(c32, c31, 1);
-        tablero.addEdge(c32, c33, 1);
-        tablero.addEdge(c33, c32, 1);
-        tablero.addEdge(c33, c34, 1);
-        tablero.addEdge(c34, c33, 1);
-        tablero.addEdge(c34, c35, 1);
-        tablero.addEdge(c35, c36, 1);
-        tablero.addEdge(c36, c37, 1);
-        tablero.addEdge(c37, c36, 1);
-        tablero.addEdge(c37, c38, 1);
-        tablero.addEdge(c38, c37, 1);
-        tablero.addEdge(c38, c39, 1);
-        tablero.addEdge(c39, c38, 1);
-        tablero.addEdge(c39, c40, 1);
-        tablero.addEdge(c40, c39, 1);
-        tablero.addEdge(c40, c41, 1);
-        tablero.addEdge(c41, c40, 1);
-        tablero.addEdge(c41, c42, 1);
-        tablero.addEdge(c42, c41, 1);
-        tablero.addEdge(c1, c42, 1);
-        tablero.addEdge(c42, c1, 1);
+        // Separamos las lineas de nodo de las de arista
+        for (String linea : lineas) {
+            linea = linea.trim();
+
+            if (linea.isEmpty() || linea.startsWith("#"))
+                continue;
+
+            if (linea.startsWith("N:"))
+                nodos.add(linea.substring(2));
+            else if (linea.startsWith("A:"))
+                aristas.add(linea.substring(2));
+        }
+
+        // Creamos el tablero del tamaño adecuado
+        Graph<Casilla> tablero = new Graph<Casilla>(nodos.size());
+
+        // Y una lista de casillas para añadir luego las aristas
+        List<Casilla> casillas = new ArrayList<Casilla>();
+
+        for (String nodo : nodos) {
+            Casilla cas = getCasilla(nodo);
+
+            casillas.add(cas);
+            tablero.addNode(cas);
+        }
+
+        for (String arista : aristas) {
+            addEdge(tablero, casillas, arista);
+        }
         return tablero;
+    }
+
+    private static Casilla getCasilla(String nodo) {
+        String[] params = nodo.split("\\|");
+
+        int id = Integer.parseInt(params[0].trim());
+
+        // La categoria puede ser null
+        Category category = null;
+        if (!params[1].trim().isEmpty())
+            category = Category.parse(params[1].trim());
+
+        TipoCasilla type = TipoCasilla.valueOf(params[2]);
+
+        return new Casilla(id, category, type);
+    }
+
+    private static void addEdge(Graph<Casilla> grafo, List<Casilla> casillas,
+            String arista) {
+        String[] params = arista.split("\\|");
+
+        int id1 = Integer.parseInt(params[0].trim());
+        int id2 = Integer.parseInt(params[1].trim());
+
+        Casilla c1 = find(casillas, id1);
+        Casilla c2 = find(casillas, id2);
+
+        // Aristas bidireccionales
+        grafo.addEdge(c1, c2, 1.0);
+        grafo.addEdge(c2, c1, 1.0);
+    }
+
+    private static Casilla find(List<Casilla> casillas, int id) {
+        for (Casilla casilla : casillas) {
+            if (casilla.getId() == id)
+                return casilla;
+        }
+
+        return null;
     }
 }
