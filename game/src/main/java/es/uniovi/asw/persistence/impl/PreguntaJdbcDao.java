@@ -75,7 +75,7 @@ public class PreguntaJdbcDao implements PreguntaDao {
 		try{
 			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_INSERT"));
 			ps.setInt(1, (Integer) pregunta.get("ID"));
-			ps.setInt(2,(Integer) pregunta.get("CATEGORIA"));
+			ps.setString(2,(String) pregunta.get("CATEGORIA"));
 			ps.setInt(3,(Integer) pregunta.get("ACIERTOS"));
 			ps.setInt(4,(Integer) pregunta.get("FALLOS"));
 

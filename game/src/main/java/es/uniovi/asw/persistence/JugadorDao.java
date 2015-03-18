@@ -9,4 +9,5 @@ public interface JugadorDao {
 	List<Map<String, Object>> listarJugadores();
 	void insertarJugadores(Map<String, Object> player);
 	void modificarJugadores(Map<String, Object> player);
+	boolean login(String username, String pass, String rol);
 }

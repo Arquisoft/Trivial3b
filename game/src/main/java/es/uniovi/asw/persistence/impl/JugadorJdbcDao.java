@@ -112,4 +112,35 @@ public class JugadorJdbcDao implements JugadorDao {
 			Jdbc.close(ps);
 		}		
 	}
+	
+	/**
+	 * True si existe un usuario con ese nombre, pass y rol.
+	 */
+	@Override
+	public boolean login(String username, String pass, String rol){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		boolean res = false;
+		try {
+
+			ps = con.prepareStatement(Conf.get("SQL_PLAYERS_LOGIN"));
+			ps.setString(1, username);
+			ps.setString(2, pass);
+			ps.setString(3, rol);
+			
+			rs = ps.executeQuery();
+			Map<String, Object> jugador;
+			if (rs.next()) {
+
+				jugador = load(rs);
+
+				if (jugador!=null){res = true;}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			Jdbc.close(rs, ps);
+		}
+		return res;
+	}
 }
