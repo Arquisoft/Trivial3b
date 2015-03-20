@@ -10,6 +10,5 @@
 |García|García|Daniel|71737498S|UO231763|[dani-garcia](https://github.com/dani-garcia)|
 |Llana|Pérez|Sergio|32891035T|UO229817|[sergiollana](https://github.com/sergiollana)|
 |López|Soto|Jairo|71775486F|UO218230|[JairoLopez](https://github.com/JairoLopez)|
-|Tudela|Cueto|Cecilia|53509210D|UO229678|[cecitudela](https://github.com/cecitudela)|
 |Navia|Santos|Cristian Javier|32892096A|UO229778|[cristian3](https://github.com/cristian3)|
 |García|Fernández|José Manuel|9449976N|UO231490|[josemanuelgarcia](https://github.com/josemanuelgarcia)|
