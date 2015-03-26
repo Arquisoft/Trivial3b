@@ -8,6 +8,7 @@ import es.uniovi.asw.util.FileUtil;
 
 public class Tablero {
     public static final int CIRCULAR = 1;
+    public static final int CUADRADO = 2;
 
     public static void main(String... args) {
         getTablero(CIRCULAR);
@@ -17,6 +18,8 @@ public class Tablero {
         switch (type) {
             case CIRCULAR:
                 return cargaGrafo("src/main/resources/grafoCircular.txt");
+            case CUADRADO:
+            	return cargaGrafo("src/main/resources/grafoCuadrado.txt");
 
             default:
                 return null;

@@ -49,6 +49,17 @@ public class GameTest {
         assertTrue(lista3.contains(tablero.getNode(54)));
         assertTrue(lista3.contains(tablero.getNode(59)));
         assertTrue(lista3.contains(tablero.getNode(64)));
+        
+        Graph<Casilla> tableroCuadrado = Tablero.getTablero(2);
+
+        Casilla cc = tableroCuadrado.getNode(0);
+
+        // Movimiento 1
+        List<Casilla> listaC = tableroCuadrado.getNodesDestino(cc, 2.0);
+
+        assertEquals(2, listaC.size());
+
+        assertTrue(listaC.contains(tableroCuadrado.getNode(2)));
 
     }
 }
