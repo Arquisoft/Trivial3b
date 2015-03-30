@@ -3,6 +3,7 @@ package es.uniovi.asw.game.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import es.uniovi.asw.game.GameService;
@@ -13,176 +14,208 @@ import es.uniovi.asw.model.Player;
 import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.model.Tablero;
 import es.uniovi.asw.model.TipoCasilla;
+import es.uniovi.asw.persistence.EstadisticasJugadorDao;
+import es.uniovi.asw.persistence.JugadorDao;
+import es.uniovi.asw.persistence.PersistenceFactory;
+import es.uniovi.asw.persistence.PreguntaDao;
+import es.uniovi.asw.persistence.impl.SimplePersistenceFactory;
 import es.uniovi.asw.questions.MongoQuestions;
 
 public class GameServiceImpl implements GameService {
-    private static final int TIPO_GRAFO = 1;
-    private static final int MAX_PLAYERS = 6;
+	private static final int TIPO_GRAFO = 1;
+	private static final int MAX_PLAYERS = 6;
 
-    private Random rand = new Random();
-    private MongoQuestions mongoQuestions = new MongoQuestions();
+	private Random rand = new Random();
+	private MongoQuestions mongoQuestions = new MongoQuestions();
 
-    // Tablero y jugadores
-    private List<Player> players = new ArrayList<Player>();
-    private Graph<Casilla> tablero;
+	// Tablero y jugadores
+	private List<Player> players = new ArrayList<Player>();
+	private Graph<Casilla> tablero;
 
-    // Estado actual
-    private int activePlayer;
-    private boolean diceThrown;
-    private int diceNumber;
-    private Pregunta questionGiven;
+	// Estado actual
+	private int activePlayer;
+	private boolean diceThrown;
+	private int diceNumber;
+	private Pregunta questionGiven;
 
-    private Player winner;
+	private Player winner;
 
-    public GameServiceImpl(int var) {
-        tablero = Tablero.getTablero(var);
-    }
+	// factory de la bd para introducir las estadisticas
+	private PersistenceFactory persistencia = new SimplePersistenceFactory();
 
-    public GameServiceImpl() {
-        this(TIPO_GRAFO);
-    }
+	public GameServiceImpl(int var) {
+		tablero = Tablero.getTablero(var);
+	}
 
-    @Override
-    public boolean addPlayer(Player player) {
-        if (players.size() >= MAX_PLAYERS) {
-            return false;
-        }
+	public GameServiceImpl() {
+		this(TIPO_GRAFO);
+	}
 
-        // Si el usuario y contraseña son incorrectos
-        // return false;
+	@Override
+	public boolean addPlayer(Player player) {
+		if (players.size() >= MAX_PLAYERS) {
+			return false;
+		}
 
-        players.add(player);
-        player.setPosition(tablero.getNode(0));
+		// Si el usuario y contraseña son incorrectos
+		// return false;
 
-        return true;
-    }
+		players.add(player);
+		player.setPosition(tablero.getNode(0));
 
-    @Override
-    public List<Player> getPlayers() {
-        return Collections.unmodifiableList(players);
-    }
+		return true;
+	}
 
-    @Override
-    public Player getCurrentTurnPlayer() {
-        if (players.size() == 0) {
-            return null;
-        }
+	@Override
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(players);
+	}
 
-        return players.get(activePlayer);
-    }
+	@Override
+	public Player getCurrentTurnPlayer() {
+		if (players.size() == 0) {
+			return null;
+		}
 
-    @Override
-    public boolean canThrowDice() {
-        return getCurrentTurnPlayer() != null && !diceThrown;
-    }
+		return players.get(activePlayer);
+	}
 
-    @Override
-    public Integer throwDice() {
-        if (!canThrowDice()) {
-            return null;
-        }
+	@Override
+	public boolean canThrowDice() {
+		return getCurrentTurnPlayer() != null && !diceThrown;
+	}
 
-        diceThrown = true;
-        return diceNumber = rand.nextInt(6) + 1;
-    }
+	@Override
+	public Integer throwDice() {
+		if (!canThrowDice()) {
+			return null;
+		}
 
-    @Override
-    public boolean canMove() {
-        return getCurrentTurnPlayer() != null && diceThrown
-                && questionGiven == null;
-    }
+		diceThrown = true;
+		return diceNumber = rand.nextInt(6) + 1;
+	}
 
-    @Override
-    public List<Casilla> getMoves() {
-        if (!canMove()) {
-            return null;
-        }
+	@Override
+	public boolean canMove() {
+		return getCurrentTurnPlayer() != null && diceThrown
+				&& questionGiven == null;
+	}
 
-        Casilla origen = getCurrentTurnPlayer().getPosition();
-        return tablero.getNodesDestino(origen, diceNumber);
-    }
+	@Override
+	public List<Casilla> getMoves() {
+		if (!canMove()) {
+			return null;
+		}
 
-    @Override
-    public boolean moveTo(Casilla casilla) {
-        if (!getMoves().contains(casilla)) {
-            return false;
-        }
+		Casilla origen = getCurrentTurnPlayer().getPosition();
+		return tablero.getNodesDestino(origen, diceNumber);
+	}
 
-        getCurrentTurnPlayer().setPosition(casilla);
+	@Override
+	public boolean moveTo(Casilla casilla) {
+		if (!getMoves().contains(casilla)) {
+			return false;
+		}
 
-        // Caer en tirar de nuevo es como acertar directamente
-        if (casilla.getTipoCasilla().equals(TipoCasilla.TIRADAEXTRA)) {
-            // Reseteamos los valores
-            resetTurn();
+		getCurrentTurnPlayer().setPosition(casilla);
 
-        } else {
-            Category cat = getCurrentTurnPlayer().getPosition().getCategoria();
-            questionGiven = mongoQuestions.getQuestion(cat);
-        }
+		// Caer en tirar de nuevo es como acertar directamente
+		if (casilla.getTipoCasilla().equals(TipoCasilla.TIRADAEXTRA)) {
+			// Reseteamos los valores
+			resetTurn();
 
-        return true;
-    }
+		} else {
+			Category cat = getCurrentTurnPlayer().getPosition().getCategoria();
+			questionGiven = mongoQuestions.getQuestion(cat);
+		}
 
-    @Override
-    public Pregunta getPregunta() {
-        return questionGiven;
-    }
+		return true;
+	}
 
-    @Override
-    public void respuestaCorrecta() {
-        if (getCurrentTurnPlayer() != null && diceThrown
-                && questionGiven != null) {
-            // TODO: Almacenar en base de datos
+	@Override
+	public Pregunta getPregunta() {
+		return questionGiven;
+	}
 
-            // Si es una pregunta de quesito, lo añadimos
-            Player player = getCurrentTurnPlayer();
-            if (player.getPosition().getTipoCasilla()
-                    .equals(TipoCasilla.QUESITO)) {
-                player.addQuesito(player.getPosition().getCategoria());
-            }
+	@Override
+	public void respuestaCorrecta() {
+		if (getCurrentTurnPlayer() != null && diceThrown
+				&& questionGiven != null) {
+			Player player = getCurrentTurnPlayer();
 
-            // Reseteamos los valores
-            resetTurn();
+			// TODO: Almacenar en base de datos
+			Map<String, Object> pregunta = persistencia.createPreguntaDao()
+					.findByEnunciado(questionGiven.getQuestion());
+			if (pregunta == null) {
+				persistencia.createPreguntaDao().insertar(questionGiven);
+				pregunta = persistencia.createPreguntaDao().findByEnunciado(
+						questionGiven.getQuestion());
+				persistencia.createPreguntaDao().guardarResultado(pregunta,
+						true);
+			}
+			persistencia.createPreguntaDao().guardarResultado(pregunta, true);
 
-        } else {
-            // Lanzar excepcion?
-        }
-    }
 
-    @Override
-    public void respuestaIncorrecta() {
-        if (getCurrentTurnPlayer() != null && diceThrown
-                && questionGiven != null) {
-            // TODO: Almacenar en base de datos
+			// Si es una pregunta de quesito, lo añadimos
 
-            // Pasamos el turno
-            nextTurn();
+			if (player.getPosition().getTipoCasilla()
+					.equals(TipoCasilla.QUESITO)) {
+				player.addQuesito(player.getPosition().getCategoria());
+			}
 
-            // Reseteamos los valores
-            resetTurn();
+			// Reseteamos los valores
+			resetTurn();
 
-        } else {
-            // Lanzar excepcion?
-        }
-    }
+		} else {
+			// Lanzar excepcion?
+		}
+	}
 
-    @Override
-    public boolean partidaFinalizada() {
-        return winner != null;
-    }
+	@Override
+	public void respuestaIncorrecta() {
+		if (getCurrentTurnPlayer() != null && diceThrown
+				&& questionGiven != null) {
 
-    @Override
-    public Player getGanador() {
-        return winner;
-    }
+			// TODO: Almacenar en base de datos
+			Map<String, Object> pregunta = persistencia.createPreguntaDao()
+					.findByEnunciado(questionGiven.getQuestion());
+			if (pregunta == null) {
+				persistencia.createPreguntaDao().insertar(questionGiven);
+				pregunta = persistencia.createPreguntaDao().findByEnunciado(
+						questionGiven.getQuestion());
+				persistencia.createPreguntaDao().guardarResultado(pregunta,
+						true);
+			}
+			persistencia.createPreguntaDao().guardarResultado(pregunta, false);
+			
+			// Pasamos el turno
+			nextTurn();
 
-    private void resetTurn() {
-        diceThrown = false;
-        questionGiven = null;
-    }
+			// Reseteamos los valores
+			resetTurn();
 
-    private void nextTurn() {
-        activePlayer++;
-        activePlayer %= players.size();
-    }
+		} else {
+			// Lanzar excepcion?
+		}
+	}
+
+	@Override
+	public boolean partidaFinalizada() {
+		return winner != null;
+	}
+
+	@Override
+	public Player getGanador() {
+		return winner;
+	}
+
+	private void resetTurn() {
+		diceThrown = false;
+		questionGiven = null;
+	}
+
+	private void nextTurn() {
+		activePlayer++;
+		activePlayer %= players.size();
+	}
 }
