@@ -16,7 +16,7 @@ public class GameTest {
 	public void test() {
 		Graph<Casilla> tablero = Tablero.getTablero(1);
 
-		Casilla c = tablero.getNode(0);
+		Casilla c = tablero.getNode(10);
 
 		List<Casilla> lista = tablero.getNodesDestino(c, 2.0);
 
@@ -28,8 +28,8 @@ public class GameTest {
 
 		List<Casilla> lista2 = tablero.getNodesDestino(c, 6.0);
 
-		assertTrue(lista2.contains(tablero.getNode(6)));
-		assertTrue(lista2.contains(tablero.getNode(36)));
+		assertTrue(lista2.contains(tablero.getNode(4)));
+		assertTrue(lista2.contains(tablero.getNode(16)));
 
 		// Todavia no están los radios centrales
 		// assertTrue(lista2.contains(tablero.getNode(72)));

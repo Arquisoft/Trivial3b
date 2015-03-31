@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import es.uniovi.asw.model.Player;
 import es.uniovi.asw.persistence.JugadorDao;
 import es.uniovi.asw.util.Conf;
 import es.uniovi.asw.util.Jdbc;
@@ -25,15 +26,9 @@ public class JugadorJdbcDao implements JugadorDao {
 	/**
 	 * Carga el resultado de un ResultSet
 	 */
-	private Map<String, Object> load(ResultSet rs) throws SQLException {
+	private Player load(ResultSet rs) throws SQLException {
 
-		Map<String, Object> player = new HashMap<String, Object>();
-
-		player.put("ID", rs.getInt("ID"));
-		player.put("USER", rs.getString("USER"));
-		player.put("PASSWORD", rs.getString("PASSWORD"));
-		player.put("ROL", rs.getString("ROL"));
-
+		Player player = new Player(rs.getString("USER"));
 		return player;
 	}
 	
@@ -41,7 +36,7 @@ public class JugadorJdbcDao implements JugadorDao {
 	 * Muestra los jugadores
 	 */
 	@Override
-	public List<Map<String, Object>> listarJugadores() {
+	public List<Player> listarJugadores() {
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -50,9 +45,9 @@ public class JugadorJdbcDao implements JugadorDao {
 			ps = con.prepareStatement(Conf.get("SQL_PLAYERS_FINDALL"));
 
 			rs = ps.executeQuery();
-			List<Map<String, Object>> players = new ArrayList<Map<String, Object>>();
+			List<Player> players = new ArrayList<Player>();
 			while (rs.next()) {
-				Map<String, Object> player = load(rs);
+				Player player = load(rs);
 				players.add(player);
 			}
 

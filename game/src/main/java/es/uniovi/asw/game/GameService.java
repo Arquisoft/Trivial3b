@@ -84,5 +84,7 @@ public interface GameService {
      * Llamar a este metodo cuando la respuesta sea incorrecta
      */
     void respuestaIncorrecta();
+    
+    Casilla getCasilla(int i);
 
 }

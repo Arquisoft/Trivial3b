@@ -50,7 +50,20 @@ public class Player {
 		}
 		return true;
 	}
-
+	/**
+	 * Metodo que devuelve el número de quesitos que lleva un determinado jugador
+	 * @return int el numero de quesitos que lleva conseguidos
+	 */
+	public int numeroQuesitos(){
+		int quesos=0;
+		for(Category cat: Category.values()){
+			if(quesitos.containsKey(cat)){
+				quesos++;
+			}
+		}
+		return quesos;
+		
+	}
 	/**
 	 * Metodo que a partir de la categoria añade un quesito al jugador
 	 * 

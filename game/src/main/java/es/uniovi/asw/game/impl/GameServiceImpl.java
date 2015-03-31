@@ -16,173 +16,178 @@ import es.uniovi.asw.model.TipoCasilla;
 import es.uniovi.asw.questions.MongoQuestions;
 
 public class GameServiceImpl implements GameService {
-    private static final int TIPO_GRAFO = 1;
-    private static final int MAX_PLAYERS = 6;
+	private static final int TIPO_GRAFO = 1;
+	private static final int MAX_PLAYERS = 6;
 
-    private Random rand = new Random();
-    private MongoQuestions mongoQuestions = new MongoQuestions();
+	private Random rand = new Random();
+	private MongoQuestions mongoQuestions = new MongoQuestions();
 
-    // Tablero y jugadores
-    private List<Player> players = new ArrayList<Player>();
-    private Graph<Casilla> tablero;
+	// Tablero y jugadores
+	private List<Player> players = new ArrayList<Player>();
+	private Graph<Casilla> tablero;
 
-    // Estado actual
-    private int activePlayer;
-    private boolean diceThrown;
-    private int diceNumber;
-    private Pregunta questionGiven;
+	// Estado actual
+	private int activePlayer;
+	private boolean diceThrown;
+	private int diceNumber;
+	private Pregunta questionGiven;
 
-    private Player winner;
+	private Player winner;
 
-    public GameServiceImpl(int var) {
-        tablero = Tablero.getTablero(var);
-    }
+	public GameServiceImpl(int var) {
+		tablero = Tablero.getTablero(var);
+	}
 
-    public GameServiceImpl() {
-        this(TIPO_GRAFO);
-    }
+	public GameServiceImpl() {
+		this(TIPO_GRAFO);
+	}
 
-    @Override
-    public boolean addPlayer(Player player) {
-        if (players.size() >= MAX_PLAYERS) {
-            return false;
-        }
+	@Override
+	public boolean addPlayer(Player player) {
+		if (players.size() >= MAX_PLAYERS) {
+			return false;
+		}
 
-        // Si el usuario y contraseña son incorrectos
-        // return false;
+		// Si el usuario y contraseña son incorrectos
+		// return false;
 
-        players.add(player);
-        player.setPosition(tablero.getNode(0));
+		players.add(player);
+		player.setPosition(tablero.getNode(0));
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public List<Player> getPlayers() {
-        return Collections.unmodifiableList(players);
-    }
+	@Override
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(players);
+	}
 
-    @Override
-    public Player getCurrentTurnPlayer() {
-        if (players.size() == 0) {
-            return null;
-        }
+	@Override
+	public Player getCurrentTurnPlayer() {
+		if (players.size() == 0) {
+			return null;
+		}
 
-        return players.get(activePlayer);
-    }
+		return players.get(activePlayer);
+	}
 
-    @Override
-    public boolean canThrowDice() {
-        return getCurrentTurnPlayer() != null && !diceThrown;
-    }
+	@Override
+	public boolean canThrowDice() {
+		return getCurrentTurnPlayer() != null && !diceThrown;
+	}
 
-    @Override
-    public Integer throwDice() {
-        if (!canThrowDice()) {
-            return null;
-        }
+	@Override
+	public Integer throwDice() {
+		if (!canThrowDice()) {
+			return null;
+		}
 
-        diceThrown = true;
-        return diceNumber = rand.nextInt(6) + 1;
-    }
+		diceThrown = true;
+		return diceNumber = rand.nextInt(6) + 1;
+	}
 
-    @Override
-    public boolean canMove() {
-        return getCurrentTurnPlayer() != null && diceThrown
-                && questionGiven == null;
-    }
+	@Override
+	public boolean canMove() {
+		return getCurrentTurnPlayer() != null && diceThrown
+				&& questionGiven == null;
+	}
 
-    @Override
-    public List<Casilla> getMoves() {
-        if (!canMove()) {
-            return null;
-        }
+	@Override
+	public List<Casilla> getMoves() {
+		if (!canMove()) {
+			return null;
+		}
 
-        Casilla origen = getCurrentTurnPlayer().getPosition();
-        return tablero.getNodesDestino(origen, diceNumber);
-    }
+		Casilla origen = getCurrentTurnPlayer().getPosition();
+		return tablero.getNodesDestino(origen, diceNumber);
+	}
 
-    @Override
-    public boolean moveTo(Casilla casilla) {
-        if (!getMoves().contains(casilla)) {
-            return false;
-        }
+	@Override
+	public boolean moveTo(Casilla casilla) {
+		if (!getMoves().contains(casilla)) {
+			return false;
+		}
 
-        getCurrentTurnPlayer().setPosition(casilla);
+		getCurrentTurnPlayer().setPosition(casilla);
 
-        // Caer en tirar de nuevo es como acertar directamente
-        if (casilla.getTipoCasilla().equals(TipoCasilla.TIRADAEXTRA)) {
-            // Reseteamos los valores
-            resetTurn();
+		// Caer en tirar de nuevo es como acertar directamente
+		if (casilla.getTipoCasilla().equals(TipoCasilla.TIRADAEXTRA)) {
+			// Reseteamos los valores
+			resetTurn();
 
-        } else {
-            Category cat = getCurrentTurnPlayer().getPosition().getCategoria();
-            questionGiven = mongoQuestions.getQuestion(cat);
-        }
+		} else {
+			Category cat = getCurrentTurnPlayer().getPosition().getCategoria();
+			questionGiven = mongoQuestions.getQuestion(cat);
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public Pregunta getPregunta() {
-        return questionGiven;
-    }
+	@Override
+	public Pregunta getPregunta() {
+		return questionGiven;
+	}
 
-    @Override
-    public void respuestaCorrecta() {
-        if (getCurrentTurnPlayer() != null && diceThrown
-                && questionGiven != null) {
-            // TODO: Almacenar en base de datos
+	@Override
+	public void respuestaCorrecta() {
+		if (getCurrentTurnPlayer() != null && diceThrown
+				&& questionGiven != null) {
+			// TODO: Almacenar en base de datos
 
-            // Si es una pregunta de quesito, lo añadimos
-            Player player = getCurrentTurnPlayer();
-            if (player.getPosition().getTipoCasilla()
-                    .equals(TipoCasilla.QUESITO)) {
-                player.addQuesito(player.getPosition().getCategoria());
-            }
+			// Si es una pregunta de quesito, lo añadimos
+			Player player = getCurrentTurnPlayer();
+			if (player.getPosition().getTipoCasilla()
+					.equals(TipoCasilla.QUESITO)) {
+				player.addQuesito(player.getPosition().getCategoria());
+			}
 
-            // Reseteamos los valores
-            resetTurn();
+			// Reseteamos los valores
+			resetTurn();
 
-        } else {
-            // Lanzar excepcion?
-        }
-    }
+		} else {
+			// Lanzar excepcion?
+		}
+	}
 
-    @Override
-    public void respuestaIncorrecta() {
-        if (getCurrentTurnPlayer() != null && diceThrown
-                && questionGiven != null) {
-            // TODO: Almacenar en base de datos
+	@Override
+	public void respuestaIncorrecta() {
+		if (getCurrentTurnPlayer() != null && diceThrown
+				&& questionGiven != null) {
+			// TODO: Almacenar en base de datos
 
-            // Pasamos el turno
-            nextTurn();
+			// Pasamos el turno
+			nextTurn();
 
-            // Reseteamos los valores
-            resetTurn();
+			// Reseteamos los valores
+			resetTurn();
 
-        } else {
-            // Lanzar excepcion?
-        }
-    }
+		} else {
+			// Lanzar excepcion?
+		}
+	}
 
-    @Override
-    public boolean partidaFinalizada() {
-        return winner != null;
-    }
+	@Override
+	public boolean partidaFinalizada() {
+		return winner != null;
+	}
 
-    @Override
-    public Player getGanador() {
-        return winner;
-    }
+	@Override
+	public Player getGanador() {
+		return winner;
+	}
 
-    private void resetTurn() {
-        diceThrown = false;
-        questionGiven = null;
-    }
+	private void resetTurn() {
+		diceThrown = false;
+		questionGiven = null;
+	}
 
-    private void nextTurn() {
-        activePlayer++;
-        activePlayer %= players.size();
-    }
+	private void nextTurn() {
+		activePlayer++;
+		activePlayer %= players.size();
+	}
+
+	@Override
+	public Casilla getCasilla(int i) {
+		return tablero.getNode(i-1);
+	}
 }
