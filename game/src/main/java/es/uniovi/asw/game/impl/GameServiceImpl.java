@@ -14,10 +14,7 @@ import es.uniovi.asw.model.Player;
 import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.model.Tablero;
 import es.uniovi.asw.model.TipoCasilla;
-import es.uniovi.asw.persistence.EstadisticasJugadorDao;
-import es.uniovi.asw.persistence.JugadorDao;
 import es.uniovi.asw.persistence.PersistenceFactory;
-import es.uniovi.asw.persistence.PreguntaDao;
 import es.uniovi.asw.persistence.impl.SimplePersistenceFactory;
 import es.uniovi.asw.questions.MongoQuestions;
 
