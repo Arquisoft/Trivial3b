@@ -1,8 +1,10 @@
 package es.uniovi.asw.game.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import es.uniovi.asw.game.GameService;
@@ -13,7 +15,10 @@ import es.uniovi.asw.model.Player;
 import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.model.Tablero;
 import es.uniovi.asw.model.TipoCasilla;
+import es.uniovi.asw.persistence.PersistenceFactory;
+import es.uniovi.asw.persistence.impl.SimplePersistenceFactory;
 import es.uniovi.asw.questions.MongoQuestions;
+import es.uniovi.asw.util.Jdbc;
 
 public class GameServiceImpl implements GameService {
 	private static final int TIPO_GRAFO = 1;
@@ -33,6 +38,9 @@ public class GameServiceImpl implements GameService {
 	private Pregunta questionGiven;
 
 	private Player winner;
+
+	// factory de la bd para introducir las estadisticas
+	private PersistenceFactory persistencia = new SimplePersistenceFactory();
 
 	public GameServiceImpl(int var) {
 		tablero = Tablero.getTablero(var);
@@ -132,10 +140,23 @@ public class GameServiceImpl implements GameService {
 	public void respuestaCorrecta() {
 		if (getCurrentTurnPlayer() != null && diceThrown
 				&& questionGiven != null) {
+			Player player = getCurrentTurnPlayer();
+
 			// TODO: Almacenar en base de datos
+			Map<String, Object> pregunta = persistencia.createPreguntaDao()
+					.findByEnunciado(questionGiven.getQuestion());
+			if (pregunta == null) {
+				persistencia.createPreguntaDao().insertar(questionGiven);
+				pregunta = persistencia.createPreguntaDao().findByEnunciado(
+						questionGiven.getQuestion());
+				persistencia.createPreguntaDao().guardarResultado(pregunta,
+						true);
+			}
+			persistencia.createPreguntaDao().guardarResultado(pregunta, true);
+
 
 			// Si es una pregunta de quesito, lo añadimos
-			Player player = getCurrentTurnPlayer();
+
 			if (player.getPosition().getTipoCasilla()
 					.equals(TipoCasilla.QUESITO)) {
 				player.addQuesito(player.getPosition().getCategoria());
@@ -153,8 +174,19 @@ public class GameServiceImpl implements GameService {
 	public void respuestaIncorrecta() {
 		if (getCurrentTurnPlayer() != null && diceThrown
 				&& questionGiven != null) {
-			// TODO: Almacenar en base de datos
 
+			// TODO: Almacenar en base de datos
+			Map<String, Object> pregunta = persistencia.createPreguntaDao()
+					.findByEnunciado(questionGiven.getQuestion());
+			if (pregunta == null) {
+				persistencia.createPreguntaDao().insertar(questionGiven);
+				pregunta = persistencia.createPreguntaDao().findByEnunciado(
+						questionGiven.getQuestion());
+				persistencia.createPreguntaDao().guardarResultado(pregunta,
+						true);
+			}
+			persistencia.createPreguntaDao().guardarResultado(pregunta, false);
+			
 			// Pasamos el turno
 			nextTurn();
 
@@ -185,7 +217,6 @@ public class GameServiceImpl implements GameService {
 		activePlayer++;
 		activePlayer %= players.size();
 	}
-
 	@Override
 	public Casilla getCasilla(int i) {
 		return tablero.getNode(i-1);

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import es.uniovi.asw.model.Pregunta;
 import es.uniovi.asw.persistence.PreguntaDao;
 import es.uniovi.asw.util.Conf;
 import es.uniovi.asw.util.Jdbc;
@@ -21,7 +22,14 @@ public class PreguntaJdbcDao implements PreguntaDao {
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
-
+	public PreguntaJdbcDao(){
+		try {
+			setConnection(Jdbc.getConnection());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Carga el resultado de un ResultSet
 	 */
@@ -69,15 +77,15 @@ public class PreguntaJdbcDao implements PreguntaDao {
 	 * inserta una pregunta
 	 */
 	@Override
-	public void insertar(Map<String, Object> pregunta) {
+	public void insertar(Pregunta pregunta) {
 
 		PreparedStatement ps = null;
 		try{
 			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_INSERT"));
-			ps.setInt(1, (Integer) pregunta.get("ID"));
-			ps.setInt(2,(Integer) pregunta.get("CATEGORIA"));
-			ps.setInt(3,(Integer) pregunta.get("ACIERTOS"));
-			ps.setInt(4,(Integer) pregunta.get("FALLOS"));
+			ps.setString(1,  pregunta.getCategory().toString());
+			ps.setInt(2,0);
+			ps.setInt(3,0);
+			ps.setString(4,pregunta.getQuestion());
 
 			ps.executeUpdate();
 
@@ -106,7 +114,7 @@ public class PreguntaJdbcDao implements PreguntaDao {
 				ps.setInt(2,1+(Integer) pregunta.get("FALLOS"));
 			}
 
-			ps.setLong(3,(Long) pregunta.get("ID"));
+			ps.setLong(3, Long.parseLong(String.valueOf(pregunta.get("ID"))));
 
 			ps.executeUpdate();
 
@@ -119,17 +127,17 @@ public class PreguntaJdbcDao implements PreguntaDao {
 	}
 
 	/**
-	 * Busca una pregunta por su id
+	 * Busca una pregunta por su enunciado
 	 */
 	@Override
-	public Map<String, Object> findByID(int idPregunta) {
+	public Map<String, Object> findByEnunciado(String idPregunta) {
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 
-			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDBYID"));
-			ps.setInt(1, idPregunta);
+			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDBYPREGUNTA"));
+			ps.setString(1, idPregunta);
 
 			rs = ps.executeQuery();
 			Map<String, Object> pregunta;

@@ -1,7 +1,6 @@
 package es.uniovi.asw.iu;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -22,7 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -111,41 +109,10 @@ public class BoardGame extends JFrame {
 	private JLabel figura35;
 	private JLabel figura36;
 
-	public static void main(String[] args) {
-		try {
-			javax.swing.UIManager
-					.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel");
-		} catch (ClassNotFoundException e1) {
-			
-			e1.printStackTrace();
-		} catch (InstantiationException e1) {
-			
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			
-			e1.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e1) {
-			
-			e1.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new BoardGame();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
-	public BoardGame() {
+	public BoardGame(int tablero) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 870, 572);
 		contentPane = new JPanel();
@@ -157,7 +124,7 @@ public class BoardGame extends JFrame {
 		contentPane.add(getLblNewLabel());
 		contentPane.add(getDado());
 		contentPane.add(getTirada());
-		cargaTablero(CUADRADO);
+		cargaTablero(tablero);
 		service.addPlayer(new Player("cristian"));
 		service.addPlayer(new Player("alex"));
 		service.addPlayer(new Player("laura"));
