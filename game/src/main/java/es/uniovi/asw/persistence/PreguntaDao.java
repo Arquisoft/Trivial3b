@@ -11,6 +11,6 @@ public interface PreguntaDao {
 	void setConnection(Connection con);
 	List<Map<String, Object>> findAll();
 	void guardarResultado(Map<String, Object> pregunta, boolean acertada);
-	Map<String, Object> findByEnunciado(String pregunta);
+	Map<String, Object> findById(String id);
 	void insertar(Pregunta pregunta);	
 }

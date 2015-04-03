@@ -10,10 +10,6 @@ public class Tablero {
 	public static final int CIRCULAR = 1;
 	public static final int CUADRADO = 2;
 
-	public static void main(String... args) {
-		getTablero(CIRCULAR);
-	}
-
 	public static Graph<Casilla> getTablero(int type) {
 		switch (type) {
 		case CIRCULAR:

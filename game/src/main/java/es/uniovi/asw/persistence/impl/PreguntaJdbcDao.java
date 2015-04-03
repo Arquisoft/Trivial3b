@@ -85,7 +85,7 @@ public class PreguntaJdbcDao implements PreguntaDao {
 			ps.setString(1,  pregunta.getCategory().toString());
 			ps.setInt(2,0);
 			ps.setInt(3,0);
-			ps.setString(4,pregunta.getQuestion());
+			ps.setString(4,pregunta.getId());
 
 			ps.executeUpdate();
 
@@ -106,12 +106,16 @@ public class PreguntaJdbcDao implements PreguntaDao {
 		PreparedStatement ps = null;
 		try{
 			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_GUARDARRESULTADO"));
+			
+            Integer aciertos = (Integer) pregunta.get("ACIERTOS");
+            Integer fallos = (Integer) pregunta.get("FALLOS");
+			
 			if(acertada){
-				ps.setInt(1,1+(Integer) pregunta.get("ACIERTOS"));
-				ps.setInt(2,(Integer) pregunta.get("FALLOS"));
+				ps.setInt(1, aciertos == null ? 1 : ++aciertos);
+				ps.setInt(2, fallos == null ? 0: fallos);
 			}else{
-				ps.setInt(1,(Integer) pregunta.get("ACIERTOS"));
-				ps.setInt(2,1+(Integer) pregunta.get("FALLOS"));
+				ps.setInt(1, aciertos == null ? 0 : aciertos);
+				ps.setInt(2, fallos == null ? 1 : ++fallos);
 			}
 
 			ps.setLong(3, Long.parseLong(String.valueOf(pregunta.get("ID"))));
@@ -127,10 +131,10 @@ public class PreguntaJdbcDao implements PreguntaDao {
 	}
 
 	/**
-	 * Busca una pregunta por su enunciado
+	 * Busca una pregunta por su id
 	 */
 	@Override
-	public Map<String, Object> findByEnunciado(String idPregunta) {
+	public Map<String, Object> findById(String idPregunta) {
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;

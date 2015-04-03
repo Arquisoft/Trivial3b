@@ -19,6 +19,7 @@ public class Pregunta {
     // Numero de respuestas de la pregunta, incluyedo la respuesta correcta
     public static final int NUM_ANSWERS = 4;
 
+    private String id;
     private Category category;
     private String question;
     private String correctAnswer;
@@ -58,6 +59,14 @@ public class Pregunta {
 
     public void setWrongAnswers(String[] wrongAnswers) {
         this.wrongAnswers = wrongAnswers;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
