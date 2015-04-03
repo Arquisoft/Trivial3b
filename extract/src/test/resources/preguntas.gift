@@ -218,7 +218,7 @@ $Categoria: Historia
 
 $Categoria: Arte y literatura
 
-¿Quién pintó el cuado "El jardín de las delicias"? {
+¿Quién pintó el cuadro "El jardín de las delicias"? {
     ~Carvaggio
     ~Velázquez
     =El Bosco
@@ -412,7 +412,7 @@ $Categoria: Espectáculos y entretenimiento
 }
 
 ¿A quién se considera el Rey del Pop? {
-    ~JustinBieber
+    ~Justin Bieber
     ~Abraham Mateo
     ~Zayn Malik
     =Michael Jackson
