@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 1ba9e3a55b39a9418e64149f3312c3d1cd218baa
 import es.uniovi.asw.model.Pregunta;
 
 public interface PreguntaDao {
