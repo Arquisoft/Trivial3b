@@ -14,13 +14,9 @@ public class GameTest {
 
     @Test
     public void test() {
-        Graph<Casilla> tablero = Tablero.getTablero(1);
+        Graph<Casilla> tablero = Tablero.getTablero(Tablero.CIRCULAR);
 
-
-		Casilla c = tablero.getNode(10);
-
-        //Casilla c3 = tablero.getNode(0);
-
+        Casilla c = tablero.getNode(0);
 
         // Movimiento 1
         List<Casilla> lista = tablero.getNodesDestino(c, 2.0);
@@ -32,13 +28,8 @@ public class GameTest {
 
         assertTrue(lista.contains(tablero.getNode(43)));
 
-
-		assertTrue(lista.contains(tablero.getNode(4)));
-		assertTrue(lista.contains(tablero.getNode(16)));
-
         // Movimiento 2
         List<Casilla> lista2 = tablero.getNodesDestino(c, 6.0);
-
 
         assertTrue(lista2.contains(tablero.getNode(6)));
         assertTrue(lista2.contains(tablero.getNode(36)));
@@ -58,7 +49,8 @@ public class GameTest {
         assertTrue(lista3.contains(tablero.getNode(54)));
         assertTrue(lista3.contains(tablero.getNode(59)));
         assertTrue(lista3.contains(tablero.getNode(64)));
-        
+
+        // Tablero cuadrado
         Graph<Casilla> tableroCuadrado = Tablero.getTablero(2);
 
         Casilla cc = tableroCuadrado.getNode(0);
@@ -69,6 +61,5 @@ public class GameTest {
         assertEquals(2, listaC.size());
 
         assertTrue(listaC.contains(tableroCuadrado.getNode(2)));
-
     }
 }
