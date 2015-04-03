@@ -227,4 +227,14 @@ public class GameServiceImpl implements GameService {
 		return persistencia.createJugadorDao().existeUsuario(user, pass, "usuario");
 		
 	}
+
+	@Override
+	public boolean registerUser(String user, String pass) {
+		// TODO Auto-generated method stub
+		if(!userExists(user,pass)){
+		persistencia.createJugadorDao().insertarJugadores(user,pass);
+		return true;
+		}
+		return false;
+	}
 }

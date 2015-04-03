@@ -99,9 +99,23 @@ public class Principal extends JFrame {
 		});
 		btnJugar.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnJugar.setActionCommand("");
-		btnJugar.setBounds(179, 213, 200, 50);
+		btnJugar.setBounds(90, 219, 200, 50);
 		contentPane.add(btnJugar);
-		contentPane.add(getPanel());
+		
+		JButton btnRegistrarse = new JButton("Registrarse");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registro registro=new Registro();
+				registro.setVisible(true);
+				registro.setLocationRelativeTo(getParent());
+				dispose();
+			}
+		});
+		btnRegistrarse.setFont(new Font("Tahoma", Font.BOLD, 21));
+		btnRegistrarse.setActionCommand("");
+		btnRegistrarse.setBounds(327, 219, 200, 50);
+		contentPane.add(btnRegistrarse);
+		contentPane.add(getPanel_1());
 	}
 	
 	private void mostrarVentanaJugadores(){
@@ -119,7 +133,7 @@ public class Principal extends JFrame {
 		dispose();
 	
 	}
-	private JPanel getPanel() {
+	private JPanel getPanel_1() {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setBounds(0, 0, 575, 321);

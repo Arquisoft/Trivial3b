@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,15 +70,14 @@ public class JugadorJdbcDao implements JugadorDao {
 	 * Inserta un jugador
 	 */
 	@Override
-	public void insertarJugadores(Map<String, Object> player) {
+	public void insertarJugadores(String name,String surname) {
 
 		PreparedStatement ps = null;
 		try{
 			ps = con.prepareStatement(Conf.get("SQL_PLAYERS_INSERT"));
-			ps.setInt(1, (Integer) player.get("ID"));
-			ps.setString(2, (String) player.get("USER"));
-			ps.setString(3,(String) player.get("PASSWORD"));
-			ps.setString(4,(String) player.get("ROL"));
+			ps.setString(1, name);
+			ps.setString(2,surname);
+			ps.setString(3,"usuario");
 
 			ps.executeUpdate();
 

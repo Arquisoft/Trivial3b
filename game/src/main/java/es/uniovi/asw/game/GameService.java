@@ -85,7 +85,7 @@ public interface GameService {
      * Llamar a este metodo cuando la respuesta sea incorrecta
      */
     void respuestaIncorrecta();
-    
+    boolean registerUser(String user,String pass);
     Casilla getCasilla(int i);
 
 }

@@ -9,7 +9,7 @@ import es.uniovi.asw.model.Player;
 public interface JugadorDao {
 	void setConnection(Connection con);	
 	List<Player> listarJugadores();
-	void insertarJugadores(Map<String, Object> player);
+	void insertarJugadores(String name,String pass);
 	void modificarJugadores(Map<String, Object> player);
     boolean existeUsuario(String username, String pass, String rol);
 }
