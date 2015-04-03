@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSpinner;
@@ -52,7 +53,7 @@ public class Login extends JFrame {
 	private GameService service;
 	private JPasswordField txP6;
 	private JLabel lblNewLabel;
-
+	private boolean condicion = true;
 
 	public void habilitarComponentes(JPanel panel, boolean habilitar) {
 		panel.setEnabled(habilitar);
@@ -60,9 +61,11 @@ public class Login extends JFrame {
 			panel.getComponent(i).setEnabled(habilitar);
 		}
 	}
-	public void comprobarLogin(){
-		
+
+	public void comprobarLogin() {
+
 	}
+
 	public void actualizarNumeroJugadores(int jugadores) {
 		if (jugadores == 1) {
 			habilitarComponentes(panel_1, true);
@@ -121,7 +124,7 @@ public class Login extends JFrame {
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				("src/main/resources/images/icono.jpg")));
-		service=new GameServiceImpl();
+		service = new GameServiceImpl();
 		setResizable(false);
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -296,13 +299,27 @@ public class Login extends JFrame {
 		JButton btJugar = new JButton("Jugar");
 		btJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				comprobarUsuarios(panel_1);
-				comprobarUsuarios(panel_2);
-				comprobarUsuarios(panel_3);
-				comprobarUsuarios(panel_4);
-				comprobarUsuarios(panel_5);
-				comprobarUsuarios(panel_6);
-				mostrarVentanaElegirTablero();
+				if (panel_1.getComponent(0).isEnabled()) {
+					comprobarUsuarios(panel_1);
+				}
+				if (panel_2.getComponent(0).isEnabled()) {
+					comprobarUsuarios(panel_2);
+				}
+				if (panel_3.getComponent(0).isEnabled()) {
+					comprobarUsuarios(panel_3);
+				}
+				if (panel_4.getComponent(0).isEnabled()) {
+					comprobarUsuarios(panel_4);
+				}
+				if (panel_5.getComponent(0).isEnabled()) {
+					comprobarUsuarios(panel_5);
+				}
+				if (panel_6.getComponent(0).isEnabled()) {
+					comprobarUsuarios(panel_6);
+				}
+				if (condicion) {
+					mostrarVentanaElegirTablero();
+				}
 			}
 		});
 		btJugar.setBounds(442, 616, 97, 33);
@@ -387,19 +404,25 @@ public class Login extends JFrame {
 		contentPane.add(lblNewLabel);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void comprobarUsuarios(JPanel panel) {
 		JTextField tx = (JTextField) panel.getComponent(0);
 		JPasswordField pass = (JPasswordField) panel.getComponent(1);
-		service.addPlayer(new Player(tx.getText()));
-		
-		
+		if (!service.userExists(tx.getText(), pass.getText())) {
+			condicion = false;
+			JOptionPane.showMessageDialog(getParent(),
+					"El usuario " + tx.getText()
+							+ " no se encuentra registrado en el sistema");
+		} else {
+			service.addPlayer(new Player(tx.getText()));
+		}
 	}
-	
-	private void mostrarVentanaElegirTablero(){
-		EleccionTablero elec = new EleccionTablero();
+
+	private void mostrarVentanaElegirTablero() {
+		EleccionTablero elec = new EleccionTablero(service);
 		elec.setLocationRelativeTo(null);
 		elec.setVisible(true);
-	
+
 	}
 
 }

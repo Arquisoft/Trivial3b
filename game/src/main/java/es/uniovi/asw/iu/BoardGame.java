@@ -29,7 +29,6 @@ import es.uniovi.asw.game.GameService;
 import es.uniovi.asw.iu.components.PolygonButton;
 import es.uniovi.asw.model.Casilla;
 import es.uniovi.asw.model.Category;
-import es.uniovi.asw.model.Player;
 import es.uniovi.asw.util.FileUtil;
 
 public class BoardGame extends JFrame {
@@ -43,6 +42,14 @@ public class BoardGame extends JFrame {
 	static Map<Integer, List<Point>> coordenadas;
 	private List<Casilla> activados;
 	GameService service;
+	public GameService getService() {
+		return service;
+	}
+
+	public void setService(GameService service) {
+		this.service = service;
+	}
+
 	private JLabel tirada;
 	JPanel contentPane;
 	static BoardGame frame;
@@ -112,7 +119,7 @@ public class BoardGame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BoardGame(int tablero) {
+	public BoardGame(int tablero,GameService servicio) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 870, 572);
 		contentPane = new JPanel();
@@ -125,12 +132,7 @@ public class BoardGame extends JFrame {
 		contentPane.add(getDado());
 		contentPane.add(getTirada());
 		cargaTablero(tablero);
-		service.addPlayer(new Player("cristian"));
-		service.addPlayer(new Player("alex"));
-		service.addPlayer(new Player("laura"));
-		service.addPlayer(new Player("maria"));
-		service.addPlayer(new Player("loli"));
-		service.addPlayer(new Player("javi"));
+		setService(servicio);
 		contentPane.add(getPanel());
 		cargarPaneles();
 	}

@@ -80,6 +80,7 @@ public interface GameService {
      */
     void respuestaCorrecta();
 
+    boolean userExists(String user,String pass);
     /**
      * Llamar a este metodo cuando la respuesta sea incorrecta
      */

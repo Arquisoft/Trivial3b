@@ -220,4 +220,11 @@ public class GameServiceImpl implements GameService {
     public Casilla getCasilla(int i) {
         return tablero.getNode(i - 1);
     }
+
+	@Override
+	public boolean userExists(String user, String pass) {
+		// TODO Auto-generated method stub
+		return persistencia.createJugadorDao().existeUsuario(user, pass, "usuario");
+		
+	}
 }

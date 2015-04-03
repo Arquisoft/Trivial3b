@@ -22,13 +22,20 @@ public class JugadorJdbcDao implements JugadorDao {
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
-	
+	public JugadorJdbcDao(){
+		try {
+			setConnection(Jdbc.getConnection());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Carga el resultado de un ResultSet
 	 */
 	private Player load(ResultSet rs) throws SQLException {
 
-		Player player = new Player(rs.getString("USER"));
+		Player player = new Player(rs.getString("USERNAME"));
 		return player;
 	}
 	
