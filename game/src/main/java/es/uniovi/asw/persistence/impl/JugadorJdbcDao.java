@@ -124,7 +124,7 @@ public class JugadorJdbcDao implements JugadorDao {
 			ps.setString(3, rol);
 			
 			rs = ps.executeQuery();
-			Map<String, Object> jugador;
+			Player jugador;
 			if (rs.next()) {
 
 				jugador = load(rs);

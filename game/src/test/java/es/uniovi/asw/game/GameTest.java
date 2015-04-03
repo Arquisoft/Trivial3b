@@ -16,11 +16,11 @@ public class GameTest {
     public void test() {
         Graph<Casilla> tablero = Tablero.getTablero(1);
 
-<<<<<<< HEAD
+
 		Casilla c = tablero.getNode(10);
-=======
-        Casilla c = tablero.getNode(0);
->>>>>>> 1ba9e3a55b39a9418e64149f3312c3d1cd218baa
+
+        //Casilla c3 = tablero.getNode(0);
+
 
         // Movimiento 1
         List<Casilla> lista = tablero.getNodesDestino(c, 2.0);
@@ -32,13 +32,13 @@ public class GameTest {
 
         assertTrue(lista.contains(tablero.getNode(43)));
 
-<<<<<<< HEAD
-		assertTrue(lista2.contains(tablero.getNode(4)));
-		assertTrue(lista2.contains(tablero.getNode(16)));
-=======
+
+		assertTrue(lista.contains(tablero.getNode(4)));
+		assertTrue(lista.contains(tablero.getNode(16)));
+
         // Movimiento 2
         List<Casilla> lista2 = tablero.getNodesDestino(c, 6.0);
->>>>>>> 1ba9e3a55b39a9418e64149f3312c3d1cd218baa
+
 
         assertTrue(lista2.contains(tablero.getNode(6)));
         assertTrue(lista2.contains(tablero.getNode(36)));

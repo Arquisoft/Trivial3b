@@ -1,10 +1,5 @@
 package es.uniovi.asw.util;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 1ba9e3a55b39a9418e64149f3312c3d1cd218baa
 import java.io.File;
 import java.io.IOException;
 

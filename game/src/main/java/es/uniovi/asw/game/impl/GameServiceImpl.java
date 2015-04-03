@@ -174,7 +174,7 @@ public class GameServiceImpl implements GameService {
 	public void respuestaIncorrecta() {
 		if (getCurrentTurnPlayer() != null && diceThrown
 				&& questionGiven != null) {
-
+			persistencia.createPreguntaDao();
 			// TODO: Almacenar en base de datos
 			Map<String, Object> pregunta = persistencia.createPreguntaDao()
 					.findByEnunciado(questionGiven.getQuestion());
@@ -217,11 +217,9 @@ public class GameServiceImpl implements GameService {
 		activePlayer++;
 		activePlayer %= players.size();
 	}
-<<<<<<< HEAD
+
 	@Override
 	public Casilla getCasilla(int i) {
 		return tablero.getNode(i-1);
 	}
-=======
->>>>>>> 1ba9e3a55b39a9418e64149f3312c3d1cd218baa
 }
