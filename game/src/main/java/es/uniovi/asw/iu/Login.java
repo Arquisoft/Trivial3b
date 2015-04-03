@@ -318,8 +318,16 @@ public class Login extends JFrame {
 					comprobarUsuarios(panel_6);
 				}
 				if (condicion) {
+					añadirUsuarios(panel_1);
+					añadirUsuarios(panel_2);
+					añadirUsuarios(panel_3);
+					añadirUsuarios(panel_4);
+					añadirUsuarios(panel_5);
+					añadirUsuarios(panel_6);
 					mostrarVentanaElegirTablero();
+					dispose();
 				}
+				condicion=true;
 			}
 		});
 		btJugar.setBounds(442, 616, 97, 33);
@@ -413,11 +421,12 @@ public class Login extends JFrame {
 			JOptionPane.showMessageDialog(getParent(),
 					"El usuario " + tx.getText()
 							+ " no se encuentra registrado en el sistema");
-		} else {
-			service.addPlayer(new Player(tx.getText()));
-		}
+		} 
 	}
-
+	public void añadirUsuarios(JPanel panel){
+		JTextField tx = (JTextField) panel.getComponent(0);
+		service.addPlayer(new Player(tx.getText()));
+	}
 	private void mostrarVentanaElegirTablero() {
 		EleccionTablero elec = new EleccionTablero(service);
 		elec.setLocationRelativeTo(null);

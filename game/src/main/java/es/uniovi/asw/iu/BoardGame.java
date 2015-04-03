@@ -893,8 +893,6 @@ public class BoardGame extends JFrame {
 	}
 
 	public ImageIcon getImage(int numero) {
-		// BufferedImage img = ImageIO.read(new
-		// File("/es/uniovi/asw/resources/espect.png"));
 		switch (numero) {
 		case 0:
 			return new ImageIcon(("src/main/resources/images/ciencias.png"));

@@ -15,8 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import com.google.common.util.concurrent.Service;
-
 import es.uniovi.asw.game.GameService;
 import es.uniovi.asw.game.impl.GameServiceImpl;
 
@@ -115,6 +113,10 @@ public class Registro extends JFrame {
 				}
 				else{
 					JOptionPane.showMessageDialog(getParent(), "Se ha registrado correctamente en el sistema");
+					Principal principal=new Principal();
+					principal.setVisible(true);
+					principal.setLocationRelativeTo(getParent());
+					dispose();
 				}
 				}
 			});
