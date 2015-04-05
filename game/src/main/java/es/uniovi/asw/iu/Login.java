@@ -321,12 +321,12 @@ public class Login extends JFrame {
                     comprobarUsuarios(panel_6);
                 }
                 if (condicion) {
-                    añadirUsuarios(panel_1);
-                    añadirUsuarios(panel_2);
-                    añadirUsuarios(panel_3);
-                    añadirUsuarios(panel_4);
-                    añadirUsuarios(panel_5);
-                    añadirUsuarios(panel_6);
+                    addUsuarios(panel_1);
+                    addUsuarios(panel_2);
+                    addUsuarios(panel_3);
+                    addUsuarios(panel_4);
+                    addUsuarios(panel_5);
+                    addUsuarios(panel_6);
                     mostrarVentanaElegirTablero();
                     dispose();
                 }
@@ -427,7 +427,7 @@ public class Login extends JFrame {
         }
     }
 
-    public void añadirUsuarios(JPanel panel) {
+    public void addUsuarios(JPanel panel) {
         JTextField tx = (JTextField) panel.getComponent(0);
         service.addPlayer(new Player(tx.getText()));
     }

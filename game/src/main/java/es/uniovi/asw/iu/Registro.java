@@ -29,7 +29,7 @@ public class Registro extends JFrame {
     private JLabel lblNewLabel;
     private JLabel lblNewLabel_1;
     private JTextField usuario;
-    private JPasswordField contraseña;
+    private JPasswordField password;
     private JButton btnNewButton;
     private JButton btnNewButton_1;
     private JPanel label;
@@ -67,7 +67,7 @@ public class Registro extends JFrame {
             panel.add(getLblNewLabel());
             panel.add(getLblNewLabel_1());
             panel.add(getUsuario());
-            panel.add(getContraseña());
+            panel.add(getPassword());
         }
         return panel;
     }
@@ -99,12 +99,12 @@ public class Registro extends JFrame {
         return usuario;
     }
 
-    private JPasswordField getContraseña() {
-        if (contraseña == null) {
-            contraseña = new JPasswordField();
-            contraseña.setBounds(137, 87, 213, 20);
+    private JPasswordField getPassword() {
+        if (password == null) {
+            password = new JPasswordField();
+            password.setBounds(137, 87, 213, 20);
         }
-        return contraseña;
+        return password;
     }
 
     private JButton getBtnNewButton() {
@@ -114,7 +114,7 @@ public class Registro extends JFrame {
                 @Override
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
-				if(!servicio.registerUser(usuario.getText(), contraseña.getText())){
+				if(!servicio.registerUser(usuario.getText(), password.getText())){
 					JOptionPane.showMessageDialog(getParent(), "El usuario que se intenta registrar ya existe en el sistema");
 				}
 				else{

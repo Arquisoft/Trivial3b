@@ -193,7 +193,7 @@ public class BoardGame extends JFrame {
      */
     private void pintar() {
         contentPane.removeAll();
-        añadirBotones(coordenadas);
+        addBotones(coordenadas);
         for (int i = 1; i < botones.length; i++) {
             contentPane.add(botones[i]);
         }
@@ -600,14 +600,14 @@ public class BoardGame extends JFrame {
                 cargaBotones("src/main/resources/botonesCircular.txt");
                 lblNewLabel.setIcon(new ImageIcon(
                         ("src/main/resources/images/trivialCirculo.jpg")));
-                añadirBotones(coordenadas);
+                addBotones(coordenadas);
                 service = GameFactory.newGameService(1);
                 break;
             case CUADRADO:
                 cargaBotones("src/main/resources/botonesCuadrado.txt");
                 lblNewLabel.setIcon(new ImageIcon(
                         ("src/main/resources/images/trivialCuadrado.jpg")));
-                añadirBotones(coordenadas);
+                addBotones(coordenadas);
                 service = GameFactory.newGameService(2);
                 break;
         }
@@ -616,7 +616,7 @@ public class BoardGame extends JFrame {
     /*
      * Metodo que crea todos los poligonButton a partir del mapa coordenadas
      */
-    public void añadirBotones(Map<Integer, List<Point>> coordenadas) {
+    public void addBotones(Map<Integer, List<Point>> coordenadas) {
         // Inicializo el array de botones con el tamaño de keys que tenga el map
         botones = new PolygonButton[coordenadas.keySet().size() + 1];
         for (Integer key : coordenadas.keySet()) {
