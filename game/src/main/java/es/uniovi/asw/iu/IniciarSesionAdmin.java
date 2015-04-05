@@ -11,36 +11,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 public class IniciarSesionAdmin extends JDialog {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     private JTextField txLogin;
     private JPasswordField pFpassword;
 
     /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            IniciarSesionAdmin dialog = new IniciarSesionAdmin();
-            dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Create the dialog.
      */
     public IniciarSesionAdmin() {
+        setResizable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage(
                 ("src/main/resources/images/icono.jpg")));
         setTitle("Iniciar sesion administrador");

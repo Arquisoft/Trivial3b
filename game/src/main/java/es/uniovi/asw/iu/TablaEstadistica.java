@@ -1,7 +1,6 @@
 package es.uniovi.asw.iu;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,34 +21,17 @@ import es.uniovi.asw.util.Jdbc;
 
 public class TablaEstadistica extends JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTable table;
     private ModeloNoEditable modeloTabla;
     private JButton btnNewButton;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    TablaEstadistica frame = new TablaEstadistica();
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     /**
      * Create the frame.
      */
     public TablaEstadistica() {
+        setResizable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage(
                 ("src/main/resources/images/icono.jpg")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

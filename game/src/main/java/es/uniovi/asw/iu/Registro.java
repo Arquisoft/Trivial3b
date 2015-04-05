@@ -44,6 +44,7 @@ public class Registro extends JFrame {
      * Create the frame.
      */
     public Registro() {
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 514, 412);
         servicio = new GameServiceImpl();

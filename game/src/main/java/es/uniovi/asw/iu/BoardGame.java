@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -29,6 +30,7 @@ import es.uniovi.asw.game.GameService;
 import es.uniovi.asw.iu.components.PolygonButton;
 import es.uniovi.asw.model.Casilla;
 import es.uniovi.asw.model.Category;
+import es.uniovi.asw.model.TipoCasilla;
 import es.uniovi.asw.util.FileUtil;
 
 public class BoardGame extends JFrame {
@@ -122,6 +124,7 @@ public class BoardGame extends JFrame {
      */
     public BoardGame(int tablero, GameService servicio) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
         setBounds(100, 100, 870, 572);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 248, 255));
@@ -683,22 +686,22 @@ public class BoardGame extends JFrame {
         posiciones.put(numeroJugadorActual(), i);
         // Pinta las posiciones de los jugadores en el tablero
         pintarPosiciones();
-        if (service.getCasilla(i).getCategoria() == null) {
-            // Si no tiene categoria es una pregunta de volver a tirar y
+		if (service.getCasilla(i).getTipoCasilla().equals(TipoCasilla.TIRADAEXTRA)) {
+			// Es una pregunta de volver a tirar y
             // volvemos a activar el dado
             dado.setEnabled(true);
+			JOptionPane.showMessageDialog(this, "Vuelve a tirar");
         } else {
             dado.setEnabled(true);
             // Sacamos el dialogo con una nueva pregunta
             JDialog dialogo = new QuestionDialog(this);
             this.setEnabled(false);
-            dialogo.setDefaultCloseOperation(0);
+			dialogo.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             dialogo.setSize(800, 200);
             dialogo.setLocationRelativeTo(this);
-            dialogo.setVisible(true);
             dialogo.setModal(true);
+			dialogo.setVisible(true);
         }
-
     }
 
     private JLabel getNombre4() {

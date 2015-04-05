@@ -13,10 +13,10 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
-import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import es.uniovi.asw.game.GameService;
@@ -46,22 +46,10 @@ public class QuestionDialog extends JDialog {
     Timer t;
 
     /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            QuestionDialog dialog = new QuestionDialog(null);
-            dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Create the dialog.
      */
     public QuestionDialog(BoardGame game) {
+        setResizable(false);
         pregunta = game.service.getPregunta();
         category = pregunta.getCategory();
         servicio = game.service;
@@ -131,11 +119,7 @@ public class QuestionDialog extends JDialog {
             Respuesta2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    servicio.respuestaIncorrecta();
-                    t.stop();
-                    game.setEnabled(true);
-                    dispose();
-                    game.recargarQuesitos(category);
+                    respuestaIncorrecta();
                 }
             });
         }
@@ -149,11 +133,7 @@ public class QuestionDialog extends JDialog {
             Respuesta3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    servicio.respuestaIncorrecta();
-                    t.stop();
-                    game.setEnabled(true);
-                    dispose();
-                    game.recargarQuesitos(category);
+                    respuestaIncorrecta();
                 }
             });
         }
@@ -167,11 +147,7 @@ public class QuestionDialog extends JDialog {
             Respuesta1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    servicio.respuestaCorrecta();
-                    t.stop();
-                    game.setEnabled(true);
-                    dispose();
-                    game.recargarQuesitos(category);
+                	respuestaCorrecta();
                 }
             });
         }
@@ -185,16 +161,34 @@ public class QuestionDialog extends JDialog {
             Respuesta4.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    servicio.respuestaIncorrecta();
-                    t.stop();
-                    game.setEnabled(true);
-                    dispose();
-                    game.recargarQuesitos(category);
+                    respuestaIncorrecta();
                 }
             });
         }
         return Respuesta4;
     }
+    
+
+	private void respuestaIncorrecta() {
+		servicio.respuestaIncorrecta();
+		t.stop();
+		game.setEnabled(true);
+		dispose();
+		game.recargarQuesitos(category);
+		
+		JOptionPane.showMessageDialog(game, "Respuesta incorrecta!");
+	}
+	
+
+	private void respuestaCorrecta() {
+		servicio.respuestaCorrecta();
+		t.stop();
+		game.setEnabled(true);
+		dispose();
+		game.recargarQuesitos(category);
+		
+		JOptionPane.showMessageDialog(game, "Respuesta correcta, tira de nuevo!");
+	}
 
     private JProgressBar getPB() {
         if (pB == null) {

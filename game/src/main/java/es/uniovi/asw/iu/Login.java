@@ -52,7 +52,7 @@ public class Login extends JFrame {
     private JTextField txU6;
     private GameService service;
     private JPasswordField txP6;
-    private JLabel lblNewLabel;
+    private JLabel lblIcon;
     private boolean condicion = true;
 
     public void habilitarComponentes(JPanel panel, boolean habilitar) {
@@ -60,10 +60,6 @@ public class Login extends JFrame {
         for (int i = 0; i < panel.getComponents().length; i++) {
             panel.getComponent(i).setEnabled(habilitar);
         }
-    }
-
-    public void comprobarLogin() {
-
     }
 
     public void actualizarNumeroJugadores(int jugadores) {
@@ -128,7 +124,7 @@ public class Login extends JFrame {
         setResizable(false);
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 553, 693);
+        setBounds(100, 100, 552, 680);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 204));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -149,7 +145,7 @@ public class Login extends JFrame {
             }
         });
         spinner.setModel(new SpinnerNumberModel(2, 2, 6, 1));
-        spinner.setBounds(23, 595, 170, 59);
+        spinner.setBounds(23, 584, 170, 59);
         contentPane.add(spinner);
 
         panel_1 = new JPanel();
@@ -295,7 +291,7 @@ public class Login extends JFrame {
                 System.exit(0);
             }
         });
-        btSalir.setBounds(321, 616, 97, 33);
+        btSalir.setBounds(321, 600, 97, 33);
         contentPane.add(btSalir);
 
         JButton btJugar = new JButton("Jugar");
@@ -333,7 +329,7 @@ public class Login extends JFrame {
                 condicion = true;
             }
         });
-        btJugar.setBounds(442, 616, 97, 33);
+        btJugar.setBounds(442, 600, 97, 33);
         contentPane.add(btJugar);
 
         panel_5 = new JPanel();
@@ -407,12 +403,11 @@ public class Login extends JFrame {
         lblPasswordUsuario_4.setEnabled(false);
         lblPasswordUsuario_4.setBounds(97, 52, 134, 14);
         panel_6.add(lblPasswordUsuario_4);
-
-        lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(
-                ("src/main/resources/images/Trivial_pursuits_colors.jpg")));
-        lblNewLabel.setBounds(0, -18, 549, 683);
-        contentPane.add(lblNewLabel);
+        
+		lblIcon = new JLabel();
+		lblIcon.setIcon(new ImageIcon("src/main/resources/images/Trivial_pursuits_colors.jpg"));
+		lblIcon.setBounds(-1, 0, 550, 664);
+		contentPane.add(lblIcon);
     }
 
     @SuppressWarnings("deprecation")
@@ -436,7 +431,5 @@ public class Login extends JFrame {
         EleccionTablero elec = new EleccionTablero(service);
         elec.setLocationRelativeTo(null);
         elec.setVisible(true);
-
     }
-
 }

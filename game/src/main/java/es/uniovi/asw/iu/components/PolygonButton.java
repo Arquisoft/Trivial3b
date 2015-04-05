@@ -40,20 +40,19 @@ public class PolygonButton extends JComponent implements ActionListener,
 
     @Override
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
-
-        if (isActive && !hasPlayer) {
+        if (hasPlayer) {
+            int x = (int) (getSize().width / 4.5);
+            int y = (int) (getSize().height / 4.5);
+            g.drawImage(getImage(), x, y, null);
+        }
+        
+        if (isActive) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(Color.BLACK);
             int x = (int) (getSize().width / 4.5);
             int y = (int) (getSize().height / 4.5);
             g2d.setComposite(makeComposite((float) 0.8));
             g.fillOval(x, y, 25, 25);
-        }
-        if (!isActive && hasPlayer) {
-            int x = (int) (getSize().width / 4.5);
-            int y = (int) (getSize().height / 4.5);
-            g.drawImage(getImage(), x, y, null);
         }
     }
 
