@@ -16,147 +16,147 @@ import es.uniovi.asw.util.Jdbc;
 
 public class PreguntaJdbcDao implements PreguntaDao {
 
-	private Connection con;
+    private Connection con;
 
-	@Override
-	public void setConnection(Connection con) {
-		this.con = con;
-	}
-	public PreguntaJdbcDao(){
-		try {
-			setConnection(Jdbc.getConnection());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	/**
-	 * Carga el resultado de un ResultSet
-	 */
-	private Map<String, Object> load(ResultSet rs) throws SQLException {
+    @Override
+    public void setConnection(Connection con) {
+        this.con = con;
+    }
 
-		Map<String, Object> pregunta = new HashMap<String, Object>();
+    public PreguntaJdbcDao() {
+        try {
+            setConnection(Jdbc.getConnection());
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-		pregunta.put("ID", rs.getInt("ID"));
-		pregunta.put("CATEGORIA", rs.getString("CATEGORIA"));
-		pregunta.put("ACIERTOS", rs.getInt("ACIERTOS"));
-		pregunta.put("FALLOS", rs.getInt("FALLOS"));
+    /**
+     * Carga el resultado de un ResultSet
+     */
+    private Map<String, Object> load(ResultSet rs) throws SQLException {
 
-		return pregunta;
-	}
+        Map<String, Object> pregunta = new HashMap<String, Object>();
 
-	/**
-	 * Muestra todas las preguntas
-	 */
-	@Override
-	public List<Map<String, Object>> findAll() {
+        pregunta.put("ID", rs.getInt("ID"));
+        pregunta.put("CATEGORIA", rs.getString("CATEGORIA"));
+        pregunta.put("ACIERTOS", rs.getInt("ACIERTOS"));
+        pregunta.put("FALLOS", rs.getInt("FALLOS"));
 
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try {
+        return pregunta;
+    }
 
-			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDALL"));
+    /**
+     * Muestra todas las preguntas
+     */
+    @Override
+    public List<Map<String, Object>> findAll() {
 
-			rs = ps.executeQuery();
-			List<Map<String, Object>> preguntas = new ArrayList<Map<String, Object>>();
-			while (rs.next()) {
-				Map<String, Object> pregunta = load(rs);
-				preguntas.add(pregunta);
-			}
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
 
-			return preguntas;
+            ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDALL"));
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			Jdbc.close(rs, ps);
-		}
-	}
+            rs = ps.executeQuery();
+            List<Map<String, Object>> preguntas = new ArrayList<Map<String, Object>>();
+            while (rs.next()) {
+                Map<String, Object> pregunta = load(rs);
+                preguntas.add(pregunta);
+            }
 
-	/**
-	 * inserta una pregunta
-	 */
-	@Override
-	public void insertar(Pregunta pregunta) {
+            return preguntas;
 
-		PreparedStatement ps = null;
-		try{
-			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_INSERT"));
-			ps.setString(1,  pregunta.getCategory().toString());
-			ps.setInt(2,0);
-			ps.setInt(3,0);
-			ps.setString(4,pregunta.getId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Jdbc.close(rs, ps);
+        }
+    }
 
-			ps.executeUpdate();
+    /**
+     * inserta una pregunta
+     */
+    @Override
+    public void insertar(Pregunta pregunta) {
 
-		}catch (SQLException e){
-			throw new RuntimeException(e);
-		}
-		finally {
-			Jdbc.close(ps);
-		}		
-	}
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_INSERT"));
+            ps.setString(1, pregunta.getCategory().toString());
+            ps.setInt(2, 0);
+            ps.setInt(3, 0);
+            ps.setString(4, pregunta.getId());
 
+            ps.executeUpdate();
 
-	/**
-	 * Guarda el resultado de una pregunta +1acierto/fallo
-	 */
-	@Override
-	public void guardarResultado(Map<String, Object> pregunta, boolean acertada) {
-		PreparedStatement ps = null;
-		try{
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Jdbc.close(ps);
+        }
+    }
+
+    /**
+     * Guarda el resultado de una pregunta +1acierto/fallo
+     */
+    @Override
+    public void guardarResultado(Map<String, Object> pregunta, boolean acertada) {
+        PreparedStatement ps = null;
+        try {
 			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_GUARDARRESULTADO"));
-			
+
             Integer aciertos = (Integer) pregunta.get("ACIERTOS");
             Integer fallos = (Integer) pregunta.get("FALLOS");
-			
-			if(acertada){
-				ps.setInt(1, aciertos == null ? 1 : ++aciertos);
-				ps.setInt(2, fallos == null ? 0: fallos);
-			}else{
-				ps.setInt(1, aciertos == null ? 0 : aciertos);
-				ps.setInt(2, fallos == null ? 1 : ++fallos);
-			}
 
-			ps.setLong(3, Long.parseLong(String.valueOf(pregunta.get("ID"))));
+            if (acertada) {
+                ps.setInt(1, aciertos == null ? 1 : ++aciertos);
+                ps.setInt(2, fallos == null ? 0 : fallos);
+            } else {
+                ps.setInt(1, aciertos == null ? 0 : aciertos);
+                ps.setInt(2, fallos == null ? 1 : ++fallos);
+            }
 
-			ps.executeUpdate();
+            ps.setLong(3, Long.parseLong(String.valueOf(pregunta.get("ID"))));
 
-		}catch (SQLException e){
-			throw new RuntimeException(e);
-		}
-		finally {
-			Jdbc.close(ps);
-		}		
-	}
+            ps.executeUpdate();
 
-	/**
-	 * Busca una pregunta por su id
-	 */
-	@Override
-	public Map<String, Object> findById(String idPregunta) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Jdbc.close(ps);
+        }
+    }
 
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try {
+    /**
+     * Busca una pregunta por su id
+     */
+    @Override
+    public Map<String, Object> findById(String idPregunta) {
 
-			ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDBYPREGUNTA"));
-			ps.setString(1, idPregunta);
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
 
-			rs = ps.executeQuery();
-			Map<String, Object> pregunta;
-			if (rs.next()) {
+            ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_FINDBYPREGUNTA"));
+            ps.setString(1, idPregunta);
 
-				pregunta = load(rs);
+            rs = ps.executeQuery();
+            Map<String, Object> pregunta;
+            if (rs.next()) {
 
-				return pregunta;
-			}
-			else return null;
+                pregunta = load(rs);
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			Jdbc.close(rs, ps);
-		}
-	}
+                return pregunta;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Jdbc.close(rs, ps);
+        }
+    }
 }

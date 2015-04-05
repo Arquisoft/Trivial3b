@@ -15,7 +15,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
 .loadpath
 .externalToolBuilders/
 *.launch
@@ -28,3 +27,4 @@ local.properties
 *.lck
 *.log
 localDB.properties
+*.iml

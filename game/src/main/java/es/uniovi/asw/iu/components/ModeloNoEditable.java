@@ -3,13 +3,14 @@ package es.uniovi.asw.iu.components;
 import javax.swing.table.DefaultTableModel;
 
 public class ModeloNoEditable extends DefaultTableModel {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ModeloNoEditable(Object[] columnNames, int rowCount) {
-		super(columnNames, rowCount);
-   }
-	@Override
-	public boolean isCellEditable(int row, int column) {
+    public ModeloNoEditable(Object[] columnNames, int rowCount) {
+        super(columnNames, rowCount);
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
         return false;
     }
 }
