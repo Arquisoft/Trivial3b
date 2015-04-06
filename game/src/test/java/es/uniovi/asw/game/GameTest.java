@@ -7,8 +7,6 @@ import java.util.List;
 import org.junit.Test;
 
 import es.uniovi.asw.graph.Graph;
-import es.uniovi.asw.model.Casilla;
-import es.uniovi.asw.model.Tablero;
 
 public class GameTest {
 

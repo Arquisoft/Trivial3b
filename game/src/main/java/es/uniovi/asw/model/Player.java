@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
+import es.uniovi.asw.game.Casilla;
+
 public class Player {
 
     private String username;

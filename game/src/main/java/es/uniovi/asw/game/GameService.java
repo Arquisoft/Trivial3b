@@ -2,7 +2,6 @@ package es.uniovi.asw.game;
 
 import java.util.List;
 
-import es.uniovi.asw.model.Casilla;
 import es.uniovi.asw.model.Player;
 import es.uniovi.asw.model.Pregunta;
 

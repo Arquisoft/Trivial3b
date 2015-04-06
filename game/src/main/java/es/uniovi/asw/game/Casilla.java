@@ -1,4 +1,6 @@
-package es.uniovi.asw.model;
+package es.uniovi.asw.game;
+
+import es.uniovi.asw.model.Category;
 
 public class Casilla {
 

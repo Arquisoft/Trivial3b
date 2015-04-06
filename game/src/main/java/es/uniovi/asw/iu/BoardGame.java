@@ -25,12 +25,12 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import es.uniovi.asw.game.Casilla;
 import es.uniovi.asw.game.GameFactory;
 import es.uniovi.asw.game.GameService;
+import es.uniovi.asw.game.TipoCasilla;
 import es.uniovi.asw.iu.components.PolygonButton;
-import es.uniovi.asw.model.Casilla;
 import es.uniovi.asw.model.Category;
-import es.uniovi.asw.model.TipoCasilla;
 import es.uniovi.asw.util.FileUtil;
 
 public class BoardGame extends JFrame {

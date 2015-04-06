@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import es.uniovi.asw.game.Casilla;
 import es.uniovi.asw.game.GameService;
+import es.uniovi.asw.game.Tablero;
+import es.uniovi.asw.game.TipoCasilla;
 import es.uniovi.asw.graph.Graph;
-import es.uniovi.asw.model.Casilla;
 import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Player;
 import es.uniovi.asw.model.Pregunta;
-import es.uniovi.asw.model.Tablero;
-import es.uniovi.asw.model.TipoCasilla;
 import es.uniovi.asw.persistence.PersistenceFactory;
 import es.uniovi.asw.persistence.PreguntaDao;
 import es.uniovi.asw.persistence.impl.SimplePersistenceFactory;

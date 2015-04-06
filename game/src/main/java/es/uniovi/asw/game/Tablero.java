@@ -1,9 +1,10 @@
-package es.uniovi.asw.model;
+package es.uniovi.asw.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import es.uniovi.asw.graph.Graph;
+import es.uniovi.asw.model.Category;
 import es.uniovi.asw.util.FileUtil;
 
 public class Tablero {
