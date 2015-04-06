@@ -237,4 +237,11 @@ public class GameServiceImpl implements GameService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean isAdmin(String user, String pass) {
+		// TODO Auto-generated method stub
+		return persistencia.createJugadorDao().existeUsuario(user, pass, "administrador");
+
+	}
 }
