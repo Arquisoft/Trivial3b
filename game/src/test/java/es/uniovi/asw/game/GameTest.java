@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import es.uniovi.asw.graph.Graph;
+import es.uniovi.asw.controller.game.Casilla;
+import es.uniovi.asw.controller.game.Tablero;
+import es.uniovi.asw.controller.graph.Graph;
 
 public class GameTest {
 

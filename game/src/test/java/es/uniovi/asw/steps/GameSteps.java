@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import cucumber.api.java.es.Cuando;
 import cucumber.api.java.es.Dado;
 import cucumber.api.java.es.Entonces;
-import es.uniovi.asw.game.GameFactory;
-import es.uniovi.asw.game.GameService;
-import es.uniovi.asw.model.Player;
+import es.uniovi.asw.controller.game.GameFactory;
+import es.uniovi.asw.controller.game.GameService;
+import es.uniovi.asw.modelo.model.Player;
 
 public class GameSteps {
 
