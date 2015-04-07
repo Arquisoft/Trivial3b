@@ -2,7 +2,6 @@ package es.uniovi.asw.view.gui;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +15,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import es.uniovi.asw.util.FileUtil;
 
 public class Principal extends JFrame {
 
@@ -50,8 +51,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				("src/main/resources/images/icono.jpg")));
+		setIconImage(FileUtil.getImage("images/icono.jpg"));
 		setResizable(false);
 		setTitle("Trivial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,6 +77,7 @@ public class Principal extends JFrame {
 
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Acerca de");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane
 						.showMessageDialog(
@@ -157,8 +158,7 @@ public class Principal extends JFrame {
 
 			JLabel lblNewLabel = new JLabel("");
 			panel.add(lblNewLabel);
-			lblNewLabel.setIcon(new ImageIcon(
-					("src/main/resources/images/Trivial-mobile_opt.jpg")));
+			lblNewLabel.setIcon(new ImageIcon(FileUtil.getImage("images/Trivial-mobile_opt.jpg")));
 		}
 		return panel;
 	}

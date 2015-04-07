@@ -1,26 +1,38 @@
 package es.uniovi.asw.util;
 
-import java.io.File;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
-import org.apache.commons.io.FileUtils;
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 
 public class FileUtil {
 
     public static final String getFile(String location) {
         try {
-            return FileUtils.readFileToString(new File(location), "UTF-8");
+            InputStream is = FileUtil.class.getClassLoader().getResourceAsStream(location);
+            String fileString = IOUtils.toString(is, Charsets.UTF_8);
+            IOUtils.closeQuietly(is);
+
+            return fileString;
         } catch (IOException e) {
             throw new IllegalArgumentException("No se puede abrir el archivo");
         }
     }
 
-    public static final void saveFile(String location, String content) {
+    public static BufferedImage getImage(String string) {
         try {
-            FileUtils.writeStringToFile(new File(location), content, "UTF-8");
+            InputStream is = FileUtil.class.getClassLoader().getResourceAsStream(string);
+            BufferedImage bi = ImageIO.read(is);
+            IOUtils.closeQuietly(is);
+
+            return bi;
         } catch (IOException e) {
-            throw new IllegalArgumentException("No ha sido posible "
-                    + "guardar su fichero");
+            e.printStackTrace();
         }
+        return null;
     }
 }

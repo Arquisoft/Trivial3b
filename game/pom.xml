@@ -150,7 +150,7 @@
 							</descriptorRefs>
 							<archive>
 								<manifest>
-									<mainClass>es.uniovi.asw.game.Game</mainClass>
+									<mainClass>es.uniovi.asw.view.gui.Principal</mainClass>
 								</manifest>
 							</archive>
 						</configuration>

@@ -17,8 +17,10 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
-public class PolygonButton extends JComponent implements ActionListener,
-        MouseListener, MouseMotionListener {
+import es.uniovi.asw.util.FileUtil;
+
+public class PolygonButton extends JComponent implements ActionListener, MouseListener,
+        MouseMotionListener {
     boolean hasPlayer;
     int jugador;
 
@@ -45,7 +47,7 @@ public class PolygonButton extends JComponent implements ActionListener,
             int y = (int) (getSize().height / 4.5);
             g.drawImage(getImage(), x, y, null);
         }
-        
+
         if (isActive) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(Color.BLACK);
@@ -156,8 +158,6 @@ public class PolygonButton extends JComponent implements ActionListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     private AlphaComposite makeComposite(float alpha) {
@@ -166,36 +166,27 @@ public class PolygonButton extends JComponent implements ActionListener,
     }
 
     public Image getImage() {
-        // BufferedImage img = ImageIO.read(new
-        // File("/es/uniovi/asw/resources/espect.png"));
         switch (jugador) {
             case 0:
-                ImageIcon icon = new ImageIcon(
-                        ("src/main/resources/images/literatura.png"));
+                ImageIcon icon = new ImageIcon(FileUtil.getImage("images/literatura.png"));
                 return icon.getImage();
             case 1:
-                ImageIcon icon2 = new ImageIcon(
-                        ("src/main/resources/images/historia.png"));
+                ImageIcon icon2 = new ImageIcon(FileUtil.getImage("images/historia.png"));
                 return icon2.getImage();
             case 2:
-                ImageIcon icon3 = new ImageIcon(
-                        ("src/main/resources/images/geografia.png"));
+                ImageIcon icon3 = new ImageIcon(FileUtil.getImage("images/geografia.png"));
                 return icon3.getImage();
             case 3:
-                ImageIcon icon4 = new ImageIcon(
-                        ("src/main/resources/images/entretenimiento.png"));
+                ImageIcon icon4 = new ImageIcon(FileUtil.getImage("images/entretenimiento.png"));
                 return icon4.getImage();
             case 4:
-                ImageIcon icon5 = new ImageIcon(
-                        ("src/main/resources/images/deportes.png"));
+                ImageIcon icon5 = new ImageIcon(FileUtil.getImage("images/deportes.png"));
                 return icon5.getImage();
             case 5:
-                ImageIcon icon6 = new ImageIcon(
-                        ("src/main/resources/images/ciencias.png"));
+                ImageIcon icon6 = new ImageIcon(FileUtil.getImage("images/ciencias.png"));
                 return icon6.getImage();
             default:
-                ImageIcon icon7 = new ImageIcon(
-                        ("src/main/resources/images/literatura.png"));
+                ImageIcon icon7 = new ImageIcon(FileUtil.getImage("images/literatura.png"));
                 return icon7.getImage();
         }
     }

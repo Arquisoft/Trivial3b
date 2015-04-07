@@ -1,7 +1,6 @@
 package es.uniovi.asw.view.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import es.uniovi.asw.controller.game.GameFactory;
+import es.uniovi.asw.util.FileUtil;
 
 public class IniciarSesionAdmin extends JDialog {
 
@@ -28,8 +28,7 @@ public class IniciarSesionAdmin extends JDialog {
 	 */
 	public IniciarSesionAdmin() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				("src/main/resources/images/icono.jpg")));
+		setIconImage(FileUtil.getImage("images/icono.jpg"));
 		setTitle("Iniciar sesion administrador");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -52,6 +51,7 @@ public class IniciarSesionAdmin extends JDialog {
 
 		JButton btAceptar = new JButton("Iniciar sesion");
 		btAceptar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (comprobarEsAdministrador()) {
 					mostrarVentanaEstadisticas();
@@ -67,6 +67,7 @@ public class IniciarSesionAdmin extends JDialog {
 
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				mostrarVentanaPrincipal();
 			}

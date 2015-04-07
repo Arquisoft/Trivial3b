@@ -2,8 +2,8 @@ package es.uniovi.asw.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,18 +12,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import es.uniovi.asw.controller.game.GameService;
 import es.uniovi.asw.controller.game.impl.GameServiceImpl;
 import es.uniovi.asw.modelo.model.Player;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import java.awt.Font;
+import es.uniovi.asw.util.FileUtil;
 
 public class EleccionTablero extends JDialog {
 
@@ -52,8 +50,7 @@ public class EleccionTablero extends JDialog {
 	public EleccionTablero(final GameService service) {
 		setTitle("Tablero de juego");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				("src/main/resources/images/icono.jpg")));
+		setIconImage(FileUtil.getImage("images/icono.jpg"));
 		this.service = service;
 		setBounds(100, 100, 524, 410);
 		getContentPane().setLayout(new BorderLayout());
@@ -79,6 +76,7 @@ public class EleccionTablero extends JDialog {
 		});
 
 		btnCircular.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				GameService servicio = new GameServiceImpl(1);
 				for (Player p : service.getPlayers()) {
@@ -91,11 +89,9 @@ public class EleccionTablero extends JDialog {
 			}
 		});
 		btnCircular.setBounds(21, 103, 221, 185);
-		ImageIcon fot = new ImageIcon(
-				"src/main/resources/images/trivialCirculo.jpg");
-		ImageIcon imagen = new ImageIcon(fot.getImage().getScaledInstance(
-				btnCircular.getWidth(), btnCircular.getHeight(),
-				Image.SCALE_DEFAULT));
+		ImageIcon fot = new ImageIcon(FileUtil.getImage("images/trivialCirculo.jpg"));
+		ImageIcon imagen = new ImageIcon(fot.getImage().getScaledInstance(btnCircular.getWidth(),
+				btnCircular.getHeight(), Image.SCALE_DEFAULT));
 		btnCircular.setIcon(imagen);
 		contentPanel.add(btnCircular);
 
@@ -117,6 +113,7 @@ public class EleccionTablero extends JDialog {
 
 		btnCuadrado.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
 		btnCuadrado.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				GameService servicio = new GameServiceImpl(2);
 				for (Player p : service.getPlayers()) {
@@ -129,10 +126,9 @@ public class EleccionTablero extends JDialog {
 			}
 		});
 		btnCuadrado.setBounds(273, 103, 235, 183);
-		fot = new ImageIcon("src/main/resources/images/trivialCuadrado.jpg");
-		imagen = new ImageIcon(fot.getImage().getScaledInstance(
-				btnCircular.getWidth(), btnCircular.getHeight(),
-				Image.SCALE_DEFAULT));
+		fot = new ImageIcon(FileUtil.getImage("images/trivialCuadrado.jpg"));
+		imagen = new ImageIcon(fot.getImage().getScaledInstance(btnCircular.getWidth(),
+				btnCircular.getHeight(), Image.SCALE_DEFAULT));
 		btnCuadrado.setIcon(imagen);
 		contentPanel.add(btnCuadrado);
 
@@ -145,6 +141,7 @@ public class EleccionTablero extends JDialog {
 
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				mostrarVentanaJugadores();
 			}

@@ -1,7 +1,6 @@
 package es.uniovi.asw.view.gui;
 
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -16,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import es.uniovi.asw.modelo.persistence.impl.EstadisticasJugadorJdbcDao;
+import es.uniovi.asw.util.FileUtil;
 import es.uniovi.asw.util.Jdbc;
 import es.uniovi.asw.view.components.ModeloNoEditable;
 
@@ -33,8 +33,7 @@ public class TablaEstadistica extends JFrame {
 	public TablaEstadistica() {
 		setTitle("Estadisticas de jugadores");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				("src/main/resources/images/icono.jpg")));
+		setIconImage(FileUtil.getImage("images/icono.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 362);
 		contentPane = new JPanel();

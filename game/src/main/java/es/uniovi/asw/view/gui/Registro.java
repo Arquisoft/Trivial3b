@@ -12,11 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import es.uniovi.asw.controller.game.GameService;
 import es.uniovi.asw.controller.game.impl.GameServiceImpl;
+import es.uniovi.asw.util.FileUtil;
 
 public class Registro extends JDialog {
 
@@ -47,7 +49,7 @@ public class Registro extends JDialog {
 		setModal(true);
 		setTitle("Formulario registro nuevo usuario");
 		setResizable(false);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 514, 256);
 		servicio = new GameServiceImpl();
 		contentPane = new JPanel();
@@ -162,8 +164,8 @@ public class Registro extends JDialog {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("");
 			lblNewLabel_2.setBounds(249, 5, 0, 0);
-			lblNewLabel_2.setIcon(new ImageIcon(
-					("src/main/resources/images/Trivial-mobile_opt.jpg")));
+			lblNewLabel_2
+					.setIcon(new ImageIcon(FileUtil.getImage("images/Trivial-mobile_opt.jpg")));
 		}
 		return lblNewLabel_2;
 	}

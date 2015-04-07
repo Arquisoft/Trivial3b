@@ -2,7 +2,6 @@ package es.uniovi.asw.view.gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +24,7 @@ import javax.swing.event.ChangeListener;
 import es.uniovi.asw.controller.game.GameService;
 import es.uniovi.asw.controller.game.impl.GameServiceImpl;
 import es.uniovi.asw.modelo.model.Player;
+import es.uniovi.asw.util.FileUtil;
 
 public class Login extends JFrame {
 
@@ -118,8 +118,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				("src/main/resources/images/icono.jpg")));
+		setIconImage(FileUtil.getImage("images/icono.jpg"));
 		service = new GameServiceImpl();
 		setResizable(false);
 		setTitle("Login");
@@ -416,8 +415,7 @@ public class Login extends JFrame {
 		panel_6.add(lblPasswordUsuario_4);
 
 		lblIcon = new JLabel();
-		lblIcon.setIcon(new ImageIcon(
-				"src/main/resources/images/Trivial_pursuits_colors.jpg"));
+		lblIcon.setIcon(new ImageIcon(FileUtil.getImage("images/Trivial_pursuits_colors.jpg")));
 		lblIcon.setBounds(-1, 0, 550, 664);
 		contentPane.add(lblIcon);
 	}

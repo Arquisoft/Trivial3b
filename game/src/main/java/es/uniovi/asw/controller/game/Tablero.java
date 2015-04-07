@@ -14,9 +14,9 @@ public class Tablero {
     public static Graph<Casilla> getTablero(int type) {
         switch (type) {
             case CIRCULAR:
-                return cargaGrafo("src/main/resources/grafoCircular.txt");
+                return cargaGrafo("grafoCircular.txt");
             case CUADRADO:
-                return cargaGrafo("src/main/resources/grafoCuadrado.txt");
+                return cargaGrafo("grafoCuadrado.txt");
 
             default:
                 return null;
