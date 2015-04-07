@@ -81,7 +81,7 @@ public class TablaEstadistica extends JFrame {
 		tabbedPane.addTab("Preguntas mas falladas", null, scrollPane_2, null);
 		
 		table_2 = new JTable();
-		table_2.setModel(tablaMasAcertadas);
+		table_2.setModel(tablaMasFalladas);
 		table_2.setBackground(Color.WHITE);
 		scrollPane_2.setViewportView(table_2);
 
@@ -122,11 +122,11 @@ public class TablaEstadistica extends JFrame {
 		}
 		Map<String, Object> estadisticas = dao.getMasAcertada();
 		Object[] line = new Object[3];
-
+			if(estadisticas!=null){
 			line[0] = estadisticas.get("IDPREGUNTA");
 			line[1] = estadisticas.get("ACIERTOS");
 			line[2] = estadisticas.get("FALLOS");
-
+			}
 			tablaMasAcertadas.addRow(line);
 
 		
@@ -142,11 +142,11 @@ public class TablaEstadistica extends JFrame {
 		}
 		Map<String, Object> estadisticas = dao.getMasFallada();
 		Object[] line = new Object[3];
-
+		if(estadisticas!=null){
 			line[0] = estadisticas.get("IDPREGUNTA");
 			line[1] = estadisticas.get("ACIERTOS");
 			line[2] = estadisticas.get("FALLOS");
-
+		}
 			tablaMasFalladas.addRow(line);
 	}
 
