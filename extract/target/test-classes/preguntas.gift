@@ -1,0 +1,433 @@
+//  PREGUNTAS PARA TRIVIAL ASW
+
+$Categoria: Deportes
+
+¿Quién fue el ganador del mundial de futbol 2010? {
+    =España 
+    ~Brasil 
+    ~Holanda 
+    ~Alemania
+}
+
+¿Qué futbolista marco el gol conocido como "la mano de dios"? {
+    ~Pelé
+    ~Cruyff
+    =Maradona
+    ~Cantona
+}
+
+¿Qué equipo tiene más campeonatos de la NBA? {
+    ~Chicago Bulls
+    =Boston Celtics
+    ~Los Angeles Lakers
+    ~San Antonio Spurs
+}
+
+¿Como se llamaba el balón con el que se disputó el mundial de futbol de 2014? {
+    ~Tango 
+    ~Azteca
+    =Brazuca
+    ~Jabulani
+}
+
+¿Qué boxeador mordió una oreja a su contrincante? {
+    ~Holyfield
+    ~Pacquiao 
+    ~Mayweather
+    =Tyson
+}
+
+¿Quién era conociodo como "el sabio de hortaleza"? {
+    ~Guardiola
+    =Luis Aragones
+    ~Vicente DelBosque
+    ~Camacho
+}
+
+¿En que año ganó Perico Delgado el Tour de Francia? {
+    =1988
+    ~1990 
+    ~1986 
+    ~1985
+}
+
+¿En que posición jugaba Michael Jordan? {
+    ~Alero 
+    ~Base
+    =Escolta
+    ~Pivot
+}
+
+¿Cuántos anillos tiene Marc Gasol? {
+    =Ninguno
+    ~2
+    ~3 
+    ~1
+}
+
+¿Quien ganó el Balon de Oro del 2015? {
+    ~Ribery 
+    ~Neuer 
+    =Cristiano Ronalo
+    ~Messi
+}
+
+$Categoria: Geografía
+
+¿Cuál es la capital de España? {
+    =Madrid 
+    ~París 
+    ~Lisboa 
+    ~Roma
+}
+
+¿Cuantos estados tiene EEUU? {
+    ~51 
+    =50
+    ~48 
+    ~45
+}
+
+¿Qué ciudad de EEUU se encuentra más al norte? {
+    ~Denver
+    =San Francisco
+    ~Nashville
+    ~Las Vegas
+}
+
+¿A qué país pertenece Groenlandia? {
+    ~Holanda 
+    ~Suecia
+    ~Finlandia
+    =Dinamarca
+}
+
+¿A qué país pertenece la isla de Tasmania? {
+    ~EEUU
+    ~Chile
+    =Australia
+    ~Japón
+}
+
+¿Cuál de estos países africanos no tiene costa? {
+    =Todos tienen costa
+    ~Senegal
+    ~Gambia
+    ~Mauritania
+}
+
+¿En qué país está la Laguna Verde? {
+    ~Argentina
+    =Bolivia
+    ~Chile
+    ~Paraguay
+}
+
+¿Qué país africano fue antigua colonia española? {
+    ~Sudáfrica
+    ~Senegal
+    ~Egipto
+    =Guinea Ecuatorial
+}
+
+¿En qué mar desemboca el rio Segura? {
+    ~Mar Cantábrico
+    =Mar Mediterráneo
+    ~Mar Báltico
+    ~Ninguna es correcta
+}
+
+¿Dónde se encuentra Baiona? {
+    ~Francia
+    ~Andalucía
+    =Pontevedra
+    ~País Vasco
+}
+
+$Categoria: Historia
+
+¿Cuál es la rama mayoritaria del Islam? {
+    ~Chiísmo
+    ~Jariyismo
+    =Sunismo
+    ~Sufismo
+}
+
+¿De qué fue ministro Manuel Fraga durante el franquismo? {
+    =De información y turismo
+    ~De interior
+    ~De economía
+    ~Del ejército
+}
+
+¿En qué año tuvo lugar el ataque a Pearl Harbor? {
+    ~1939
+    =1941
+    ~1940
+    ~1942
+}
+
+¿Qué país fue dirigido por Stalin? {
+    ~Cuba
+    ~Alemania
+    =Unión Soviética
+    ~Polonia
+}
+
+¿Cuál de los siguientes políticos no ha estado implicado en la trama Gürtel? {
+    ~Francisco Camps
+    ~Luis Bárcenas
+    ~Esteban Gonzalez Pons
+    =Mariano Rajoy
+}
+
+¿Cómo murió Jacques de Molay, último gran maestre templario? {
+    ~Envenenado
+    =En la hoguera
+    ~De risa
+    ~Enfermedad
+}
+
+¿Quién gobernó Francia desde 1799 a 1815? {
+    ~Adam Smith
+    ~François Quesnay
+    =Napoleón Bonaparte
+    ~Louis Bonaldgug
+}
+
+¿Qué modelo de Seat significó la motorización de los españoles? {
+    ~León
+    ~500
+    ~Ibiza
+    =600
+}
+
+¿En qué país nació el protestantismo? {
+    ~Italia
+    =Alemania
+    ~Francia
+    ~Polonia
+}
+
+¿Qué ciudad española era conocida como 'Lucentum' por los romanos? {
+    ~Murcia
+    ~Oviedo
+    =Alicante
+    ~Barcelona
+}
+
+$Categoria: Arte y literatura
+
+¿Quién pintó el cuadro "El jardín de las delicias"? {
+    ~Carvaggio
+    ~Velázquez
+    =El Bosco
+    ~Murillo
+}
+
+¿Quién escribió "El viejo y el mar"? {
+    =Ernest Hemingway
+    ~Norman Mailer
+    ~Gabriel García Márquez
+    ~JK Rowling
+}
+
+¿Cuál fue el género más cultivado por los autores de la generación del 27? {
+    ~Ensayo
+    ~Novela
+    ~Teatro
+    =Poesía
+}
+
+¿Qué odia Mafalda? {
+    ~Bailar
+    ~El pájaro loco
+    =La sopa
+    ~Los perros
+}
+
+¿De qué siglo es representativo el arte mozárabe? {
+    ~IIX
+    =X
+    ~XIX
+    ~V
+}
+
+¿Dónde nació Shakespeare? {
+    ~Albacete
+    ~Surrey
+    ~New Castle
+    =Stratford-upon-Avon
+}
+
+¿Cuál es el género teatral intermedio entre la comedia y la tragedia? {
+    ~Zarzuela
+    =Drama
+    ~Entremés
+    ~Farsa
+}
+
+¿Quién es el autor de "La Celestina"? {
+    ~Jorge Manrique
+    ~Anónima
+    = Fernando de Rojas
+    ~Miguel de Cervantes
+}
+
+¿De dónde era Diego Velázquez? {
+    =Sevilla
+    ~Murcia
+    ~Madrid
+    ~Toledo
+}
+
+¿Quién escribió la trilogía "Los Juegos del Hambre"? {
+    ~Stephenie Meyer
+    ~JK Rowling
+    ~John Green
+    =Suzanne Collins
+}
+
+$Categoria: Ciencia y Tecnología
+
+¿Cuál de las siguientes enfermedades ataca al higado? {
+    =Hepatitis
+    ~Diabetes
+    ~Artrósis
+    ~Cifoescoliosis
+}
+
+¿Qué hay en la boca del estómago? {
+    ~El píloro
+    ~Los ácidos gástricos
+    ~El epilón mayor
+    =El cardías
+}
+
+¿De dónde se saca la sacarina? {
+    ~Del aceite de girasol
+    ~Del azúcar
+    =Del carbón
+    ~Del azufre
+}
+
+¿Cuál es el mamífero más grande conocido hasta la actualidad? {
+    ~Cachalote
+    ~Rinoceronte
+    =Ballena azul
+    ~Elefante
+}
+
+¿Cuál de estas redes sociales es de ámbito laboral? {
+    ~Tuenti
+    =LinkedIn
+    ~Facebook
+    ~JobFire
+}
+
+¿Con que parte del cuerpo hacen el zumbido las abejas? {
+    =Con las alas
+    ~Con la boca
+    ~Con las patas
+    ~Con las antenas
+}
+
+¿Qué son las enzimas? {
+    ~Glúcidos
+    ~Células
+    ~Hadas
+    =Proteínas
+}
+
+¿Cuál es el símbolo de Bromo? {
+    ~B
+    =Br
+    ~Bh
+    ~Bt
+}
+
+¿Cuál es el nombre común del ácido ascórbico? {
+    ~Ácido Cítrico
+    ~Vitamina B6
+    ~Vitamina B12
+    =Vitamina C
+}
+
+¿Cómo se llama el sistema operativo con el que trabajan los teléfonos HTC,LG,Samsung? {
+    ~Microsoft
+    ~iOS
+    =Android
+    ~Linux
+}
+
+$Categoria: Espectáculos y entretenimiento
+
+¿Quién es la mascota de SEGA? {
+    =Sonic
+    ~Mario
+    ~Luigi
+    ~Pac Man
+}
+
+¿Cuál es considerado por los fans el peor juego de la historia de ATARI? {
+    ~Tetris
+    =ET
+    ~Combat
+    ~Galaxian
+}
+
+¿Por cuál de estas películas ganó Clint Eastwood el premio Oscar al mejor director? {
+    ~Mystic River
+    ~Million Dollar Baby
+    =Los puentes de Madison
+    ~Cartas desde Iwo Jima
+}
+
+¿A qué hace referencia "La Milla Verde"? {
+    ~A un prado cercano
+    ~A una carrera
+    ~A la cárcel
+    =Al corredor de la muerte
+}
+
+¿Cómo se llama el protagonista de la saga Indiana Jones? {
+    =Harrison Ford
+    ~Jack Nicholson
+    ~Jean Claude Van Damme
+    ~Chuck Norris
+}
+
+¿Qué animal es la mascota de Jazmín en Aladdin? {
+    ~Mono
+    =Tigre
+    ~Serpiente
+    ~Elefante
+}
+
+¿Cuál de estas es una cantante española? {
+    ~Ariana Grande
+    ~Jennifer Lopez
+    =Eva Amaral
+    ~Alaska
+}
+
+¿A quién se considera el Rey del Pop? {
+    ~Justin Bieber
+    ~Abraham Mateo
+    ~Zayn Malik
+    =Michael Jackson
+}
+
+¿Cómo se llama el actor protagonista de "Solo en casa"? {
+    =Macaulay Culkin
+    ~Keanu Reeves
+    ~Leonardo DiCaprio
+    ~Johnny Deep
+}
+
+¿Cuántas peliculas hubo de Harry Potter? {
+    ~5
+    =8
+    ~9
+    ~7
+}

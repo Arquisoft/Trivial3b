@@ -101,7 +101,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<p>MongoDB es un sistema de base de datos NoSQL orientado a documentos, desarrollado bajo el concepto de código abierto. MongoDB forma parte de la nueva familia de sistemas de base de datos NoSQL. En vez de guardar los datos en tablas como se hace en las base de datos relacionales, MongoDB guarda estructuras de datos en documentos tipo JSON 
 						con un esquema dinámico (MongoDB llama ese formato BSON), haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida. El desarrollo de MongoDB empezó en octubre de 2007 por la compañía de software 10gen. Ahora MongoDB es una base de datos lista para su uso en producción y con muchas características. Esta base de 
 						datos se utiliza mucho en la industria. El código binario está disponible para los sistemas operativos Windows, Linux, OS X y Solaris.</p>
-					 </div>					 
+					 </div>	
+					<div class="container">
+						<img src="images/maven.png" alt="" />							
+						<p>Maven es una herramienta de software para la gestión y construcción de proyectos Java creada por Jason van Zyl, de Sonatype, en 2002. Es similar en funcionalidad a Apache Ant, pero tiene un modelo de configuración de construcción más simple, basado en un formato XML. Estuvo integrado inicialmente dentro del proyecto Jakarta pero ahora ya es 
+						un proyecto de nivel superior de la Apache Software Foundation. Maven utiliza un Project Object Model (POM) para describir el proyecto de software a construir, sus dependencias de otros módulos y componentes externos, y el orden de construcción de los elementos. Viene con objetivos predefinidos para realizar ciertas tareas claramente definidas, 
+						como la compilación del código y su empaquetado. Una característica clave de Maven es que está listo para usar en red. El motor incluido en su núcleo puede dinámicamente descargar plugins de un repositorio, el mismo repositorio que provee acceso a muchas versiones de diferentes proyectos Open Source en Java, de Apache y otras organizaciones y 
+						desarrolladores. Maven provee soporte no sólo para obtener archivos de su repositorio, sino también para subir artefactos al repositorio al final de la construcción de la aplicación, dejándola al acceso de todos los usuarios. Maven está construido usando una arquitectura basada en plugins que permite que utilice cualquier aplicación controlable 
+						a través de la entrada estándar.</p>
+					 </div>	
+					 <div class="container">
+						<img src="images/Travis.png" alt="" />							
+						<p>Travis CI te permite conectar tu repositorio de Github y probar después de cada push que hagas, regenerando el proyecto. Soporta múltiples lenguajes como Clojure, Erlang, Node.js, PHP, Ruby, Python y Java. Una de las ventajas más claras de usar Travis CI es que el entorno de integración continua esta compuesto de multiples runtimes o data stores. 
+						De este modo, podemos probar nuestras librerías o aplicaciones contra distintas configuraciones sin tener que tenerlas instaladas localmente. Tienen varias maquinas virtuales preparadas para cada combinación, allí puedes instalar MySQL o lo que necesites.</p>
+					 </div>	
+					  <div class="container">
+						<img src="images/cucumber.png" alt="" />							
+						<p>Cucumber es una herramienta que da soporte a las BDD (Behaviour-Driver-Development), es decir, da la posibilidad de realizar pruebas basadas en comportamiento. Está desarrollado en Ruby y actualmente soporta múltiples lenguajes. Utiliza el Gherkin que es un lenguaje propio del Cucumber que permite describir el comportamiento del software sin detallar 
+						su implementación. Gherkin sirve para dos propósitos, documentación y pruebas automatizadas.</p>
+					 </div>	
 				<div class="clearfix"> </div>
 				</div>
 			</div>
@@ -164,39 +182,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="ser-grid">
 					<div class="container">						
 						<p>El propósito de este manual es facilitar al usuario el uso de la aplicación y la consulta de la información que se administra en la aplicación Trivial3b. La aplicación, en un primer paso, se encarga de leer ficheros con los 
-						enunciados y respuestas de preguntas, procesas dichas preguntas indicando si hay errores o son correctas y guardarlas un fichero intermedio de salida.<br> 
-						En un segundo paso, se encarga de subir esas preguntas (una vez el operario las haya revisado, si así lo desea) a una base de datos MongoDB.<br>
-						1-Implementación del sistema<br>
-							a)	Requerimientos de hardware:<br>
+						enunciados y respuestas de preguntas, procesar dichas preguntas indicando si hay errores o son correctas y guardarlas en un fichero intermedio de salida.<br>
+						En un segundo paso, se encarga de subir esas preguntas (una vez el operario las haya revisado, si así lo desea) a una base de datos MongoDB.</p>
+						<p><strong>1-Implementación del sistema</strong><br><br>
+							<strong>A)</strong>	Requerimientos de hardware:<br>
 								a.	Ordenador.<br>
-							b)	Requerimientos de software:<br>
+							<strong>B)</strong>	Requerimientos de software:<br>
 								a.	Sistema operativo con Java 1.7+.<br>
-								b.	Una base MongoDB en local (Para usar el guardado en base de datos)<br>
-						2-Ingresando al sistema.<br>
-						Ejecuta la aplicación trivial3b.jar, a través de la ventana de comandos con la orden java –jar trivial3b.jar <modo> <parámetros>.<br>
-						3-Funcionalidad general.<br>
-						La forma de utilizar esta aplicación es la misma que cualquier otra de tipo bash, ésta, en concreto, precisa de al menos tres parámetros para funcionar correctamente. El formato de entrada sería:</p>
-						<pre>Uso: java -jar extract.jar <modo> <parámetros>
-
-Modos:
- - extract: Extrae las preguntas a un fichero de salida
-	 - Parámetros: <entrada> <formato-entrada> <salida> <formato-salida>
-	 Los formatos de entrada son: gift, xml
-	 Los formatos de salida son: json
-
- - upload: Sube las preguntas extraídas a la base de datos
-	 - Parámetros: <entrada> <servidor>
-	 El servidor es de tipo url:puerto
-	 En caso de omisión se supondrá localhost:27017
-</pre>
-<p>El significado de dichos parámetros es el siguiente:<br>
-•	entrada: Ubicación del fichero en el cuál se encuentran las preguntas.<br>
-•	formato-entrada: Formato del fichero de entrada.<br>
-•	fichero-salida: En caso de salida a fichero, para indicar la ruta del fichero de salida.<br>
-•	formato-salida: formato del fichero en el que queremos que la aplicación nos devuelva las preguntas (de momento solo está JSON).<br>
-Una vez ejecutado dicho comando con el primero de los modos, el programa se encarga de generar la salida con el formato correspondiente y de guardarla en un fichero.
-Cuando el usuario lo vea oportuno, con el segundo de los modos es posible guardar los datos de ese fichero en una base de datos MongoDB en formato JSON.
-Si alguna de las preguntas procesadas tiene un formato incorrecto o algún fallo (p ej.: no tiene respuesta correcta) la aplicación generará un mensaje de error e ignorará la pregunta, pero seguirá con el procesamiento del resto de preguntas.</p>
+								b.	Una base MongoDB en local (Para usar el guardado en base de datos)
+						</p>		
+						<p><strong>2-Acceso y funcionalidad del sistema</strong></p>
+						<p>A la aplicación se puede acceder con roles diferentes que se detallaran a continuación.</p>
+							<p><strong>a) Rol de Usuario</strong><br><br>
+							Nada más ejecutar la aplicación apareceremos en esta pantalla en la cual si pulsamos partida rápida nos llevara a la pantalla de login para posteriormente empezar a jugar. 
+							Si pulsamos sobre registrarse nos llevara a una pantalla de registro, en la que un nuevo jugador de nuestra aplicación podrá registrarse en el sistema, esto se hará efectivo 
+							cuando se pulse el botón registrar. Pulsando el botón volver volveremos a la pantalla principal.<br>
+							<img src="images/VentanasPrincipales.jpg" alt="" /><br>
+							Pulsando partida rápida llegaremos a la pantalla de login, donde primero se han de seleccionar el número de jugadores y posteriormente introducir el usuario y contraseña 
+							de todos ellos, si todos los usuarios se encuentran registrados en el sistema pulsando el botón jugar se procederá a la elección del tablero donde seleccionaremos si preferimos 
+							un tablero circular o uno cuadrado.<br>
+							<img src="images/VentanaLogeo.jpg" alt="" /><br>
+							Elijamos el tablero que elijamos la distribución será la misma. Al lado izquierdo se situara el tablero de juego, y al lado derecho en la parte superior el dado y en la inferior los paneles 
+							con los nombres y quesitos de los jugadores activos. Cuando caigamos en un quesito de pregunta nos aparecerá un dialogo como el de la segunda imagen, en el cual la barra superior es el tiempo que tenemos 
+							disponible para contestar la pregunta, y si este se acaba la pregunta se dará como no contestada y pasará el turno al siguiente jugador. Los puntos negros que se observan en la tercera imagen, especifica a 
+							donde podemos movernos una vez tirado el dado.
+							<img src="images/VentanaJuego.jpg" alt="" /><br>							
+							<strong>b) Rol de Administrador</strong><br><br>
+							Como administrador en la pantalla principal podremos pulsar en el archivo estadísticas, lo cual nos llevara a una página como la mostrada en la imagen. Donde logueandonos con una cuenta de administrador e iniciando 
+							sesión podremos ver las estadísticas.</p>
+							<img src="images/VentanaAdmin.jpg" alt="" /></p>
 					 </div>									 
 				<div class="clearfix"> </div>
 				</div>
@@ -243,12 +257,7 @@ Si alguna de las preguntas procesadas tiene un formato incorrecto o algún fallo
 			<td>Jairo</td>
 			<td>López Soto</td>
 			<td>UO218230</td>			
-		</tr>
-		<tr>
-			<td>Cecilia</td>
-			<td>Cueto Tudela</td>
-			<td>UO229678</td>			
-		</tr>	
+		</tr>		
 		<tr>
 			<td>Cristian Javier</td>
 			<td>Santos Navia</td>
