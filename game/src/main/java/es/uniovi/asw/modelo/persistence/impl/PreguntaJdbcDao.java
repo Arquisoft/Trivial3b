@@ -159,4 +159,57 @@ public class PreguntaJdbcDao implements PreguntaDao {
             Jdbc.close(rs, ps);
         }
     }
+
+	@Override
+	public Map<String, Object> getMasAcertada() {
+		PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_MASACERTADA"));
+ 
+
+            rs = ps.executeQuery();
+            Map<String, Object> pregunta;
+            if (rs.next()) {
+
+                pregunta = load(rs);
+
+                return pregunta;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Jdbc.close(rs, ps);
+        }
+	}
+
+	@Override
+	public Map<String, Object> getMasFallada() {
+		PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            ps = con.prepareStatement(Conf.get("SQL_PREGUNTAS_MASFALLADA"));
+
+            rs = ps.executeQuery();
+            Map<String, Object> pregunta;
+            if (rs.next()) {
+
+                pregunta = load(rs);
+
+                return pregunta;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Jdbc.close(rs, ps);
+        }
+	}
 }

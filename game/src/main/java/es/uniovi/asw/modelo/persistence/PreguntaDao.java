@@ -16,4 +16,7 @@ public interface PreguntaDao {
     Map<String, Object> findById(String id);
 
     void insertar(Pregunta pregunta);
+    
+    Map<String, Object> getMasAcertada();
+    Map<String, Object> getMasFallada();
 }

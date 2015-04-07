@@ -16,4 +16,6 @@ public interface JugadorDao {
     void modificarJugadores(Map<String, Object> player);
 
     boolean existeUsuario(String username, String pass, String rol);
+    
+    int getIdByLogin(String login);
 }

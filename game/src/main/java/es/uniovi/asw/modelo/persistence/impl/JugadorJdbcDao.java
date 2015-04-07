@@ -145,4 +145,25 @@ public class JugadorJdbcDao implements JugadorDao {
         }
         return res;
     }
+
+	@Override
+	public int getIdByLogin(String login) {
+		 PreparedStatement ps = null;
+		  ResultSet rs = null;
+	        try {
+	            ps = con.prepareStatement(Conf.get("SQL_FINDBYLOGIN"));
+	            ps.setString(1, login);
+
+	            rs = ps.executeQuery();
+	            if (rs.next()) {
+	                return rs.getInt("ID");
+	            }
+
+	        } catch (SQLException e) {
+	            throw new RuntimeException(e);
+	        } finally {
+	            Jdbc.close(ps);
+	        }
+			return 0;
+	}
 }

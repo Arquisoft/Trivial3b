@@ -69,15 +69,15 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
      * inserta una estadistica
      */
     @Override
-    public void insertar(Map<String, Object> estadistica) {
+    public void insertar(int idJugador, int idPregunta) {
 
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_INSERT"));
-            ps.setInt(1, (Integer) estadistica.get("IDJUGADOR"));
-            ps.setInt(2, (Integer) estadistica.get("IDPREGUNTA"));
-            ps.setInt(3, (Integer) estadistica.get("ACIERTOS"));
-            ps.setInt(4, (Integer) estadistica.get("FALLOS"));
+            ps.setInt(1, idJugador);
+            ps.setInt(2, idPregunta);
+            ps.setInt(3, 0);
+            ps.setInt(4, 0);
 
             ps.executeUpdate();
 

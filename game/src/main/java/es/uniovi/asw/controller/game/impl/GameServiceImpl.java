@@ -14,6 +14,8 @@ import es.uniovi.asw.controller.graph.Graph;
 import es.uniovi.asw.modelo.model.Category;
 import es.uniovi.asw.modelo.model.Player;
 import es.uniovi.asw.modelo.model.Pregunta;
+import es.uniovi.asw.modelo.persistence.EstadisticasJugadorDao;
+import es.uniovi.asw.modelo.persistence.JugadorDao;
 import es.uniovi.asw.modelo.persistence.PersistenceFactory;
 import es.uniovi.asw.modelo.persistence.PreguntaDao;
 import es.uniovi.asw.modelo.persistence.impl.SimplePersistenceFactory;
@@ -142,7 +144,11 @@ public class GameServiceImpl implements GameService {
            
             Player player = getCurrentTurnPlayer();
 
-            // TODO: Almacenar en base de datos
+            //  Almacenar en base de datos estadisticas pregunta
+            
+            EstadisticasJugadorDao ejDao= persistencia.createEstadisticasJugadorDao();
+            JugadorDao jugadorDao=persistencia.createJugadorDao();
+            
             PreguntaDao preguntaDao = persistencia.createPreguntaDao();
             String id = questionGiven.getId();
 
@@ -152,7 +158,22 @@ public class GameServiceImpl implements GameService {
                 pregunta = preguntaDao.findById(id);
                 preguntaDao.guardarResultado(pregunta, true);
             }
-            preguntaDao.guardarResultado(pregunta, true);
+            else
+            	preguntaDao.guardarResultado(pregunta, true);
+            
+            //Almacenar estadisticas jugador 
+            
+            
+            int idJugador= jugadorDao.getIdByLogin(player.getUsername());
+            pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+            if (pregunta == null) {
+               ejDao.insertar(idJugador, Integer.valueOf(id));
+                pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+                ejDao.guardarResultado(pregunta, true);
+            }
+            else 
+            	ejDao.guardarResultado(pregunta, true); 
+         
 
             // Si es una pregunta de quesito, lo añadimos
 
@@ -172,8 +193,11 @@ public class GameServiceImpl implements GameService {
     public void respuestaIncorrecta() {
         if (getCurrentTurnPlayer() != null && diceThrown
                 && questionGiven != null) {
-
-            // TODO: Almacenar en base de datos
+        	Player player = getCurrentTurnPlayer();
+        	
+            //Almacenar en base de datos estadisticas pregunta
+        	 EstadisticasJugadorDao ejDao= persistencia.createEstadisticasJugadorDao();
+             JugadorDao jugadorDao=persistencia.createJugadorDao();
             PreguntaDao preguntaDao = persistencia.createPreguntaDao();
             String id = questionGiven.getId();
 
@@ -183,7 +207,21 @@ public class GameServiceImpl implements GameService {
                 pregunta = preguntaDao.findById(id);
                 preguntaDao.guardarResultado(pregunta, false);
             }
-            preguntaDao.guardarResultado(pregunta, false);
+            else
+            	preguntaDao.guardarResultado(pregunta, false);
+                      
+            //Almacenar estadisticas jugador 
+            
+            
+            int idJugador= jugadorDao.getIdByLogin(player.getUsername());
+            pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+            if (pregunta == null) {
+               ejDao.insertar(idJugador, Integer.valueOf(id));
+                pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+                ejDao.guardarResultado(pregunta, true);
+            }
+            else 
+            	ejDao.guardarResultado(pregunta, true); 
 
             // Pasamos el turno
             nextTurn();
