@@ -21,6 +21,14 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
     public void setConexion(Connection conexion) {
         this.conexion = conexion;
     }
+    
+    public EstadisticasJugadorJdbcDao() {
+        try {
+        	setConexion(Jdbc.getConnection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Carga el resultado de un ResultSet
@@ -30,7 +38,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
         Map<String, Object> estadisticaJugador = new HashMap<String, Object>();
 
         estadisticaJugador.put("IDJUGADOR", rs.getInt("IDJUGADOR"));
-        estadisticaJugador.put("IDPREGUNTA", rs.getInt("IDPREGUNTA"));
+        estadisticaJugador.put("IDPREGUNTA", rs.getString("IDPREGUNTA"));
         estadisticaJugador.put("ACIERTOS", rs.getInt("ACIERTOS"));
         estadisticaJugador.put("FALLOS", rs.getInt("FALLOS"));
 
@@ -69,13 +77,13 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
      * inserta una estadistica
      */
     @Override
-    public void insertar(int idJugador, int idPregunta) {
+    public void insertar(int idJugador, String idPregunta) {
 
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_INSERT"));
             ps.setInt(1, idJugador);
-            ps.setInt(2, idPregunta);
+            ps.setString(2, idPregunta);
             ps.setInt(3, 0);
             ps.setInt(4, 0);
 
@@ -104,7 +112,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
                 ps.setInt(2, 1 + (Integer) estadistica.get("FALLOS"));
             }
 
-            ps.setString(3, (String) estadistica.get("IDJUGADOR"));
+            ps.setInt(3, (Integer) estadistica.get("IDJUGADOR"));
             ps.setString(4, (String) estadistica.get("IDPREGUNTA"));
 
             ps.executeUpdate();
@@ -120,7 +128,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
      * Busca una estadistica por su jugador y pregunta
      */
     @Override
-    public Map<String, Object> findByJyP(int idJugador, int idPregunta) {
+    public Map<String, Object> findByJyP(int idJugador, String idPregunta) {
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -128,7 +136,7 @@ public class EstadisticasJugadorJdbcDao implements EstadisticasJugadorDao {
 
 			ps = conexion.prepareStatement(Conf.get("SQL_ESTADISTICAS_FINDBYJugadorYPregunta"));
             ps.setInt(1, idJugador);
-            ps.setInt(2, idPregunta);
+            ps.setString(2, idPregunta);
 
             rs = ps.executeQuery();
             Map<String, Object> estadistica;

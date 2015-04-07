@@ -12,7 +12,7 @@ public interface EstadisticasJugadorDao {
     void guardarResultado(Map<String, Object> estadistica, boolean acertada);
 
     // Find by Jugador y Pregunta
-    Map<String, Object> findByJyP(int idJugador, int idPregunta);
+    Map<String, Object> findByJyP(int idJugador, String idPregunta);
 
-	void insertar(int idJugador, int idPregunta);
+	void insertar(int idJugador, String idPregunta);
 }

@@ -165,10 +165,10 @@ public class GameServiceImpl implements GameService {
             
             
             int idJugador= jugadorDao.getIdByLogin(player.getUsername());
-            pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+            pregunta = ejDao.findByJyP(idJugador, id);
             if (pregunta == null) {
-               ejDao.insertar(idJugador, Integer.valueOf(id));
-                pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+                ejDao.insertar(idJugador, id);
+                pregunta = ejDao.findByJyP(idJugador, id);
                 ejDao.guardarResultado(pregunta, true);
             }
             else 
@@ -214,14 +214,13 @@ public class GameServiceImpl implements GameService {
             
             
             int idJugador= jugadorDao.getIdByLogin(player.getUsername());
-            pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
+            pregunta = ejDao.findByJyP(idJugador, id);
             if (pregunta == null) {
-               ejDao.insertar(idJugador, Integer.valueOf(id));
-                pregunta = ejDao.findByJyP(idJugador, Integer.valueOf(id));
-                ejDao.guardarResultado(pregunta, true);
-            }
-            else 
-            	ejDao.guardarResultado(pregunta, true); 
+                ejDao.insertar(idJugador, id);
+                pregunta = ejDao.findByJyP(idJugador, id);
+                ejDao.guardarResultado(pregunta, false);
+            } else
+                ejDao.guardarResultado(pregunta, false);
 
             // Pasamos el turno
             nextTurn();

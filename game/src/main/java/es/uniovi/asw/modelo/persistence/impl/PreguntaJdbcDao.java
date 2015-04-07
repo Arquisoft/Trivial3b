@@ -27,7 +27,6 @@ public class PreguntaJdbcDao implements PreguntaDao {
         try {
             setConnection(Jdbc.getConnection());
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -38,8 +37,9 @@ public class PreguntaJdbcDao implements PreguntaDao {
     private Map<String, Object> load(ResultSet rs) throws SQLException {
 
         Map<String, Object> pregunta = new HashMap<String, Object>();
-
+       
         pregunta.put("ID", rs.getInt("ID"));
+        pregunta.put("IDPREGUNTA", rs.getString("IDPREGUNTA"));
         pregunta.put("CATEGORIA", rs.getString("CATEGORIA"));
         pregunta.put("ACIERTOS", rs.getInt("ACIERTOS"));
         pregunta.put("FALLOS", rs.getInt("FALLOS"));
