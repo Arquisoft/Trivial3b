@@ -9,13 +9,15 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 
 import es.uniovi.asw.modelo.model.Category;
 import es.uniovi.asw.modelo.model.Pregunta;
 
 public class MongoQuestions {
-    private static final String DEFAULT_MONGO = "localhost:27017";
+    
+    private static final String DEFAULT_MONGO = "mongodb://admin:p4!ze&09@ds037571.mongolab.com:37571/trivial3b-preguntas";
     private String server;
 
     public MongoQuestions() {
@@ -29,10 +31,11 @@ public class MongoQuestions {
     public Pregunta getQuestion(Category categ) {
         try {
             // Creamos la conexion
-            MongoClient mongo = new MongoClient(server);
+            MongoClientURI uri = new MongoClientURI(server);
+            MongoClient mongo = new MongoClient(uri);
 
             // Obtenemos la base de datos y la coleccion
-            DB db = mongo.getDB("trivial");
+            DB db = mongo.getDB(uri.getDatabase());
             DBCollection collection = db.getCollection("questions");
 
             // Creamos un objeto para buscar por categoría
