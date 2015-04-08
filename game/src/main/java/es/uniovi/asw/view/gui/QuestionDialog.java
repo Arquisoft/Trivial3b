@@ -184,7 +184,6 @@ public class QuestionDialog extends JDialog {
 		game.setEnabled(true);
 		dispose();
 		game.recargarQuesitos(category);
-
 		JOptionPane.showMessageDialog(game,
 				"Respuesta correcta, tira de nuevo!");
 	}

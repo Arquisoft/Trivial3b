@@ -47,7 +47,7 @@ public class Player {
      */
     public boolean hasAllQuesitos() {
         for (Category cat : Category.values()) {
-            if (!quesitos.containsKey(cat)) {
+            if (!quesitos.containsKey(cat) && !cat.equals(Category.FINAL)) {
                 return false;
             }
         }

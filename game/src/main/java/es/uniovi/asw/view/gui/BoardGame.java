@@ -435,10 +435,14 @@ public class BoardGame extends JFrame {
 
 			List<Point> temp = new ArrayList<Point>();
 			String[] puntos = linea.split(",");
-			temp.add(new Point(Integer.parseInt(puntos[0]), Integer.parseInt(puntos[1])));
-			temp.add(new Point(Integer.parseInt(puntos[2]), Integer.parseInt(puntos[3])));
-			temp.add(new Point(Integer.parseInt(puntos[4]), Integer.parseInt(puntos[5])));
-			temp.add(new Point(Integer.parseInt(puntos[6]), Integer.parseInt(puntos[7])));
+			temp.add(new Point(Integer.parseInt(puntos[0]), Integer
+					.parseInt(puntos[1])));
+			temp.add(new Point(Integer.parseInt(puntos[2]), Integer
+					.parseInt(puntos[3])));
+			temp.add(new Point(Integer.parseInt(puntos[4]), Integer
+					.parseInt(puntos[5])));
+			temp.add(new Point(Integer.parseInt(puntos[6]), Integer
+					.parseInt(puntos[7])));
 			coordenadas.put(++i, temp);
 		}
 	}
@@ -599,18 +603,20 @@ public class BoardGame extends JFrame {
 	 */
 	public void cargaTablero(int opcion) {
 		switch (opcion) {
-			case CIRCULAR:
-				cargaBotones("botonesCircular.txt");
-				lblNewLabel.setIcon(new ImageIcon(FileUtil.getImage("images/trivialCirculo.jpg")));
-				addBotones(coordenadas);
-				service = GameFactory.newGameService(1);
-				break;
-			case CUADRADO:
-				cargaBotones("botonesCuadrado.txt");
-				lblNewLabel.setIcon(new ImageIcon(FileUtil.getImage("images/trivialCuadrado.jpg")));
-				addBotones(coordenadas);
-				service = GameFactory.newGameService(2);
-				break;
+		case CIRCULAR:
+			cargaBotones("botonesCircular.txt");
+			lblNewLabel.setIcon(new ImageIcon(FileUtil
+					.getImage("images/trivialCirculo.jpg")));
+			addBotones(coordenadas);
+			service = GameFactory.newGameService(1);
+			break;
+		case CUADRADO:
+			cargaBotones("botonesCuadrado.txt");
+			lblNewLabel.setIcon(new ImageIcon(FileUtil
+					.getImage("images/trivialCuadrado.jpg")));
+			addBotones(coordenadas);
+			service = GameFactory.newGameService(2);
+			break;
 		}
 	}
 
@@ -685,21 +691,35 @@ public class BoardGame extends JFrame {
 		// Pinta las posiciones de los jugadores en el tablero
 		pintarPosiciones();
 		if (service.getCasilla(i).getTipoCasilla()
-				.equals(TipoCasilla.TIRADAEXTRA)) {
+				.equals(TipoCasilla.TIRADAEXTRA)
+				&& (service.getCurrentTurnPlayer().getPosition().getCategoria() == null
+				|| !service.getCurrentTurnPlayer().hasAllQuesitos())) {
 			// Es una pregunta de volver a tirar y
 			// volvemos a activar el dado
 			dado.setEnabled(true);
 			JOptionPane.showMessageDialog(this, "Vuelve a tirar");
 		} else {
-			dado.setEnabled(true);
-			// Sacamos el dialogo con una nueva pregunta
-			JDialog dialogo = new QuestionDialog(this);
-			this.setEnabled(false);
-			dialogo.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			dialogo.setSize(800, 200);
-			dialogo.setLocationRelativeTo(this);
-			dialogo.setModal(true);
-			dialogo.setVisible(true);
+			if (service.getCurrentTurnPlayer().getPosition().getCategoria()
+					.equals(Category.FINAL)
+					&& service.getCurrentTurnPlayer().hasAllQuesitos()) {
+				JOptionPane.showMessageDialog(this, service
+						.getCurrentTurnPlayer().getUsername()
+						+ " "
+						+ "ha ganado la partida");
+				Principal principal = new Principal();
+				principal.setVisible(true);
+				dispose();
+			} else {
+				dado.setEnabled(true);
+				// Sacamos el dialogo con una nueva pregunta
+				JDialog dialogo = new QuestionDialog(this);
+				this.setEnabled(false);
+				dialogo.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+				dialogo.setSize(800, 200);
+				dialogo.setLocationRelativeTo(this);
+				dialogo.setModal(true);
+				dialogo.setVisible(true);
+			}
 		}
 	}
 
@@ -775,7 +795,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura1() {
 		if (figura1 == null) {
 			figura1 = new JLabel("");
-			figura1.setIcon(new ImageIcon(FileUtil.getImage("images/cienciasbn.png")));
+			figura1.setIcon(new ImageIcon(FileUtil
+					.getImage("images/cienciasbn.png")));
 		}
 		return figura1;
 	}
@@ -783,7 +804,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura2() {
 		if (figura2 == null) {
 			figura2 = new JLabel("");
-			figura2.setIcon(new ImageIcon(FileUtil.getImage("images/deportesbn.png")));
+			figura2.setIcon(new ImageIcon(FileUtil
+					.getImage("images/deportesbn.png")));
 		}
 		return figura2;
 	}
@@ -791,7 +813,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura3() {
 		if (figura3 == null) {
 			figura3 = new JLabel("");
-			figura3.setIcon(new ImageIcon(FileUtil.getImage("images/entretenimientobn.png")));
+			figura3.setIcon(new ImageIcon(FileUtil
+					.getImage("images/entretenimientobn.png")));
 		}
 		return figura3;
 	}
@@ -799,7 +822,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura4() {
 		if (figura4 == null) {
 			figura4 = new JLabel("");
-			figura4.setIcon(new ImageIcon(FileUtil.getImage("images/geografiabn.png")));
+			figura4.setIcon(new ImageIcon(FileUtil
+					.getImage("images/geografiabn.png")));
 		}
 		return figura4;
 	}
@@ -807,7 +831,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura5() {
 		if (figura5 == null) {
 			figura5 = new JLabel("");
-			figura5.setIcon(new ImageIcon(FileUtil.getImage("images/historiabn.png")));
+			figura5.setIcon(new ImageIcon(FileUtil
+					.getImage("images/historiabn.png")));
 		}
 		return figura5;
 	}
@@ -815,7 +840,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura6() {
 		if (figura6 == null) {
 			figura6 = new JLabel("");
-			figura6.setIcon(new ImageIcon(FileUtil.getImage("images/literaturabn.png")));
+			figura6.setIcon(new ImageIcon(FileUtil
+					.getImage("images/literaturabn.png")));
 		}
 		return figura6;
 	}
@@ -838,7 +864,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_6() {
 		if (figura7 == null) {
 			figura7 = new JLabel("");
-			figura7.setIcon(new ImageIcon(FileUtil.getImage("images/cienciasbn.png")));
+			figura7.setIcon(new ImageIcon(FileUtil
+					.getImage("images/cienciasbn.png")));
 		}
 		return figura7;
 	}
@@ -846,7 +873,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_1_1() {
 		if (figura8 == null) {
 			figura8 = new JLabel("");
-			figura8.setIcon(new ImageIcon(FileUtil.getImage("images/deportesbn.png")));
+			figura8.setIcon(new ImageIcon(FileUtil
+					.getImage("images/deportesbn.png")));
 		}
 		return figura8;
 	}
@@ -854,7 +882,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_2_1() {
 		if (figura9 == null) {
 			figura9 = new JLabel("");
-			figura9.setIcon(new ImageIcon(FileUtil.getImage("images/entretenimientobn.png")));
+			figura9.setIcon(new ImageIcon(FileUtil
+					.getImage("images/entretenimientobn.png")));
 		}
 		return figura9;
 	}
@@ -862,7 +891,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_3_1() {
 		if (figura10 == null) {
 			figura10 = new JLabel("");
-			figura10.setIcon(new ImageIcon(FileUtil.getImage("images/geografiabn.png")));
+			figura10.setIcon(new ImageIcon(FileUtil
+					.getImage("images/geografiabn.png")));
 		}
 		return figura10;
 	}
@@ -870,7 +900,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_4_1() {
 		if (figura11 == null) {
 			figura11 = new JLabel("");
-			figura11.setIcon(new ImageIcon(FileUtil.getImage("images/historiabn.png")));
+			figura11.setIcon(new ImageIcon(FileUtil
+					.getImage("images/historiabn.png")));
 		}
 		return figura11;
 	}
@@ -878,32 +909,34 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_5_1() {
 		if (figura12 == null) {
 			figura12 = new JLabel("");
-			figura12.setIcon(new ImageIcon(FileUtil.getImage("images/literaturabn.png")));
+			figura12.setIcon(new ImageIcon(FileUtil
+					.getImage("images/literaturabn.png")));
 		}
 		return figura12;
 	}
 
 	public ImageIcon getImage(int numero) {
 		switch (numero) {
-			case 0:
-				return new ImageIcon(FileUtil.getImage("images/ciencias.png"));
-			case 1:
-				return new ImageIcon(FileUtil.getImage("images/deportes.png"));
+		case 0:
+			return new ImageIcon(FileUtil.getImage("images/ciencias.png"));
+		case 1:
+			return new ImageIcon(FileUtil.getImage("images/deportes.png"));
 
-			case 2:
-				return new ImageIcon(FileUtil.getImage("images/entretenimiento.png"));
+		case 2:
+			return new ImageIcon(
+					FileUtil.getImage("images/entretenimiento.png"));
 
-			case 3:
-				return new ImageIcon(FileUtil.getImage("images/geografia.png"));
+		case 3:
+			return new ImageIcon(FileUtil.getImage("images/geografia.png"));
 
-			case 4:
-				return new ImageIcon(FileUtil.getImage("images/historia.png"));
+		case 4:
+			return new ImageIcon(FileUtil.getImage("images/historia.png"));
 
-			case 5:
-				return new ImageIcon(FileUtil.getImage("images/literatura.png"));
+		case 5:
+			return new ImageIcon(FileUtil.getImage("images/literatura.png"));
 
-			default:
-				return new ImageIcon(FileUtil.getImage("images/literatura.png"));
+		default:
+			return new ImageIcon(FileUtil.getImage("images/literatura.png"));
 
 		}
 	}
@@ -926,7 +959,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura13() {
 		if (figura13 == null) {
 			figura13 = new JLabel("");
-			figura13.setIcon(new ImageIcon(FileUtil.getImage("images/cienciasbn.png")));
+			figura13.setIcon(new ImageIcon(FileUtil
+					.getImage("images/cienciasbn.png")));
 		}
 		return figura13;
 	}
@@ -934,7 +968,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura14() {
 		if (figura14 == null) {
 			figura14 = new JLabel("");
-			figura14.setIcon(new ImageIcon(FileUtil.getImage("images/deportesbn.png")));
+			figura14.setIcon(new ImageIcon(FileUtil
+					.getImage("images/deportesbn.png")));
 		}
 		return figura14;
 	}
@@ -942,7 +977,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura15() {
 		if (figura15 == null) {
 			figura15 = new JLabel("");
-			figura15.setIcon(new ImageIcon(FileUtil.getImage("images/entretenimientobn.png")));
+			figura15.setIcon(new ImageIcon(FileUtil
+					.getImage("images/entretenimientobn.png")));
 		}
 		return figura15;
 	}
@@ -950,7 +986,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura16() {
 		if (figura16 == null) {
 			figura16 = new JLabel("");
-			figura16.setIcon(new ImageIcon(FileUtil.getImage("images/geografiabn.png")));
+			figura16.setIcon(new ImageIcon(FileUtil
+					.getImage("images/geografiabn.png")));
 		}
 		return figura16;
 	}
@@ -958,7 +995,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura17() {
 		if (figura17 == null) {
 			figura17 = new JLabel("");
-			figura17.setIcon(new ImageIcon(FileUtil.getImage("images/historiabn.png")));
+			figura17.setIcon(new ImageIcon(FileUtil
+					.getImage("images/historiabn.png")));
 		}
 		return figura17;
 	}
@@ -966,7 +1004,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_6_1() {
 		if (figura18 == null) {
 			figura18 = new JLabel("");
-			figura18.setIcon(new ImageIcon(FileUtil.getImage("images/literaturabn.png")));
+			figura18.setIcon(new ImageIcon(FileUtil
+					.getImage("images/literaturabn.png")));
 		}
 		return figura18;
 	}
@@ -989,7 +1028,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura19() {
 		if (figura19 == null) {
 			figura19 = new JLabel("");
-			figura19.setIcon(new ImageIcon(FileUtil.getImage("images/cienciasbn.png")));
+			figura19.setIcon(new ImageIcon(FileUtil
+					.getImage("images/cienciasbn.png")));
 		}
 		return figura19;
 	}
@@ -997,7 +1037,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura20() {
 		if (figura20 == null) {
 			figura20 = new JLabel("");
-			figura20.setIcon(new ImageIcon(FileUtil.getImage("images/deportesbn.png")));
+			figura20.setIcon(new ImageIcon(FileUtil
+					.getImage("images/deportesbn.png")));
 		}
 		return figura20;
 	}
@@ -1005,7 +1046,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura21() {
 		if (figura21 == null) {
 			figura21 = new JLabel("");
-			figura21.setIcon(new ImageIcon(FileUtil.getImage("images/entretenimientobn.png")));
+			figura21.setIcon(new ImageIcon(FileUtil
+					.getImage("images/entretenimientobn.png")));
 		}
 		return figura21;
 	}
@@ -1013,7 +1055,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura22() {
 		if (figura22 == null) {
 			figura22 = new JLabel("");
-			figura22.setIcon(new ImageIcon(FileUtil.getImage("images/geografiabn.png")));
+			figura22.setIcon(new ImageIcon(FileUtil
+					.getImage("images/geografiabn.png")));
 		}
 		return figura22;
 	}
@@ -1021,7 +1064,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura23() {
 		if (figura23 == null) {
 			figura23 = new JLabel("");
-			figura23.setIcon(new ImageIcon(FileUtil.getImage("images/historiabn.png")));
+			figura23.setIcon(new ImageIcon(FileUtil
+					.getImage("images/historiabn.png")));
 		}
 		return figura23;
 	}
@@ -1029,7 +1073,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_6_2() {
 		if (figura24 == null) {
 			figura24 = new JLabel("");
-			figura24.setIcon(new ImageIcon(FileUtil.getImage("images/literaturabn.png")));
+			figura24.setIcon(new ImageIcon(FileUtil
+					.getImage("images/literaturabn.png")));
 		}
 		return figura24;
 	}
@@ -1052,7 +1097,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura25() {
 		if (figura25 == null) {
 			figura25 = new JLabel("");
-			figura25.setIcon(new ImageIcon(FileUtil.getImage("images/cienciasbn.png")));
+			figura25.setIcon(new ImageIcon(FileUtil
+					.getImage("images/cienciasbn.png")));
 		}
 		return figura25;
 	}
@@ -1060,7 +1106,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura26() {
 		if (figura26 == null) {
 			figura26 = new JLabel("");
-			figura26.setIcon(new ImageIcon(FileUtil.getImage("images/deportesbn.png")));
+			figura26.setIcon(new ImageIcon(FileUtil
+					.getImage("images/deportesbn.png")));
 		}
 		return figura26;
 	}
@@ -1068,7 +1115,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura27() {
 		if (figura27 == null) {
 			figura27 = new JLabel("");
-			figura27.setIcon(new ImageIcon(FileUtil.getImage("images/entretenimientobn.png")));
+			figura27.setIcon(new ImageIcon(FileUtil
+					.getImage("images/entretenimientobn.png")));
 		}
 		return figura27;
 	}
@@ -1076,7 +1124,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura28() {
 		if (figura28 == null) {
 			figura28 = new JLabel("");
-			figura28.setIcon(new ImageIcon(FileUtil.getImage("images/geografiabn.png")));
+			figura28.setIcon(new ImageIcon(FileUtil
+					.getImage("images/geografiabn.png")));
 		}
 		return figura28;
 	}
@@ -1084,7 +1133,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura29() {
 		if (figura29 == null) {
 			figura29 = new JLabel("");
-			figura29.setIcon(new ImageIcon(FileUtil.getImage("images/historiabn.png")));
+			figura29.setIcon(new ImageIcon(FileUtil
+					.getImage("images/historiabn.png")));
 		}
 		return figura29;
 	}
@@ -1092,7 +1142,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_6_3() {
 		if (figura30 == null) {
 			figura30 = new JLabel("");
-			figura30.setIcon(new ImageIcon(FileUtil.getImage("images/literaturabn.png")));
+			figura30.setIcon(new ImageIcon(FileUtil
+					.getImage("images/literaturabn.png")));
 		}
 		return figura30;
 	}
@@ -1115,7 +1166,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura31() {
 		if (figura31 == null) {
 			figura31 = new JLabel("");
-			figura31.setIcon(new ImageIcon(FileUtil.getImage("images/cienciasbn.png")));
+			figura31.setIcon(new ImageIcon(FileUtil
+					.getImage("images/cienciasbn.png")));
 		}
 		return figura31;
 	}
@@ -1123,7 +1175,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura32() {
 		if (figura32 == null) {
 			figura32 = new JLabel("");
-			figura32.setIcon(new ImageIcon(FileUtil.getImage("images/deportesbn.png")));
+			figura32.setIcon(new ImageIcon(FileUtil
+					.getImage("images/deportesbn.png")));
 		}
 		return figura32;
 	}
@@ -1131,7 +1184,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura33() {
 		if (figura33 == null) {
 			figura33 = new JLabel("");
-			figura33.setIcon(new ImageIcon(FileUtil.getImage("images/entretenimientobn.png")));
+			figura33.setIcon(new ImageIcon(FileUtil
+					.getImage("images/entretenimientobn.png")));
 		}
 		return figura33;
 	}
@@ -1139,7 +1193,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura34() {
 		if (figura34 == null) {
 			figura34 = new JLabel("");
-			figura34.setIcon(new ImageIcon(FileUtil.getImage("images/geografiabn.png")));
+			figura34.setIcon(new ImageIcon(FileUtil
+					.getImage("images/geografiabn.png")));
 		}
 		return figura34;
 	}
@@ -1147,7 +1202,8 @@ public class BoardGame extends JFrame {
 	private JLabel getFigura35() {
 		if (figura35 == null) {
 			figura35 = new JLabel("");
-			figura35.setIcon(new ImageIcon(FileUtil.getImage("images/historiabn.png")));
+			figura35.setIcon(new ImageIcon(FileUtil
+					.getImage("images/historiabn.png")));
 		}
 		return figura35;
 	}
@@ -1155,7 +1211,8 @@ public class BoardGame extends JFrame {
 	private JLabel getLabel_6_4() {
 		if (figura36 == null) {
 			figura36 = new JLabel("");
-			figura36.setIcon(new ImageIcon(FileUtil.getImage("images/literaturabn.png")));
+			figura36.setIcon(new ImageIcon(FileUtil
+					.getImage("images/literaturabn.png")));
 		}
 		return figura36;
 	}
