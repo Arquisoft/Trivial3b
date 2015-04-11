@@ -28,3 +28,12 @@ local.properties
 *.log
 localDB.properties
 *.iml
+
+# Play
+logs
+project/project
+project/target
+.history
+dist
+out
+RUNNING_PID
