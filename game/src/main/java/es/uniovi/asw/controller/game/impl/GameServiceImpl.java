@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import es.uniovi.asw.controller.game.Casilla;
 import es.uniovi.asw.controller.game.GameService;
 import es.uniovi.asw.controller.game.Tablero;
@@ -39,6 +41,8 @@ public class GameServiceImpl implements GameService {
     private Pregunta questionGiven;
 
     private Player winner;
+    
+    private boolean saveStats = true;
 
     // factory de la bd para introducir las estadisticas
     private PersistenceFactory persistencia = new SimplePersistenceFactory();
@@ -141,42 +145,13 @@ public class GameServiceImpl implements GameService {
     public void respuestaCorrecta() {
         if (getCurrentTurnPlayer() != null && diceThrown
                 && questionGiven != null) {
-           
+
             Player player = getCurrentTurnPlayer();
 
-            //  Almacenar en base de datos estadisticas pregunta
-            
-            EstadisticasJugadorDao ejDao= persistencia.createEstadisticasJugadorDao();
-            JugadorDao jugadorDao=persistencia.createJugadorDao();
-            
-            PreguntaDao preguntaDao = persistencia.createPreguntaDao();
-            String id = questionGiven.getId();
-
-            Map<String, Object> pregunta = preguntaDao.findById(id);
-            if (pregunta == null) {
-                preguntaDao.insertar(questionGiven);
-                pregunta = preguntaDao.findById(id);
-                preguntaDao.guardarResultado(pregunta, true);
-            }
-            else
-            	preguntaDao.guardarResultado(pregunta, true);
-            
-            //Almacenar estadisticas jugador 
-            
-            
-            int idJugador= jugadorDao.getIdByLogin(player.getUsername());
-            pregunta = ejDao.findByJyP(idJugador, id);
-            if (pregunta == null) {
-                ejDao.insertar(idJugador, id);
-                pregunta = ejDao.findByJyP(idJugador, id);
-                ejDao.guardarResultado(pregunta, true);
-            }
-            else 
-            	ejDao.guardarResultado(pregunta, true); 
-         
+            // Guardar estadisticas en segundo plano
+            guardaEstadisticas(true, player.getUsername(), questionGiven);
 
             // Si es una pregunta de quesito, lo añadimos
-
             if (player.getPosition().getTipoCasilla().equals(TipoCasilla.QUESITO)) {
                 player.addQuesito(player.getPosition().getCategoria());
             }
@@ -189,38 +164,57 @@ public class GameServiceImpl implements GameService {
         }
     }
 
+    private void guardaEstadisticas(final boolean resultado, final String user,
+            final Pregunta question) {
+        if (saveStats) {
+            try {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Almacenar en base de datos estadisticas pregunta
+                        EstadisticasJugadorDao ejDao = persistencia.createEstadisticasJugadorDao();
+                        JugadorDao jugadorDao = persistencia.createJugadorDao();
+                        PreguntaDao preguntaDao = persistencia.createPreguntaDao();
+                        String id = question.getId();
+
+                        Map<String, Object> pregunta = preguntaDao.findById(id);
+                        if (pregunta == null) {
+                            preguntaDao.insertar(question);
+                            pregunta = preguntaDao.findById(id);
+                            preguntaDao.guardarResultado(pregunta, resultado);
+                        } else
+                            preguntaDao.guardarResultado(pregunta, resultado);
+
+                        // Almacenar estadisticas jugador
+                        int idJugador = jugadorDao.getIdByLogin(user);
+                        pregunta = ejDao.findByJyP(idJugador, id);
+                        if (pregunta == null) {
+                            ejDao.insertar(idJugador, id);
+                            pregunta = ejDao.findByJyP(idJugador, id);
+                            ejDao.guardarResultado(pregunta, resultado);
+                        } else
+                            ejDao.guardarResultado(pregunta, resultado);
+                    }
+                }).start();
+            } catch (Exception e) {
+                saveStats = false;
+                JOptionPane.showMessageDialog(null,
+                        "Error al guardar las estadisticas, "
+                                + "se han desabilitado durante esta partida");
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void respuestaIncorrecta() {
         if (getCurrentTurnPlayer() != null && diceThrown
                 && questionGiven != null) {
-        	Player player = getCurrentTurnPlayer();
-        	
-            //Almacenar en base de datos estadisticas pregunta
-        	 EstadisticasJugadorDao ejDao= persistencia.createEstadisticasJugadorDao();
-             JugadorDao jugadorDao=persistencia.createJugadorDao();
-            PreguntaDao preguntaDao = persistencia.createPreguntaDao();
-            String id = questionGiven.getId();
 
-            Map<String, Object> pregunta = preguntaDao.findById(id);
-            if (pregunta == null) {
-                preguntaDao.insertar(questionGiven);
-                pregunta = preguntaDao.findById(id);
-                preguntaDao.guardarResultado(pregunta, false);
-            }
-            else
-            	preguntaDao.guardarResultado(pregunta, false);
-                      
-            //Almacenar estadisticas jugador 
-            
-            
-            int idJugador= jugadorDao.getIdByLogin(player.getUsername());
-            pregunta = ejDao.findByJyP(idJugador, id);
-            if (pregunta == null) {
-                ejDao.insertar(idJugador, id);
-                pregunta = ejDao.findByJyP(idJugador, id);
-                ejDao.guardarResultado(pregunta, false);
-            } else
-                ejDao.guardarResultado(pregunta, false);
+            Player player = getCurrentTurnPlayer();
+
+            // Guardar estadisticas en segundo plano
+            guardaEstadisticas(true, player.getUsername(), questionGiven);
 
             // Pasamos el turno
             nextTurn();

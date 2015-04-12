@@ -68,8 +68,7 @@ public class Extractor {
         System.out.println("\t - Parámetros: <entrada> <servidor>");
 
         System.out.println("\t El servidor es de tipo url:puerto");
-        System.out.println("\t En caso de omisión se supondrá localhost:27017");
-
+        System.out.println("\t En caso de omisión se supondrá el servidor remoto");
     }
 
     public String extract(String formatoEntrada, String entrada,

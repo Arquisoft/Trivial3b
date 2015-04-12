@@ -1,1 +1,0 @@
-java -classpath ../libs/hsqldb/hsqldb/1.0/hsqldb-1.0.jar org.hsqldb.util.DatabaseManagerSwing -url jdbc:hsqldb:hsql://localhost/localDB -driver org.hsqldb.jdbcDriver

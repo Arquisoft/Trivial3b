@@ -10,6 +10,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.DuplicateKeyException;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.util.JSON;
 
@@ -35,23 +36,26 @@ import com.mongodb.util.JSON;
  */
 public class MongoUpload implements Uploader {
 
-    private static final String DEFAULT_MONGO = "localhost:27017";
-    private String server = DEFAULT_MONGO;
+    private static final String DEFAULT_MONGO = "mongodb://user:av65~w@ds037571.mongolab.com:37571/trivial3b-preguntas";
+    private String server;
+
+    public MongoUpload() {
+        this(DEFAULT_MONGO);
+    }
 
     public MongoUpload(String server) {
-        if (server != null) {
-            this.server = server;
-        }
+        this.server = server;
     }
 
     @Override
     public void upload(String content) {
         try {
             // Creamos la conexion
-            MongoClient mongo = new MongoClient(server);
+            MongoClientURI uri = new MongoClientURI(server);
+            MongoClient mongo = new MongoClient(uri);
 
             // Obtenemos la base de datos y la coleccion
-            DB db = mongo.getDB("trivial");
+            DB db = mongo.getDB(uri.getDatabase());
             DBCollection collection = db.getCollection("questions");
 
             // Creamos un indice para que no halla preguntas repetidas
