@@ -1,0 +1,28 @@
+.estrecho {
+	margin-left: 35%;
+	margin-right: 35%;
+}
+
+.primerElemento {
+	margin-top: 5em;
+}
+
+.loginCentrado {
+	margin-top: 10em;
+}
+
+.margenIzq {
+	margin-left: 1em;
+}
+
+.margenInferior {
+	margin-bottom: 2em;
+}
+
+.filtros {
+	margin-top: 7.2em;
+}
+
+.tablalink { 
+	cursor: pointer; 
+}
