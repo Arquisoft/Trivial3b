@@ -9,5 +9,5 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 #Ejemplo para crear y obtener un usuario 
-GET     /user/{id}            Application.getUser
-POST    /user/                Application.createUser
+#GET     /user/{id}            Application.getUser
+#POST    /user/                Application.createUser
