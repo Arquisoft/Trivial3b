@@ -1,6 +1,7 @@
 package models;
 
 import game.Casilla;
+import game.Category;
 
 import java.util.Collections;
 import java.util.EnumMap;

@@ -5,6 +5,7 @@
 
 create table estadistica (
   id                        bigint not null,
+  usuario                   varchar(255),
   question_id               integer,
   aciertos                  integer,
   fallos                    integer,
@@ -17,9 +18,16 @@ create table player (
   constraint pk_player primary key (id))
 ;
 
+create table pregunta (
+  id                        bigint not null,
+  constraint pk_pregunta primary key (id))
+;
+
 create sequence estadistica_seq;
 
 create sequence player_seq;
+
+create sequence pregunta_seq;
 
 
 
@@ -32,9 +40,13 @@ drop table if exists estadistica;
 
 drop table if exists player;
 
+drop table if exists pregunta;
+
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists estadistica_seq;
 
 drop sequence if exists player_seq;
+
+drop sequence if exists pregunta_seq;
 
