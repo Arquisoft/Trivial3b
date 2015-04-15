@@ -1,0 +1,43 @@
+@(form: Form[Application.Login])
+
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>Inicie sesión</title>
+	
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+  </head>
+<body>
+	
+	<div class="container primerElemento">
+	@helper.form(routes.Application.authenticate, 'class -> "estrecho") {
+   		
+   		@if(form.hasGlobalErrors) {
+   			<div class="alert alert-danger">@form.globalError.message</div>
+		}
+   		
+   		<h2 class="form-signin-heading">Bienvenido a Trivial3b</h2>
+   		
+   		<label for="id" class="sr-only">Identificador de usuario</label>
+   		<input type="text" id="id" name="id" class="form-control" placeholder="Identificador de usuario" value="@form("id").value" required autofocus>
+ 		
+ 		<label for="pass" class="sr-only">Contraseña</label>
+    	<input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña" required>
+    	
+    	<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+    	<br>
+        <a href="/register">
+   		  <button class="btn btn-link center-block" type="button" ">Registrarse</button>
+		</a>
+	}
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"/>
+</body>
+</html>

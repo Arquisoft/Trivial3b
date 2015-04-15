@@ -1,30 +1,45 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-
-import views.html.*;
+import models.Usuario;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.login;
 
 public class Application extends Controller {
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
+    public static Result showLogin() {
+        return ok(login.render(Form.form(Login.class)));
     }
     
+    public static Result showRegister() {
+        return ok(register.render());
+    }
     
-  /** 
-   * Ejemplo de los metodos referenciados en routes
-   *  public static void createUser(User newUser) {
-        newUser.save();
-        user(newUser.id);
+    public static Result showIndex() {
+        return ok(index.render());
     }
-
-    public static void updateUser(Long id, User user) {
-        User dbUser = User.findById(id);
-        dbUser.updateDetails(user); // some model logic you would write to do a safe merge
-        dbUser.save();
-        user(id);
+    
+    public static Result authenticate() {
+        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
+        if (loginForm.hasErrors()) {
+            return badRequest(login.render(loginForm));
+        } else {
+            session().clear();
+            session("id", loginForm.get().id);
+            return redirect(routes.Application.showIndex());
+        }
     }
-    */
-
+        
+    public static class Login {
+        public String id;
+        public String password;
+        
+        public String validate() {
+            if (Usuario.authenticate(id, password) == null) {
+              return "Usuario o contraseña inválida";
+            }
+            return null;
+        }
+    }
 }
