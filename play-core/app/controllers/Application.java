@@ -1,6 +1,6 @@
 package controllers;
 
-import models.Usuario;
+import models.Player;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -37,7 +37,7 @@ public class Application extends Controller {
     	if(registerForm.hasErrors()) {
     		return badRequest(register.render(registerForm));
     	} else {
-    		Usuario.addUser(new Usuario(registerForm.get().id, registerForm.get().password));
+    		Player.addUser(new Player(registerForm.get().id, registerForm.get().password));
     		return redirect(routes.Application.showLogin());
     	}
     }
@@ -52,7 +52,8 @@ public class Application extends Controller {
         public String password;
         
         public String validate() {
-            if (Usuario.authenticate(id, password) == null) {
+        	System.out.println(password);
+            if (Player.authenticate(id, password) == null) {
               return "Usuario o contraseña inválida";
             }
             return null;
@@ -67,7 +68,7 @@ public class Application extends Controller {
         public String validate() {
             if (!password.equals(password2)) {
             	return "Las contraseñas deben coincidir";
-            } else if (Usuario.get(id) != null) {
+            } else if (Player.get(id) != null) {
             	return "El ID de usuario introducido ya existe";
             }
             return null;
