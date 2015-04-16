@@ -36,7 +36,7 @@ public class Estadistica extends Model {
 	}
 
 	public static void addEstadistica(Estadistica estadistica) {
-		estadistica.save();O
+		estadistica.save();
 	}
 
 	public static List<Estadistica> obtenerEstadisticas(String usuario,

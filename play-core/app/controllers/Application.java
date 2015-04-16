@@ -1,13 +1,19 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Player;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import util.FileUtil;
+import views.html.index;
+import views.html.login;
+import views.html.register;
 
 public class Application extends Controller {
-
+public static List<String> coordenadas=new ArrayList<String>();
     public static Result showLogin() {
         return ok(login.render(Form.form(Login.class)));
     }
@@ -17,7 +23,12 @@ public class Application extends Controller {
     }
     
     public static Result showIndex() {
-        return ok(index.render());
+    	String fichero=FileUtil.getFile("public/resources/botonesCircular.txt");
+    	String[] lineas = fichero.split("[\r\n]");
+    	for(int i=0;i<lineas.length;i++){
+    		coordenadas.add(lineas[i]);
+    	}
+        return ok(index.render(coordenadas));
     }
     
     public static Result authenticate() {
@@ -52,7 +63,6 @@ public class Application extends Controller {
         public String password;
         
         public String validate() {
-        	System.out.println(password);
             if (Player.authenticate(id, password) == null) {
               return "Usuario o contraseña inválida";
             }
