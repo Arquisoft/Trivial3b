@@ -1,5 +1,8 @@
 package controllers;
 
+import game.GameService;
+import game.GameServiceImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,18 @@ import views.html.*;
 
 public class Application extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
+	public static GameService game=new GameServiceImpl();
+	public static Result jugar(Long id) {
+		game.addPlayer(new Player("f","f"));
+		game.throwDice();
+		int posicion=id.intValue();
+		game.moveTo(game.getCasilla(posicion));
+		String fichero = FileUtil.getFile("public/resources/botonesCircular.txt");
+		String[] lineas = fichero.split("[\n]");
+		for (int i = 0; i < lineas.length; i++)
+			coordenadas.add(lineas[i]);
+		return ok(index.render(coordenadas,new Long(0)));
+	}
 
 	public static Result showLogin() {
 		return ok(login.render(Form.form(Login.class)));
@@ -26,11 +41,11 @@ public class Application extends Controller {
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex() {
 		String fichero = FileUtil.getFile("public/resources/botonesCircular.txt");
-		String[] lineas = fichero.split("[\r\n]");
+		String[] lineas = fichero.split("[\n]");
 		for (int i = 0; i < lineas.length; i++)
 			coordenadas.add(lineas[i]);
 		
-		return ok(index.render(coordenadas));
+		return ok(index.render(coordenadas,new Long(0)));
 	}
 	
 	@Security.Authenticated(AdminSecured.class)

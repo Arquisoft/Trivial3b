@@ -10,7 +10,8 @@ POST	/register					controllers.Application.register()
 GET		/index						controllers.Application.showIndex()
 GET		/admin						controllers.Application.showAdminStatistics()
 GET		/logout						controllers.Application.logout()
-
+POST /tirar                         controllers.Juego.tirar()
+#GET /jugar/:i                       controllers.Application.jugar(i:Long)
 # Ruta de para obtener preguntas de prueba
 GET		/pregunta					controllers.MongoQuestions.get()
 

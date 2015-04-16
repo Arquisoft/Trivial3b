@@ -25,6 +25,13 @@ public class Player extends Model {
 	private Map<Category, Boolean> quesitos = new EnumMap<Category, Boolean>(Category.class);
 	@Transient
     private Casilla position;
+	public Casilla getPosition() {
+		return position;
+	}
+
+	public void setPosition(Casilla position) {
+		this.position = position;
+	}
 	private static final long serialVersionUID = 1L;
 
 	public Player(String id, String pass) {
