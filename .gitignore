@@ -37,3 +37,4 @@ project/target
 dist
 out
 RUNNING_PID
+*.cache

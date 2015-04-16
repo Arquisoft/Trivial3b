@@ -36,7 +36,7 @@ import com.mongodb.util.JSON;
  */
 public class MongoUpload implements Uploader {
 
-    private static final String DEFAULT_MONGO = "mongodb://user:av65~w@ds037571.mongolab.com:37571/trivial3b-preguntas";
+    private static final String DEFAULT_MONGO = "mongodb://admin:p4!ze&09@ds037571.mongolab.com:37571/trivial3b-preguntas";
     private String server;
 
     public MongoUpload() {
