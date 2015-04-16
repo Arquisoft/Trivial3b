@@ -1,4 +1,3 @@
-@(coordenadas: List[String])
 <!DOCTYPE html>
 <html>
 	<head>
@@ -32,28 +31,6 @@
 		</div>
 	</div>
 	</nav>
-	
-	<nav class="navbar navbar-default" role="navigation">
-	  <div class="navbar-header">
-	    <button type="button" class="navbar-toggle" data-toggle="collapse"data-target=".navbar-ex1-collapse"/>
-	    <a class="navbar-brand" href="#">Logotipo</a>
-	  </div>
-	 
-	  <div class="collapse navbar-collapse navbar-ex1-collapse">
-	    <ul class="nav navbar-nav right">
-	      <li><a href="/logout">Cerrar sesión</a></li>
-	    </ul>
-	  </div>
-	</nav>
-
-	
-	<img usemap="#mapa" src="@routes.Assets.at("images/trivial5.jpg")">
-	<map id="mapa" name="mapa">
-	@for(coordenada<-coordenadas){
-	<area href="#" shape="poly" coords="@coordenada">
-	}
-	<area href="#" shape="poly" coords="425,54,400,88,423,110,454,78">
-	</map>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>
     <script src="@routes.Assets.at("javascript/bootstrap.min.js")"/>

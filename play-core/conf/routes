@@ -8,6 +8,7 @@ POST	/							controllers.Application.authenticate()
 GET		/register					controllers.Application.showRegister()
 POST	/register					controllers.Application.register()
 GET		/index						controllers.Application.showIndex()
+GET		/admin						controllers.Application.showAdminStatistics()
 GET		/logout						controllers.Application.logout()
 
 # Map static resources from the /public folder to the /assets URL path
