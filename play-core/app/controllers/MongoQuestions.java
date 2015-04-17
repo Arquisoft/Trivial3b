@@ -14,6 +14,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 public class MongoQuestions extends Controller {
+	
+	private final static Random random=new Random();
 
     private static JacksonDBCollection<Pregunta, String> getCollection() {
         return MongoDB.getCollection("questions", Pregunta.class, String.class);
@@ -25,7 +27,7 @@ public class MongoQuestions extends Controller {
 
         // Obtenemos un numero al azar entre 0 y el número de preguntas
         int count = (int) col.count();
-        int toSkip = new Random().nextInt(count);
+        int toSkip = random.nextInt(count);
 
         return col.find().skip(toSkip).next();
     }
@@ -39,7 +41,7 @@ public class MongoQuestions extends Controller {
 
         // Obtenemos un numero al azar entre 0 y el número de preguntas
         int count = (int) col.count(query);
-        int toSkip = new Random().nextInt(count);
+        int toSkip = random.nextInt(count);
 
         return col.find(query).skip(toSkip).next();
     }

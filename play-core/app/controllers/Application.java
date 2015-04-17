@@ -6,14 +6,15 @@ import game.GameServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import controllers.authenticators.*;
 import models.Player;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import util.FileUtil;
-import views.html.*;
+import views.html.adminStatistics;
+import views.html.login;
+import views.html.register;
+import controllers.authenticators.AdminSecured;
 
 public class Application extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();

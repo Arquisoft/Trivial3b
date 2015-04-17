@@ -98,5 +98,6 @@ public class Player extends Model {
     public void addQuesito(Category cat) {
         quesitos.put(cat, true);
     }
+    
 	private static Finder<String, Player> finder = new Finder<String, Player>(String.class, Player.class);
 }

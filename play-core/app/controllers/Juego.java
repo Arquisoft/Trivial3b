@@ -1,6 +1,5 @@
 package controllers;
 
-import game.Casilla;
 import game.GameService;
 import game.GameServiceImpl;
 
@@ -12,18 +11,17 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import scala.Int;
 import util.FileUtil;
 import views.html.index;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
-	public static List<String> coordenadas = new ArrayList<String>();
-	public static List<String> centrosx = new ArrayList<String>();
-	public static List<String> centrosy = new ArrayList<String>();
-	public static List<String> centrosximages = new ArrayList<String>();
-	public static List<String> centrosyimages = new ArrayList<String>();
-	public static GameService game = new GameServiceImpl();
+	public final static List<String> coordenadas = new ArrayList<String>();
+	public final static List<String> centrosx = new ArrayList<String>();
+	public final static List<String> centrosy = new ArrayList<String>();
+	public final static List<String> centrosximages = new ArrayList<String>();
+	public final static List<String> centrosyimages = new ArrayList<String>();
+	public final static GameService game = new GameServiceImpl();
 
 	public static Result jugar(Integer posicion) {
 		game.moveTo(game.getCasilla(posicion + 1));

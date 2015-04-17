@@ -667,7 +667,7 @@ public class Graph<T> {
 	 * 
 	 * @return información del grafo
 	 */
-	public String toStringAssert() {
+	/*public String toStringAssert() {
 		String cadena = "";
 		T[] nodos = getNodes();
 		boolean[][] aristas = getEdges();
@@ -730,7 +730,7 @@ public class Graph<T> {
 		}
 		cadena += "}\n";
 		return cadena;
-	}
+	}*/
 
 	/**
 	 * Devuelve la excentricidad del nodo que se le pasa por parámetro La
