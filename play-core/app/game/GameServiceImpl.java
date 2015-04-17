@@ -111,7 +111,9 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean moveTo(Casilla casilla) {
        
-
+    	if (!getMoves().contains(casilla)) {
+            return false;
+        }
         getCurrentTurnPlayer().setPosition(casilla);
 
         // Caer en tirar de nuevo es como acertar directamente
@@ -146,6 +148,7 @@ public class GameServiceImpl implements GameService {
             if (player.getPosition().getTipoCasilla().equals(TipoCasilla.QUESITO)) {
                 player.addQuesito(player.getPosition().getCategoria());
             }
+        
 
             // Reseteamos los valores
             resetTurn();
