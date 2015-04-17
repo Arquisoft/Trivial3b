@@ -1,69 +1,111 @@
-@(coordenadas: List[String],dado: Long)
+@import game._ 
+@(coordenadas: List[String], game: GameService)
 <!DOCTYPE html>
 <html>
-	<head>
-    	<title>Inicio</title>
-	
-    	<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<title>Inicio</title>
 
-        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
-        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
-  </head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+</head>
 <body>
-	
 	<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Trivial3b</a>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Trivial3b</a>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/logout">Cerrar sesión</a></li>
+				</ul>
+			</div>
 		</div>
+	</nav>
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-ex1-collapse" />
+			<a class="navbar-brand" href="#">Logotipo</a>
+		</div>
+
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav right">
 				<li><a href="/logout">Cerrar sesión</a></li>
 			</ul>
 		</div>
-	</div>
 	</nav>
-	
-	<nav class="navbar navbar-default" role="navigation">
-	  <div class="navbar-header">
-	    <button type="button" class="navbar-toggle" data-toggle="collapse"data-target=".navbar-ex1-collapse"/>
-	    <a class="navbar-brand" href="#">Logotipo</a>
-	  </div>
-	 
-	  <div class="collapse navbar-collapse navbar-ex1-collapse">
-	    <ul class="nav navbar-nav right">
-	      <li><a href="/logout">Cerrar sesión</a></li>
-	    </ul>
-	  </div>
-	</nav>
+	@if(game.getPregunta()!=null){
+	<div id=”miVentana” style=”position:
+		fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight:
+		normal; border: #333333 3pxsolid; background-color: #FAFAFA; color: #000000; display:none;”>
+		<label value="@game.getPregunta().getQuestion()">@game.getPregunta().getQuestion()</label>
+		@for(respuesta<-game.getPregunta().getWrongAnswers()){
+		<button onclick="location.href='/respuestaIncorrecta'" type="submit">@respuesta</button>
+		}
+		<button onclick="location.href='/respuestaCorrecta'" type="submit">@game.getPregunta().getCorrectAnswer()</button>
+		</div>
+	<script type="text/javascript">
+	 var ventana = document.getElementById(‘miVentana’);
+	    ventana.style.marginTop = “100px”;
+	    ventana.style.left = ((document.body.clientWidth-350) / 2) +  “px”;
+	    ventana.style.display = ‘block’;
+	</script>
+
+	}
 	<form action="/tirar" method="post">
-	<label style="margin-left:83%; font-size:250%">@dado</label>
-	<button class="btn btn-primary" value="Tirar Dado" style="margin-left:85%" type="submit">Tirar Dado</button>
+		<label style="margin-left: 83%; font-size: 250%">@game.getDiceNumber()</label>
+		@if(game.canThrowDice()){
+		<button class="btn btn-primary" value="Tirar Dado"
+			style="margin-left: 85%" type="submit">Tirar Dado</button>
+		} @if(!game.canThrowDice()){
+		<button class="btn btn-primary" value="Tirar Dado"
+			style="margin-left: 85%" type="submit" disabled="disabled">Tirar
+			Dado</button>
+		}
 	</form>
-	<svg style="background-image:url('@routes.Assets.at("images/trivial5.jpg")'); margin-left:30%; margin-top:2%" xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" width="540px" height="540px">
+	<svg style="margin-left: 30%; margin-top: 2%"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink" width="540px"
+		height="540px">
+	<image x="0" y="0" height="540" usemap="#mapa" width="540" xlink:href="@routes.Assets.at("images/trivial5.jpg")" />
+	@if(game.getMoves()!=null && game.canMove()){
 	@for(i<-0 until coordenadas.size){
-    <polygon id="@i" onclick="location.href='jugar/@i'" style="cursor:pointer" fill-opacity="0.0" points="@coordenadas.get(i)"/>
+		@for(casilla<-game.getMoves()){
+		@if(i+1==casilla.getId()){
+    <polygon id="@i+1" onclick="location.href='jugar/@i'"
+			style="cursor:pointer;width:140px;height:140px;background:#008040; -moz-border-radius:70px;-webkit-border-radius:70px;border-radius:70px"
+			fill-opacity="0.0" points="@coordenadas.get(i)" />
     }
-    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="black"/>
+    }
+    }
+    }
+<script>
+        $('#myModal').modal('show');
+	</script>
     </svg>
-    <script>
+	<script>
     function jugar(int i){
     	
     		location.href='/prueba/'+i;
     	
     }
     </script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>
-    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"/>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />
+	<script src="@routes.Assets.at(" javascript/bootstrap.min.js")"/>
+	<script src="@routes.Assets.at(" javascript/bootstrap-dialog.js")"/>
 </body>
 </html>

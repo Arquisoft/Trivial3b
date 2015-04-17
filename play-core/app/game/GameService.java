@@ -18,7 +18,7 @@ public interface GameService {
 	 * Devuelve al ganador si lo hay, o null si no
 	 */
 	Player getGanador();
-
+	int getDiceNumber();
 	/**
 	 * Metodo que añade un jugador a la partida y lo coloca en la casilla de
 	 * salida

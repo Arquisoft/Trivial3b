@@ -25,7 +25,13 @@ public class GameServiceImpl implements GameService {
     private int activePlayer;
     private boolean diceThrown;
     private int diceNumber;
-    private Pregunta questionGiven=new Pregunta();
+    @Override
+    public int getDiceNumber() {
+		return diceNumber;
+	}
+
+
+	private Pregunta questionGiven;
 
     private Player winner;
     
@@ -104,9 +110,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public boolean moveTo(Casilla casilla) {
-        if (!getMoves().contains(casilla)) {
-            return false;
-        }
+       
 
         getCurrentTurnPlayer().setPosition(casilla);
 

@@ -27,7 +27,7 @@ public class Application extends Controller {
 		String[] lineas = fichero.split("[\n]");
 		for (int i = 0; i < lineas.length; i++)
 			coordenadas.add(lineas[i]);
-		return ok(index.render(coordenadas,new Long(0)));
+		return ok(index.render(coordenadas,game));
 	}
 
 	public static Result showLogin() {
@@ -45,7 +45,7 @@ public class Application extends Controller {
 		for (int i = 0; i < lineas.length; i++)
 			coordenadas.add(lineas[i]);
 		
-		return ok(index.render(coordenadas,new Long(0)));
+		return ok(index.render(coordenadas,game));
 	}
 	
 	@Security.Authenticated(AdminSecured.class)
@@ -65,7 +65,7 @@ public class Application extends Controller {
 			if(loginForm.get().id.equals("admin"))
 				return redirect(routes.Application.showAdminStatistics());
 			else
-				return redirect(routes.Application.showIndex());
+				return redirect(routes.Juego.showIndex());
 		}
 	}
 
