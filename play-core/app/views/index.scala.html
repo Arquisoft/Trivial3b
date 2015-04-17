@@ -1,5 +1,5 @@
 @import game._ 
-@(coordenadas: List[String], game: GameService)
+@(coordenadas: List[String], game: GameService,centrosx: List[String],centrosy: List[String])
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,15 +83,21 @@
 	<!-- Imagenes @for(player<-game.getPlayers()){
 	<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
 	}-->
+	@for(i<-0 until coordenadas.size){
+	@if(i+1==game.getCurrentTurnPlayer().getPosition().getId()){
+    	<!-- <image x="@centrosx.get(i+1)" y="@centrosy.get(i+1)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/ciencias.png")" /> -->
+    }
+    }
 	@if(game.getMoves()!=null && game.canMove()){
 	@for(i<-0 until coordenadas.size){
 		@for(casilla<-game.getMoves()){
 		@if(i+1==casilla.getId()){
-		<image x="360" y="30" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/ciencias.png")" />
+		<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black"/>
     <polygon id="@i+1" onclick="location.href='jugar/@i'"
 			style=cursor:pointer;width:140px;height:140px;background-color: red; -moz-border-radius:70px;-webkit-border-radius:70px;border-radius:70px"
 			fill-opacity="0.0" points="@coordenadas.get(i)" />
     }
+    	
     }
     }
     }

@@ -19,38 +19,55 @@ import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
-	public static GameService game=new GameServiceImpl();
-	public static Result jugar(Integer posicion){
-		game.moveTo(game.getCasilla(posicion+1));
+	public static List<String> centrosx = new ArrayList<String>();
+	public static List<String> centrosy = new ArrayList<String>();
+	public static GameService game = new GameServiceImpl();
+
+	public static Result jugar(Integer posicion) {
+		game.moveTo(game.getCasilla(posicion + 1));
 		Logger.info(String.valueOf(posicion));
 		return redirect("/index");
 	}
+
 	public static Result tirar() {
 		game.throwDice();
 		return redirect("/index");
 	}
-	public static Result respuestaCorrecta(){
+
+	public static Result respuestaCorrecta() {
 		game.respuestaCorrecta();
-		return ok(index.render(coordenadas, game));
+		return redirect("/index");
 	}
-	public static Result respuestaIncorrecta(){
+
+	public static Result respuestaIncorrecta() {
 		game.respuestaIncorrecta();
-		return ok(index.render(coordenadas, game));
+		return redirect("/index");
 	}
+
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex() {
-		
-		if(game.getPlayers().size()==0){
-		game.addPlayer(new Player("f","f"));
+
+		if (game.getPlayers().size() == 0) {
+			game.addPlayer(new Player("f", "f"));
 		}
-		String fichero = FileUtil.getFile("public/resources/botonesCircular.txt");
+		String fichero = FileUtil
+				.getFile("public/resources/botonesCircular.txt");
 		String[] lineas = fichero.split("[\n]");
 		for (int i = 0; i < lineas.length; i++)
 			coordenadas.add(lineas[i]);
-		return ok(index.render(coordenadas,game));
+		String fichero2 = FileUtil.getFile("public/resources/centros.txt");
+		String[] lineas2 = fichero2.split("[\n]");
+		for (int i = 0; i < lineas2.length; i ++) {
+			String[] datos=lineas2[i].split(",");
+			centrosx.add(datos[0]);
+			centrosy.add(datos[1]);
+		}
+		return ok(index.render(coordenadas, game,centrosx,centrosy));
 	}
-	public static List<String> getCoordenadas(){
-		String fichero = FileUtil.getFile("public/resources/botonesCircular.txt");
+
+	public static List<String> getCoordenadas() {
+		String fichero = FileUtil
+				.getFile("public/resources/botonesCircular.txt");
 		String[] lineas = fichero.split("[\n]");
 		for (int i = 0; i < lineas.length; i++)
 			coordenadas.add(lineas[i]);

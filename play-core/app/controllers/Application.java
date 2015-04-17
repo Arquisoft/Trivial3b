@@ -27,16 +27,7 @@ public class Application extends Controller {
 		return ok(register.render(Form.form(Register.class)));
 	}
 
-	@Security.Authenticated(ClientSecured.class)
-	public static Result showIndex() {
-		String fichero = FileUtil.getFile("public/resources/botonesCircular.txt");
-		String[] lineas = fichero.split("[\n]");
-		for (int i = 0; i < lineas.length; i++)
-			coordenadas.add(lineas[i]);
-		
-		return ok(index.render(coordenadas,game));
-	}
-	
+
 	@Security.Authenticated(AdminSecured.class)
 	public static Result showAdminStatistics() {
 	
