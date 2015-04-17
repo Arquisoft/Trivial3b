@@ -1,5 +1,5 @@
 @import game._ 
-@(coordenadas: List[String], game: GameService,centrosx: List[String],centrosy: List[String])
+@(coordenadas: List[String], game: GameService,centrosx: List[String],centrosy: List[String],centrosximages: List[String],centrosyimages: List[String])
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +85,7 @@
 	}-->
 	@for(i<-0 until coordenadas.size){
 	@if(i+1==game.getCurrentTurnPlayer().getPosition().getId()){
-    	<!-- <image x="@centrosx.get(i+1)" y="@centrosy.get(i+1)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/ciencias.png")" /> -->
+    	<image x="@centrosximages.get(i)" y="@centrosyimages.get(i)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/ciencias.png")" />
     }
     }
 	@if(game.getMoves()!=null && game.canMove()){

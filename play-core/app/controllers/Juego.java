@@ -21,6 +21,8 @@ public class Juego extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
 	public static List<String> centrosx = new ArrayList<String>();
 	public static List<String> centrosy = new ArrayList<String>();
+	public static List<String> centrosximages = new ArrayList<String>();
+	public static List<String> centrosyimages = new ArrayList<String>();
 	public static GameService game = new GameServiceImpl();
 
 	public static Result jugar(Integer posicion) {
@@ -58,11 +60,15 @@ public class Juego extends Controller {
 		String fichero2 = FileUtil.getFile("public/resources/centros.txt");
 		String[] lineas2 = fichero2.split("[\n]");
 		for (int i = 0; i < lineas2.length; i ++) {
-			String[] datos=lineas2[i].split(",");
+			String[] datos=lineas2[i].trim().split(",");
 			centrosx.add(datos[0]);
+			int centro=Integer.parseInt(datos[0]);
+			int centroy=Integer.parseInt(datos[1]);
+			centrosximages.add(String.valueOf(centro-19));
+			centrosyimages.add(String.valueOf(centroy-34));
 			centrosy.add(datos[1]);
 		}
-		return ok(index.render(coordenadas, game,centrosx,centrosy));
+		return ok(index.render(coordenadas, game,centrosx,centrosy,centrosximages,centrosyimages));
 	}
 
 	public static List<String> getCoordenadas() {
