@@ -1,6 +1,12 @@
 import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.*;
+import static play.mvc.Http.Status.OK;
 
 import org.junit.Test;
+
+import play.mvc.Result;
+import controllers.Application;
+import play.test.FakeRequest;
 
 
 /**
@@ -15,6 +21,23 @@ public class ApplicationTest {
     public void simpleCheck() {
         int a = 1 + 1;
         assertThat(a).isEqualTo(2);
+    }
+    
+    @Test
+    public void testLogin() {
+      Result result = Application.showLogin();
+      assertThat(status(result)).isEqualTo(OK);
+      assertThat(charset(result)).isEqualTo("utf-8");
+      assertThat(contentAsString(result)).contains("Bienvenido");
+    }
+    
+    @Test
+    public void testCallLogin() {
+      Result result = callAction(
+        controllers.routes.ref.Application.showLogin(),
+        new FakeRequest(GET, "/")
+      );
+      assertThat(status(result)).isEqualTo(OK);
     }
     
     
