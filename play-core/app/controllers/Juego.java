@@ -51,6 +51,7 @@ public class Juego extends Controller {
 
 		if (game.getPlayers().size() == 0) {
 			game.addPlayer(new Player("f", "f"));
+			//game.addPlayer(new Player("cristian", "cris"));
 		}
 		String fichero = FileUtil
 				.getFile("public/resources/botonesCircular.txt");

@@ -99,4 +99,11 @@ public class Player extends Model {
         quesitos.put(cat, true);
     }
 	private static Finder<String, Player> finder = new Finder<String, Player>(String.class, Player.class);
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

@@ -1,5 +1,5 @@
-@import game._ 
-@(coordenadas: List[String], game: GameService,centrosx: List[String],centrosy: List[String],centrosximages: List[String],centrosyimages: List[String])
+@import game._
+ @(coordenadas: List[String], game: GameService,centrosx:List[String],centrosy: List[String],centrosximages:List[String],centrosyimages: List[String])
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,14 +48,13 @@
 	</nav>
 	@if(game.getPregunta()!=null){
 	<div id=”miVentana” style=”position:
-		fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight:
-		normal; border: #333333 3pxsolid; background-color: #FAFAFA; color: #000000; display:none;”>
+		fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight:normal; border: #333333 3pxsolid; background-color: #FAFAFA; color: #000000; display:none;”>
 		<label value="@game.getPregunta().getQuestion()">@game.getPregunta().getQuestion()</label>
 		@for(respuesta<-game.getPregunta().getWrongAnswers()){
 		<button onclick="location.href='/respuestaIncorrecta'" type="submit">@respuesta</button>
 		}
 		<button onclick="location.href='/respuestaCorrecta'" type="submit">@game.getPregunta().getCorrectAnswer()</button>
-		</div>
+	</div>
 	<script type="text/javascript">
 	 var ventana = document.getElementById(‘miVentana’);
 	    ventana.style.marginTop = “100px”;
@@ -63,6 +62,24 @@
 	    ventana.style.display = ‘block’;
 	</script>
 
+	}
+	@for(player<-game.getPlayers()){
+	<div style="width:25%;font-size: 250%;">
+	<div class="panel panel-default" style="display:inline-block;">
+		<div class="panel-body">@player.getId()
+		<div class="row">
+  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
+  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
+  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
+		</div>
+		<div class="row">
+  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
+  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
+  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
+		</div>
+	</div>
+	</div>
+	</div>
 	}
 	<form action="/tirar" method="post">
 		<label style="margin-left: 83%; font-size: 250%">@game.getDiceNumber()</label>
@@ -75,10 +92,8 @@
 			Dado</button>
 		}
 	</form>
-	<svg style="margin-left: 30%; margin-top: 2%"
-		xmlns="http://www.w3.org/2000/svg"
-		xmlns:xlink="http://www.w3.org/1999/xlink" width="540px"
-		height="540px">
+	<svg style="margin-left: 30%; margin-top: 2%;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600px"
+		height="600px">
 	<image x="0" y="0" height="540" usemap="#mapa" width="540" xlink:href="@routes.Assets.at("images/trivial5.jpg")" />
 	<!-- Imagenes @for(player<-game.getPlayers()){
 	<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
@@ -92,10 +107,12 @@
 	@for(i<-0 until coordenadas.size){
 		@for(casilla<-game.getMoves()){
 		@if(i+1==casilla.getId()){
-		<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black"/>
+		<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black" />
     <polygon id="@i+1" onclick="location.href='jugar/@i'"
-			style=cursor:pointer;width:140px;height:140px;background-color: red; -moz-border-radius:70px;-webkit-border-radius:70px;border-radius:70px"
-			fill-opacity="0.0" points="@coordenadas.get(i)" />
+			style=cursor:pointer;width:140px;height:140px;background-color:
+			red; -moz-border-radius:70px;-webkit-border-radius:70px;border-radius:70px"
+			fill-opacity="0.0"
+			points="@coordenadas.get(i)" />
     }
     	
     }
