@@ -61,50 +61,43 @@
 	    ventana.style.left = ((document.body.clientWidth-350) / 2) +  “px”;
 	    ventana.style.display = ‘block’;
 	</script>
-
 	}
+	<div style="display:inline">
 	@for(player<-game.getPlayers()){
-	<div style="width:25%;font-size: 250%;">
-	<div class="panel panel-default" style="display:inline-block;">
+	<div style="width:25%;font-size: 250%; display:inline-block;">
+	<div class="panel panel-default">
 		<div class="panel-body">@player.getId()
 		<div class="row">
-  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
-  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
-  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
-		</div>
-		<div class="row">
-  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
-  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
-  		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/ciencias.png")"></div>
-		</div>
+		@for(k<-0 until player.getCategorias().size()){
+		@if(player.getQuesitos().get(player.getCategorias().get(k))==null){
+		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/figuritabn"+(k+1)+".png")"></div>
+		}
+		@if(player.getQuesitos().get(player.getCategorias().get(k))!=null){
+		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/figurita"+(k+1)+".png")"></div>
+		}
+		}
+	</div>
 	</div>
 	</div>
 	</div>
 	}
-	<form action="/tirar" method="post">
-		<label style="margin-left: 83%; font-size: 250%">@game.getDiceNumber()</label>
-		@if(game.canThrowDice()){
-		<button class="btn btn-primary" value="Tirar Dado"
-			style="margin-left: 85%" type="submit">Tirar Dado</button>
-		} @if(!game.canThrowDice()){
-		<button class="btn btn-primary" value="Tirar Dado"
-			style="margin-left: 85%" type="submit" disabled="disabled">Tirar
-			Dado</button>
-		}
-	</form>
+	</div>
+	<div style="display:inline">
 	<svg style="margin-left: 30%; margin-top: 2%;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600px"
 		height="600px">
 	<image x="0" y="0" height="540" usemap="#mapa" width="540" xlink:href="@routes.Assets.at("images/trivial5.jpg")" />
 	<!-- Imagenes @for(player<-game.getPlayers()){
 	<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
 	}-->
+	@for(pl<-0 until game.getPlayers().size()){
 	@for(i<-0 until coordenadas.size){
-	@if(i+1==game.getCurrentTurnPlayer().getPosition().getId()){
-    	<image x="@centrosximages.get(i)" y="@centrosyimages.get(i)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/ciencias.png")" />
+	@if(i+1==game.getPlayers().get(pl).getPosition().getId()){
+    	<image x="@centrosximages.get(i)" y="@centrosyimages.get(i)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/figurita"+(pl+1)+".png")" />
+    }
     }
     }
 	@if(game.getMoves()!=null && game.canMove()){
-	@for(i<-0 until coordenadas.size){
+	@for(i<-0 until coordenadas.size()){
 		@for(casilla<-game.getMoves()){
 		@if(i+1==casilla.getId()){
 		<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black" />
@@ -119,6 +112,20 @@
     }
     }
     </svg>
+    </div>
+    <div style="display:inline">
+	<form action="/tirar" method="post">
+		<label style="margin-left: 83%; font-size: 250%">@game.getDiceNumber()</label>
+		@if(game.canThrowDice()){
+		<button class="btn btn-primary" value="Tirar Dado"
+			style="margin-left: 85%" type="submit">Tirar Dado</button>
+		} @if(!game.canThrowDice()){
+		<button class="btn btn-primary" value="Tirar Dado"
+			style="margin-left: 85%" type="submit" disabled="disabled">Tirar
+			Dado</button>
+		}
+	</form>
+	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />
 	<script src="@routes.Assets.at(" javascript/bootstrap.min.js")"/>

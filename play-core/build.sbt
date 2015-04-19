@@ -16,9 +16,3 @@ libraryDependencies ++= Seq(
   "info.cukes" % "cucumber-java" % "1.1.8" % "test",
   "info.cukes" % "cucumber-junit" % "1.1.8" % "test"
 )
-
-jacoco.settings
-
-findbugsSettings
-
-findbugsReportType := Some(de.johoop.findbugs4sbt.ReportType.Html)

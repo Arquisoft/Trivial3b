@@ -3,8 +3,10 @@ package models;
 import game.Casilla;
 import game.Category;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -25,6 +27,16 @@ public class Player extends Model {
 	private Map<Category, Boolean> quesitos = new EnumMap<Category, Boolean>(Category.class);
 	@Transient
     private Casilla position;
+	@Transient
+	List<Category> categorias=new ArrayList<Category>();
+	public List<Category> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Category> categorias) {
+		this.categorias = categorias;
+	}
+
 	public Casilla getPosition() {
 		return position;
 	}
@@ -37,6 +49,12 @@ public class Player extends Model {
 	public Player(String id, String pass) {
 		this.id = id;
 		this.pass = pass;
+		categorias.add(Category.CIENCIAYTECNOLOGIA);
+		categorias.add(Category.DEPORTES);
+		categorias.add(Category.ESPECTACULOSYENTRETENIMIENTO);
+		categorias.add(Category.GEOGRAFIA);
+		categorias.add(Category.HISTORIA);
+		categorias.add(Category.ARTEYLITERATURA);
 	}
 
 	public static Player authenticate(String id, String password) {

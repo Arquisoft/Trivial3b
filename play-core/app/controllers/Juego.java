@@ -1,6 +1,6 @@
 package controllers;
 
-import game.Casilla;
+import game.Category;
 import game.GameService;
 import game.GameServiceImpl;
 
@@ -12,7 +12,6 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import scala.Int;
 import util.FileUtil;
 import views.html.index;
 import controllers.authenticators.ClientSecured;
@@ -51,7 +50,7 @@ public class Juego extends Controller {
 
 		if (game.getPlayers().size() == 0) {
 			game.addPlayer(new Player("f", "f"));
-			//game.addPlayer(new Player("cristian", "cris"));
+			game.addPlayer(new Player("cristian", "cris"));
 		}
 		String fichero = FileUtil
 				.getFile("public/resources/botonesCircular.txt");
