@@ -1,6 +1,9 @@
 package controllers;
 
+<<<<<<< HEAD
 import game.Category;
+=======
+>>>>>>> 93b0f97c5ea4001c9d7fb71c570c93470a106753
 import game.GameService;
 import game.GameServiceImpl;
 
@@ -17,12 +20,12 @@ import views.html.index;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
-	public static List<String> coordenadas = new ArrayList<String>();
-	public static List<String> centrosx = new ArrayList<String>();
-	public static List<String> centrosy = new ArrayList<String>();
-	public static List<String> centrosximages = new ArrayList<String>();
-	public static List<String> centrosyimages = new ArrayList<String>();
-	public static GameService game = new GameServiceImpl();
+	public final static List<String> coordenadas = new ArrayList<String>();
+	public final static List<String> centrosx = new ArrayList<String>();
+	public final static List<String> centrosy = new ArrayList<String>();
+	public final static List<String> centrosximages = new ArrayList<String>();
+	public final static List<String> centrosyimages = new ArrayList<String>();
+	public final static GameService game = new GameServiceImpl();
 
 	public static Result jugar(Integer posicion) {
 		game.moveTo(game.getCasilla(posicion + 1));

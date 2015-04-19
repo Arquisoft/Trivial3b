@@ -25,6 +25,7 @@ public class GameServiceImpl implements GameService {
     private int activePlayer;
     private boolean diceThrown;
     private int diceNumber;
+    
     @Override
     public int getDiceNumber() {
 		return diceNumber;
