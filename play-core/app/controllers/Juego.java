@@ -1,9 +1,6 @@
 package controllers;
 
-<<<<<<< HEAD
 import game.Category;
-=======
->>>>>>> 93b0f97c5ea4001c9d7fb71c570c93470a106753
 import game.GameService;
 import game.GameServiceImpl;
 
