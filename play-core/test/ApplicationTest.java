@@ -40,5 +40,26 @@ public class ApplicationTest {
       assertThat(status(result)).isEqualTo(OK);
     }
     
+    @Test
+    public void testRegister() {
+      Result result = Application.showRegister();
+      assertThat(status(result)).isEqualTo(OK);
+      assertThat(charset(result)).isEqualTo("utf-8");
+      assertThat(contentAsString(result)).contains("Únete");
+    }
+    
+    @Test
+    public void testCallRegister() {
+      Result result = callAction(
+        controllers.routes.ref.Application.showRegister(),
+        new FakeRequest(GET, "/register")
+      );
+      assertThat(status(result)).isEqualTo(OK);
+    }
+
+    
+    
+    	
+    
     
 }
