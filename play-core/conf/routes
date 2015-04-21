@@ -7,19 +7,20 @@ GET     /                           controllers.Application.showLogin()
 POST	/							controllers.Application.authenticate()
 GET		/register					controllers.Application.showRegister()
 POST	/register					controllers.Application.register()
+GET		/choice						controllers.Application.showChoice()
+
+#FALTA: POST	/choice		...
+
 GET		/index						controllers.Juego.showIndex()
 GET		/admin						controllers.Application.showAdminStatistics()
 GET		/logout						controllers.Application.logout()
-POST /tirar                         controllers.Juego.tirar()
-GET /jugar/:i                       controllers.Juego.jugar(i:Integer)
-GET /respuestaIncorrecta            controllers.Juego.respuestaIncorrecta()
-GET /respuestaCorrecta              controllers.Juego.respuestaCorrecta()
+POST 	/tirar                      controllers.Juego.tirar()
+GET 	/jugar/:i                   controllers.Juego.jugar(i:Integer)
+GET 	/respuestaIncorrecta        controllers.Juego.respuestaIncorrecta()
+GET 	/respuestaCorrecta          controllers.Juego.respuestaCorrecta()
+
 # Ruta de para obtener preguntas de prueba
 GET		/pregunta					controllers.MongoQuestions.get()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-#Ejemplo para crear y obtener un usuario 
-#GET     /user/{id}            Application.getUser
-#POST    /user/                Application.createUser

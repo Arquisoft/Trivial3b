@@ -11,10 +11,9 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.adminStatistics;
-import views.html.login;
-import views.html.register;
+import views.html.*;
 import controllers.authenticators.AdminSecured;
+import controllers.authenticators.ClientSecured;
 
 public class Application extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
@@ -28,6 +27,10 @@ public class Application extends Controller {
 		return ok(register.render(Form.form(Register.class)));
 	}
 
+	@Security.Authenticated(ClientSecured.class)
+	public static Result showChoice() {
+		return ok(choice.render());
+	}
 
 	@Security.Authenticated(AdminSecured.class)
 	public static Result showAdminStatistics() {
