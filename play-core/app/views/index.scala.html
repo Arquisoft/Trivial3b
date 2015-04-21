@@ -46,14 +46,14 @@
 			</ul>
 		</div>
 	</nav>
-	@if(game.getPregunta()!=null){
+	@if(game.getQuestionGiven()!=null){
 	<div id=”miVentana” style=”position:
 		fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight:normal; border: #333333 3pxsolid; background-color: #FAFAFA; color: #000000; display:none;”>
-		<label value="@game.getPregunta().getQuestion()">@game.getPregunta().getQuestion()</label>
-		@for(respuesta<-game.getPregunta().getWrongAnswers()){
+		<label value="@game.getQuestionGiven().getQuestion()">@game.getQuestionGiven().getQuestion()</label>
+		@for(respuesta<-game.getQuestionGiven().getWrongAnswers()){
 		<button onclick="location.href='/respuestaIncorrecta'" type="submit">@respuesta</button>
 		}
-		<button onclick="location.href='/respuestaCorrecta'" type="submit">@game.getPregunta().getCorrectAnswer()</button>
+		<button onclick="location.href='/respuestaCorrecta'" type="submit">@game.getQuestionGiven().getCorrectAnswer()</button>
 	</div>
 	<script type="text/javascript">
 	 var ventana = document.getElementById(‘miVentana’);
@@ -90,7 +90,7 @@
 	<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
 	}-->
 	@for(pl<-0 until game.getPlayers().size()){
-	@for(i<-0 until coordenadas.size){
+	@for(i<-0 until coordenadas.size()){
 	@if(i+1==game.getPlayers().get(pl).getPosition().getId()){
     	<image x="@centrosximages.get(i)" y="@centrosyimages.get(i)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/figurita"+(pl+1)+".png")" />
     }
@@ -101,7 +101,7 @@
 		@for(casilla<-game.getMoves()){
 		@if(i+1==casilla.getId()){
 		<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black" />
-    <polygon id="@i+1" onclick="location.href='jugar/@i'"
+    <polygon id="@i" onclick="location.href='jugar/@i'"
 			style=cursor:pointer;width:140px;height:140px;background-color:
 			red; -moz-border-radius:70px;-webkit-border-radius:70px;border-radius:70px"
 			fill-opacity="0.0"

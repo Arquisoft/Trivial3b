@@ -1,5 +1,7 @@
 package game;
 
-public enum TipoCasilla {
+import java.io.Serializable;
+
+public enum TipoCasilla implements Serializable{
     NORMAL, TIRADAEXTRA, QUESITO, FINAL;
 }

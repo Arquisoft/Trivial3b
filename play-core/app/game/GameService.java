@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Player;
 import models.Pregunta;
+import controllers.MongoQuestions;
 
 
 
@@ -13,11 +14,10 @@ public interface GameService {
 	 * Devuelve true si la partida ya finalizo
 	 */
 	boolean partidaFinalizada();
-
+	public List<Casilla> getMoves();
 	/**
 	 * Devuelve al ganador si lo hay, o null si no
 	 */
-	Player getGanador();
 	int getDiceNumber();
 	/**
 	 * Metodo que añade un jugador a la partida y lo coloca en la casilla de
@@ -36,7 +36,7 @@ public interface GameService {
 	/**
 	 * Devuelve el jugador del turno actual, o null si no hay jugadores
 	 */
-	Player getCurrentTurnPlayer();
+	Player CurrentTurnPlayer();
 
 	/**
 	 * Indica si el jugador actual puede tirar el dado
@@ -47,7 +47,7 @@ public interface GameService {
 	 * Tira el dado y devuelve el valor para mostrarlo (entre 1 y 6).
 	 *
 	 * Para obtener la lista de posibles movimientos llamar a
-	 * {@link #getMoves()}
+	 * {@link #move()}
 	 */
 	Integer throwDice();
 
@@ -61,7 +61,7 @@ public interface GameService {
 	 * si no es el momento de mover
 	 *
 	 */
-	List<Casilla> getMoves();
+	List<Casilla> move();
 
 	/**
 	 * Cambia la posicion de un jugador al final del turno, devuelve true si es
@@ -76,7 +76,7 @@ public interface GameService {
 	 * Metodo que obtiene una pregunta a partir de una casilla, o null si no es
 	 * posible en este momento
 	 */
-	Pregunta getPregunta();
+	
 
 	/**
 	 * Llamar a este metodo cuando la respuesta sea correcta
@@ -95,5 +95,31 @@ public interface GameService {
 	boolean registerUser(String user, String pass);
 
 	Casilla getCasilla(int i);
+	
+	
+
+	public MongoQuestions getMongoQuestions();
+
+	public void setMongoQuestions(MongoQuestions mongoQuestions);
+	public int getActivePlayer();
+
+	public void setActivePlayer(int activePlayer);
+
+	public boolean isDiceThrown();
+	public void setDiceThrown(boolean diceThrown);
+
+	public Pregunta getQuestionGiven();
+
+	public void setQuestionGiven(Pregunta questionGiven);
+
+	public Graph<Casilla> getTablero();
+
+	public Player getWinner();
+
+	public boolean isSaveStats();
+
+	public void setPlayers(List<Player> players);
+
+	public void setDiceNumber(int diceNumber);
 
 }

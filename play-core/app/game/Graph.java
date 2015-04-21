@@ -1,10 +1,14 @@
 package game;
 
-import java.text.DecimalFormat;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graph<T> {
+public class Graph<T> implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private T[] nodes; // Vector de nodos
 	private boolean[][] edges; // Matriz de aristas
 	private double[][] weights; // Matriz de pesos
@@ -24,7 +28,9 @@ public class Graph<T> {
 		weights = new double[tam][tam];
 		numNodes = 0;
 	}
-
+	public Graph(){
+		
+	}
 	/**
 	 * Método de acceso al valor de la variable numNodes. Utilizado para las
 	 * pruebas JUnit
@@ -67,7 +73,7 @@ public class Graph<T> {
 	 * 
 	 * @return devuelve una referencia a la matriz de booleanos weight
 	 */
-	public double[][] getWeight() {
+	public double[][] Weight() {
 		return weights;
 	}
 

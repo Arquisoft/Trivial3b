@@ -1,6 +1,8 @@
 package game;
 
-public enum Category {
+import java.io.Serializable;
+
+public enum Category implements Serializable{
 
 	DEPORTES,
 

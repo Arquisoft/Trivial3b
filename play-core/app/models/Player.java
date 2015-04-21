@@ -3,6 +3,7 @@ package models;
 import game.Casilla;
 import game.Category;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -17,7 +18,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-public class Player extends Model {
+public class Player extends Model implements Serializable{
 
 	@Id
 	private String id;

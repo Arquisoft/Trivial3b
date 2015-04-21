@@ -11,7 +11,9 @@ public class Casilla {
     public Casilla(int id, TipoCasilla tipo) {
         this(id, null, tipo);
     }
-
+    public Casilla(){
+    	
+    }
     public Casilla(int id, Category categoria) {
         this(id, categoria, TipoCasilla.NORMAL);
     }
@@ -30,7 +32,7 @@ public class Casilla {
         return categoria;
     }
 
-    public TipoCasilla getTipoCasilla() {
+    public TipoCasilla getTipo() {
         return tipo;
     }
 

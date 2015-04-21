@@ -1,17 +1,22 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import controllers.MongoQuestions;
 import models.Player;
 import models.Pregunta;
+import controllers.MongoQuestions;
 
 
-public class GameServiceImpl implements GameService {
-    private static final int TIPO_GRAFO = 1;
+public class GameServiceImpl implements GameService,Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final int TIPO_GRAFO = 1;
     private static final int MAX_PLAYERS = 6;
 
     private Random rand = new Random();
@@ -20,7 +25,7 @@ public class GameServiceImpl implements GameService {
     // Tablero y jugadores
     private List<Player> players = new ArrayList<Player>();
     private Graph<Casilla> tablero;
-
+    private List<Casilla> moves;
     // Estado actual
     private int activePlayer;
     private boolean diceThrown;
@@ -70,7 +75,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Player getCurrentTurnPlayer() {
+    public Player CurrentTurnPlayer() {
         if (players.size() == 0) {
             return null;
         }
@@ -80,7 +85,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public boolean canThrowDice() {
-        return getCurrentTurnPlayer() != null && !diceThrown;
+        return CurrentTurnPlayer() != null && !diceThrown;
     }
 
     @Override
@@ -95,58 +100,60 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public boolean canMove() {
-        return getCurrentTurnPlayer() != null && diceThrown
+        return CurrentTurnPlayer() != null && diceThrown
                 && questionGiven == null;
     }
 
     @Override
-    public List<Casilla> getMoves() {
+    public List<Casilla> move() {
         if (!canMove()) {
             return null;
         }
 
-        Casilla origen = getCurrentTurnPlayer().getPosition();
-        return tablero.getNodesDestino(origen, diceNumber);
+        Casilla origen = CurrentTurnPlayer().getPosition();
+        moves=tablero.getNodesDestino(origen, diceNumber);
+        return moves;
     }
-
     @Override
+    public List<Casilla> getMoves() {
+		return moves;
+	}
+
+	@Override
     public boolean moveTo(Casilla casilla) {
        
-    	if (!getMoves().contains(casilla)) {
+    	if (!move().contains(casilla)) {
             return false;
         }
-        getCurrentTurnPlayer().setPosition(casilla);
+        CurrentTurnPlayer().setPosition(casilla);
 
         // Caer en tirar de nuevo es como acertar directamente
-        if (casilla.getTipoCasilla().equals(TipoCasilla.TIRADAEXTRA)) {
+        if (casilla.getTipo().equals(TipoCasilla.TIRADAEXTRA)) {
             // Reseteamos los valores
             resetTurn();
 
         } else {
-            Category cat = getCurrentTurnPlayer().getPosition().getCategoria();
+            Category cat = CurrentTurnPlayer().getPosition().getCategoria();
           questionGiven = MongoQuestions.getRandomQuestion(cat);
         }
 
         return true;
     }
 
-    @Override
-    public Pregunta getPregunta() {
-        return questionGiven;
-    }
+   
 
     @Override
     public void respuestaCorrecta() {
-        if (getCurrentTurnPlayer() != null && diceThrown
+        if (CurrentTurnPlayer() != null && diceThrown
                 && questionGiven != null) {
 
-            Player player = getCurrentTurnPlayer();
+            Player player = CurrentTurnPlayer();
 
             // Guardar estadisticas en segundo plano
           //  guardaEstadisticas(true, player.getUsername(), questionGiven);
 
             // Si es una pregunta de quesito, lo añadimos
-            if (player.getPosition().getTipoCasilla().equals(TipoCasilla.QUESITO)) {
+            if (player.getPosition().getTipo().equals(TipoCasilla.QUESITO)) {
                 player.addQuesito(player.getPosition().getCategoria());
             }
         
@@ -200,13 +207,66 @@ public class GameServiceImpl implements GameService {
 //            }
 //        }
 //    }
-
+    
     @Override
+	public MongoQuestions getMongoQuestions() {
+		return mongoQuestions;
+	}
+    @Override
+	public void setMongoQuestions(MongoQuestions mongoQuestions) {
+		this.mongoQuestions = mongoQuestions;
+	}
+    @Override
+	public int getActivePlayer() {
+		return activePlayer;
+	}
+    @Override
+	public void setActivePlayer(int activePlayer) {
+		this.activePlayer = activePlayer;
+	}
+    @Override
+	public boolean isDiceThrown() {
+		return diceThrown;
+	}
+    @Override
+	public void setDiceThrown(boolean diceThrown) {
+		this.diceThrown = diceThrown;
+	}
+    @Override
+	public Pregunta getQuestionGiven() {
+		return questionGiven;
+	}
+    @Override
+	public void setQuestionGiven(Pregunta questionGiven) {
+		this.questionGiven = questionGiven;
+	}
+    @Override
+	public Graph<Casilla> getTablero() {
+		return tablero;
+	}
+    @Override
+	public Player getWinner() {
+		return winner;
+	}
+    @Override
+	public boolean isSaveStats() {
+		return saveStats;
+	}
+    @Override
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+    @Override
+	public void setDiceNumber(int diceNumber) {
+		this.diceNumber = diceNumber;
+	}
+
+	@Override
     public void respuestaIncorrecta() {
-        if (getCurrentTurnPlayer() != null && diceThrown
+        if (CurrentTurnPlayer() != null && diceThrown
                 && questionGiven != null) {
 
-            Player player = getCurrentTurnPlayer();
+            
 
             // Guardar estadisticas en segundo plano
            // guardaEstadisticas(true, player.getUsername(), questionGiven);
@@ -225,11 +285,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean partidaFinalizada() {
         return winner != null;
-    }
-
-    @Override
-    public Player getGanador() {
-        return winner;
     }
 
     private void resetTurn() {

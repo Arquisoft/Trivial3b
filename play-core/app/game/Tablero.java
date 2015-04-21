@@ -2,14 +2,19 @@ package game;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import util.FileUtil;
 
 
-public class Tablero {
-    public static final int CIRCULAR = 1;
+public class Tablero implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final int CIRCULAR = 1;
     public static final int CUADRADO = 2;
 
     public static Graph<Casilla> getTablero(int type) {

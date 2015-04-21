@@ -2,7 +2,9 @@ package models;
 
 import game.Category;
 
-public class Pregunta {
+import java.io.Serializable;
+
+public class Pregunta implements Serializable{
 
     private String id;
 

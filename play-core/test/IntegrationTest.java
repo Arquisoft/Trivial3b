@@ -40,7 +40,7 @@ public class IntegrationTest {
             public void invoke(TestBrowser browser) {
 
               GameService game = GameFactory.newGameService(1);
-              assertNull(game.getCurrentTurnPlayer());
+              assertNull(game.CurrentTurnPlayer());
           	
           	for(int i=1;i<7;i++){
           			assertTrue(game.addPlayer(new Player("jugador"+i,"jugador"+i)));
@@ -49,7 +49,7 @@ public class IntegrationTest {
           	
           	assertFalse(game.addPlayer(new Player("error","error")));
           	
-          	assertEquals(game.getPlayers().get(0), game.getCurrentTurnPlayer());
+          	assertEquals(game.getPlayers().get(0), game.CurrentTurnPlayer());
           	
             }
         });
