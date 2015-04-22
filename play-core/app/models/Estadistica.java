@@ -6,33 +6,32 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
 public class Estadistica extends Model implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+	
+	//Si no funcionan los ids, descomentar y quitar el idUsuario y el de pregunta
+//	@Id
+//	private long id;
+	
 	@Id
-	private long id;
-	@Required
 	private String usuario;
-	private int questionId;
+	@Id
+	private String question;
+	private String category;
 	private int aciertos;
 	private int fallos;
 
-	public Estadistica(String usuario, int questionId, int aciertos, int fallos) {
+	public Estadistica(String usuario, String questionId, String category, int aciertos, int fallos) {
 		super();
 		this.usuario = usuario;
-		this.questionId = questionId;
+		this.question = question;
+		this.category = category;
 		this.aciertos = aciertos;
 		this.fallos = fallos;
-	}
-
-	public static Estadistica get(Integer id) {
-		return finder.byId(id);
 	}
 
 	public static void addEstadistica(Estadistica estadistica) {

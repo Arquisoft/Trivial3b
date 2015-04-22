@@ -4,12 +4,11 @@
 # --- !Ups
 
 create table estadistica (
-  id                        bigint not null,
-  usuario                   varchar(255),
-  question_id               integer,
+  usuario                   varchar(255) not null,
+  question                  varchar(255) not null,
+  category                  varchar(255),
   aciertos                  integer,
-  fallos                    integer,
-  constraint pk_estadistica primary key (id))
+  fallos                    integer)
 ;
 
 create table player (

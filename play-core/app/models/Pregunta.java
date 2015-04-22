@@ -4,7 +4,15 @@ import game.Category;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import play.db.ebean.Model;
+
 public class Pregunta implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
     private String id;
 
@@ -56,5 +64,4 @@ public class Pregunta implements Serializable{
     void setWrongAnswers(String[] wrongAnswers) {
         this.wrongAnswers = wrongAnswers;
     }
-
 }

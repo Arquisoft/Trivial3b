@@ -119,6 +119,7 @@ public class Player extends Model implements Serializable{
     }
     
 	private static Finder<String, Player> finder = new Finder<String, Player>(String.class, Player.class);
+	
 	public String getId() {
 		return id;
 	}
