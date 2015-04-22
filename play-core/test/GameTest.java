@@ -1,5 +1,3 @@
-package es.uniovi.asw.game;
-
 import static org.junit.Assert.*;
 import game.Casilla;
 import game.GameService;

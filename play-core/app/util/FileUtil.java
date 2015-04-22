@@ -1,15 +1,9 @@
 package util;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.imageio.ImageIO;
-
 import org.apache.commons.io.IOUtils;
-
-
-
 
 public class FileUtil {
 
@@ -23,18 +17,5 @@ public class FileUtil {
         } catch (IOException e) {
             throw new IllegalArgumentException("No se puede abrir el archivo");
         }
-    }
-
-    public static BufferedImage getImage(String string) {
-        try {
-            InputStream is = FileUtil.class.getClassLoader().getResourceAsStream(string);
-            BufferedImage bi = ImageIO.read(is);
-            IOUtils.closeQuietly(is);
-
-            return bi;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

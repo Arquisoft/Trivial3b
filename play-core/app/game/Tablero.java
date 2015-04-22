@@ -22,7 +22,7 @@ public class Tablero implements Serializable{
             case CIRCULAR:
                 return cargaGrafo("public/resources/grafoCircular.txt");
             case CUADRADO:
-                return cargaGrafo("grafoCuadrado.txt");
+                return cargaGrafo("public/resources/grafoCuadrado.txt");
 
             default:
                 return null;
