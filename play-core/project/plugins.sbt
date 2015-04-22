@@ -22,3 +22,6 @@ addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
 
 // FindBugs
 addSbtPlugin("de.johoop" % "findbugs4sbt" % "1.4.0")
+
+// Heroku
+addSbtPlugin("com.heroku" % "sbt-heroku" % "0.3.6")
