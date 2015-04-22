@@ -1,5 +1,7 @@
 # Trivial3b [![Build Status](https://travis-ci.org/Arquisoft/Trivial3b.svg?branch=master)](https://travis-ci.org/Arquisoft/Trivial3b)
 
+[Juega al Trivial3b!](http://trivial3b.herokuapp.com/)
+
 [Página web](https://arquisoft.github.io/Trivial3b/)
 
 ## Equipo formado por: 
