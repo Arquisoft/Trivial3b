@@ -20,15 +20,18 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
+
 				<a class="navbar-brand" href="#">Trivial3b</a>
 			</div>
+
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/logout">Cerrar sesión</a></li>
@@ -38,39 +41,38 @@
 	</nav>
 
 	<div class="col-xs-10 col-xs-offset-1 primerElemento">
-		
 		<h3>Hola @session.get("id")!</h3>
-		<br/>
+		<br />
+
 		<form>
-		
 			<h4>Elige un modo de juego:</h4>
 			<select id="modo">
 				<option>Multijugador en local</option>
 				<option>Multijugador en red</option>
-  			</select>
-			
+			</select>
+
 			<h4>Elige un tablero</h4>
 			<select id="tablero">
 				<option>Tablero cuadrado</option>
 				<option>Tablero circular</option>
-  			</select>
-  			<br/>
-  			<br/>
-  			<button type="submit" class="btn btn-primary">Jugar</button>
+			</select> <br /> <br />
+			<button type="submit" class="btn btn-primary">Jugar</button>
 		</form>
-		<br/>
+		<br />
+
 		<div class="row">
-		  	<div class="col-xs-offset-1 col-xs-5 col-md-offset-2 col-md-4">
-    			<a href="#" class="thumbnail">
-      			<img src="@routes.Assets.at("images/trivial4.jpg")" alt="Tablero cuadrado">
-    			</a>
-  			</div>
-  			<div class="col-xs-offset-1 col-xs-5 col-md-4">
-    			<a href="#" class="thumbnail">
-      			<img src="@routes.Assets.at("images/trivial5.jpg")" alt="Tablero circular">
-    			</a>
-  			</div>
-  		</div>
+			<div class="col-xs-offset-1 col-xs-5 col-md-offset-2 col-md-4">
+				<a href="#" class="thumbnail">
+					<img src="@routes.Assets.at("images/trivial4.jpg")" alt="Tablero cuadrado">
+				</a>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-5 col-md-4">
+				<a href="#" class="thumbnail">
+					<img src="@routes.Assets.at("images/trivial5.jpg")" alt="Tablero circular">
+				</a>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

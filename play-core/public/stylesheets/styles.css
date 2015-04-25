@@ -23,6 +23,42 @@
 	margin-top: 7.2em;
 }
 
-.tablalink { 
-	cursor: pointer; 
+.tablalink {
+	cursor: pointer;
+}
+
+.polygonStyle {
+	cursor: pointer;
+	width: 140px;
+	height: 140px;
+	background-color: red;
+	-moz-border-radius: 70px;
+	-webkit-border-radius: 70px;
+	border-radius: 70px
+}
+
+.players {
+	width: 25%;
+	font-size: 250%;
+	display: inline-block;
+}
+
+.gameBoard {
+	text-align: center;
+}
+
+.gameBoard > svg {
+	width: 540px;
+	height: 540px;
+}
+
+.alignLabel {
+	font-size: 200%;
+	vertical-align: middle;
+	margin-bottom: unset;
+}
+
+.rightFloated {
+	float: right;
+	margin-right: 25px;
 }

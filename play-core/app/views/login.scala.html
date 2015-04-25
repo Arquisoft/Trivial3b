@@ -2,73 +2,80 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-    	<title>Inicie sesión</title>
-	
-    	<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<head>
+<title>Inicie sesión</title>
 
-        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
-        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	    <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  </head>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+</head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Trivial3b</a>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="#">Trivial3b</a>
+			</div>
 		</div>
-	</div>
 	</nav>
-	
+
 	<div class="container primerElemento">
-	@helper.form(routes.Application.authenticate, 'class -> "estrecho") {
-   		
-   		@if(form.hasGlobalErrors) {
-   			<div class="alert alert-danger">@form.globalError.message</div>
+		@helper.form(routes.Application.authenticate, 'class -> "estrecho") {
+			@if(form.hasGlobalErrors) {
+				<div class="alert alert-danger">@form.globalError.message</div>
+			}
+
+			<h2 class="form-signin-heading">Bienvenido a Trivial3b</h2>
+
+			<label for="id" class="sr-only">Identificador de usuario</label>
+			<input type="text" id="id" name="id" value="@form("id").value" class="form-control"
+				placeholder="Identificador de usuario" required autofocus>
+
+			<label for="pass" class="sr-only">Contraseña</label>
+			<input type="password" id="password" name="password" class="form-control"
+				placeholder="Contraseña" required>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+			<br>
+
+			<a href="/register">
+				<button class="btn btn-link center-block" type="button">Registrarse</button>
+			</a>
 		}
-   		
-   		<h2 class="form-signin-heading">Bienvenido a Trivial3b</h2>
-   		
-   		<label for="id" class="sr-only">Identificador de usuario</label>
-   		<input type="text" id="id" name="id" class="form-control" placeholder="Identificador de usuario" value="@form("id").value" required autofocus>
- 		
- 		<label for="pass" class="sr-only">Contraseña</label>
-    	<input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
-    	
-    	<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
-    	<br>
-        <a href="/register">
-   		  <buttonclass="btn btn-link center-block" type="button" >Registrarse</button>
-		</a>
 
 		<!-- Para que angular evalue las expresiones, el padre tiene que contener el atributo'ng-app' -->
-		<div ng-app="test">
-			<p ng-app="showTime">Fecha actual: {{TheDate.now() | date:'HH:mm:ss dd-MM-yyyy'}}</p>
-			<p> 1+2={{1+2}}</p>
+		<div ng-app="test" align="right">
+			<p ng-app="showTime">
+				Fecha actual: {{TheDate.now() | date:'HH:mm:ss dd-MM-yyyy'}}
+			</p>
+			<!-- <p>1+2={{1+2}}</p> -->
 		</div>
 
 		<script>
-		var app = angular.module('test',[])
+			var app = angular.module('test', [])
 
-		app.run(function($rootScope,$interval){
-			$rootScope.TheDate = Date;
-			$interval(function(){}, 1000) // recarga el tiempo cada segundo
-		})
+			app.run(function($rootScope, $interval) {
+				$rootScope.TheDate = Date;
+
+				$interval(function() { }, 1000) // recarga el tiempo cada segundo
+			})
 		</script>
-	}
-    </div>
+	</div>
 </body>
 </html>

@@ -88,7 +88,6 @@ public class Juego extends Controller {
 		System.out.println("parar");
 		}
 		return ok(index.render(coordenadas, gameWeb,centrosx,centrosy,centrosximages,centrosyimages));
-		
 	}
 
 	public static List<String> getCoordenadas() {
@@ -99,6 +98,7 @@ public class Juego extends Controller {
 			coordenadas.add(lineas[i]);
 		return coordenadas;
 	}
+
 	public static void conexion(GameService game){
 		try{
 			Socket s = new Socket("localhost",9000);
@@ -109,6 +109,6 @@ public class Juego extends Controller {
 			oos.close();
 			os.close();
 			s.close();
-			}catch(Exception e){System.out.println(e);}
-			}
+		}catch(Exception e){System.out.println(e);}
+	}
 }

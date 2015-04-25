@@ -34,7 +34,7 @@ public class Application extends Controller {
 
 	@Security.Authenticated(AdminSecured.class)
 	public static Result showAdminStatistics() {
-	
+
 		return ok(adminStatistics.render());
 	}
 
@@ -45,7 +45,7 @@ public class Application extends Controller {
 		} else {
 			session().clear();
 			session("id", loginForm.get().id);
-			
+
 			if(loginForm.get().id.equals("admin"))
 				return redirect(routes.Application.showAdminStatistics());
 			else
@@ -54,7 +54,6 @@ public class Application extends Controller {
 	}
 
 	public static Result register() {
-
 		Form<Register> registerForm = Form.form(Register.class)
 				.bindFromRequest();
 		if (registerForm.hasErrors()) {

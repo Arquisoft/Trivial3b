@@ -1,5 +1,5 @@
 @import game._
- @(coordenadas: List[String], game: GameService,centrosx:List[String],centrosy: List[String],centrosximages:List[String],centrosyimages: List[String])
+@(coordenadas: List[String], game: GameService, centrosx: List[String], centrosy: List[String], centrosximages: List[String], centrosyimages: List[String])
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,113 +20,115 @@
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Trivial3b</a>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="#">Trivial3b</a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/logout">Cerrar sesión</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/logout">Cerrar sesión</a></li>
-			</ul>
-		</div>
-	</div>
 	</nav>
+
 	<div class="primerElemento">
-	@if(game.getQuestionGiven()!=null){
-	
-	<script type=”text/javascript”>
-		$(function() {
-		$(“#dialog”).dialog();
-		});
-	</script>
-	
-	div id="dialog" class="modal fade">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">@game.getQuestionGiven().getQuestion()</h4>
-	      </div>
-	      <div class="modal-footer">
-	        @for(respuesta<-game.getQuestionGiven().getWrongAnswers()){
-				<button class="btn btn-default" onclick="location.href='/respuestaIncorrecta'" type="submit">@respuesta</button>
+		@if(game.getQuestionGiven()!=null){
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#dialog").modal("show");
+				});
+			</script>
+		<div id="dialog" class="modal fade" data-backdrop="static" data-keyboard="false">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">@game.getQuestionGiven().getQuestion()</h4>
+						</div>
+						<div class="modal-footer">
+							@for(respuesta <- game.getQuestionGiven().getWrongAnswers()){
+								<button class="btn btn-default" type="submit"
+									onclick="location.href='/respuestaIncorrecta'">@respuesta</button>
+							}
+							<button class="btn btn-default" type="submit"
+								onclick="location.href='/respuestaCorrecta'">@game.getQuestionGiven().getCorrectAnswer()</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+
+		<div class="rightFloated">
+			<form action="/tirar" method="post">
+				<label class="alignLabel">@game.getDiceNumber()</label>
+
+				<button class="btn btn-primary" value="Tirar Dado"
+					type="submit" @if(!game.canThrowDice()){disabled="disabled"}>Tirar Dado</button>
+
+			</form>
+		</div>
+
+		<div>
+			@for(player <- game.getPlayers()){
+				<div class="players">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							@player.getId()
+							<div class="row">
+								@for(k<-0 until player.getCategorias().size()){
+									@if(player.getQuesitos().get(player.getCategorias().get(k))==null){
+									<div class="col-xs-4">
+										<img alt="" src="@routes.Assets.at("images/figuritabn"+(k+1)+".png")">
+									</div>
+									} else {
+									<div class="col-xs-4">
+										<img alt="" src="@routes.Assets.at("images/figurita"+(k+1)+".png")">
+									</div>
+								} }
+							</div>
+						</div>
+					</div>
+				</div>
 			}
-			<button class="btn btn-default" onclick="location.href='/respuestaCorrecta'" type="submit">@game.getQuestionGiven().getCorrectAnswer()</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	}
-	<div style="display:inline">
-	@for(player<-game.getPlayers()){
-	<div style="width:25%;font-size: 250%; display:inline-block;">
-	<div class="panel panel-default">
-		<div class="panel-body">@player.getId()
-		<div class="row">
-		@for(k<-0 until player.getCategorias().size()){
-		@if(player.getQuesitos().get(player.getCategorias().get(k))==null){
-		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/figuritabn"+(k+1)+".png")"></div>
-		}
-		@if(player.getQuesitos().get(player.getCategorias().get(k))!=null){
-		<div class="col-xs-4"><img alt="" src="@routes.Assets.at("images/figurita"+(k+1)+".png")"></div>
-		}
-		}
-	</div>
-	</div>
-	</div>
-	</div>
-	}
-	</div>
-	<div style="display:inline">
-	<svg style="margin-left: 30%; margin-top: 2%;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600px"
-		height="600px">
-	<image x="0" y="0" height="540" usemap="#mapa" width="540" xlink:href="@routes.Assets.at("images/trivial5.jpg")" />
-	<!-- Imagenes @for(player<-game.getPlayers()){
-	<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
-	}-->
-	@for(pl<-0 until game.getPlayers().size()){
-	@for(i<-0 until coordenadas.size()){
-	@if(i+1==game.getPlayers().get(pl).getPosition().getId()){
-    	<image x="@centrosximages.get(i)" y="@centrosyimages.get(i)" height="40" usemap="#mapa" width="40" xlink:href="@routes.Assets.at("images/figurita"+(pl+1)+".png")" />
-    }
-    }
-    }
-	@if(game.getMoves()!=null && game.canMove()){
-	@for(i<-0 until coordenadas.size()){
-		@for(casilla<-game.getMoves()){
-		@if(i+1==casilla.getId()){
-		<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black" />
-    <polygon id="@i" onclick="location.href='jugar/@i'"
-			style=cursor:pointer;width:140px;height:140px;background-color:
-			red; -moz-border-radius:70px;-webkit-border-radius:70px;border-radius:70px"
-			fill-opacity="0.0"
-			points="@coordenadas.get(i)" />
-    }
-    	
-    }
-    }
-    }
-    </svg>
-    </div>
-    <div style="display:inline">
-	<form action="/tirar" method="post">
-		<label style="margin-left: 83%; font-size: 250%">@game.getDiceNumber()</label>
-		@if(game.canThrowDice()){
-		<button class="btn btn-primary" value="Tirar Dado"
-			style="margin-left: 85%" type="submit">Tirar Dado</button>
-		} @if(!game.canThrowDice()){
-		<button class="btn btn-primary" value="Tirar Dado"
-			style="margin-left: 85%" type="submit" disabled="disabled">Tirar
-			Dado</button>
-		}
-	</form>
-	</div>
+		</div>
+
+		<div class="gameBoard">
+			<svg>
+				<image usemap="#mapa" height="540" width="540" xlink:href="@routes.Assets.at("images/trivial5.jpg")" />
+				<!-- Imagenes @for(player<-game.getPlayers()){
+				<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
+				}-->
+
+				@for(pl<-0 until game.getPlayers().size()){
+					@for(i<-0 until coordenadas.size()){
+						@if(i+1 == game.getPlayers().get(pl).getPosition().getId()){
+					    	<image x="@centrosximages.get(i)" y="@centrosyimages.get(i)" height="40" width="40"
+										usemap="#mapa" xlink:href="@routes.Assets.at("images/figurita"+(pl+1)+".png")" />
+					    }
+				    }
+			    }
+				@if(game.getMoves()!=null && game.canMove()){
+					@for(i <- 0 until coordenadas.size()){
+						@for(casilla <- game.getMoves()){
+							@if(i+1 == casilla.getId()){
+								<circle cx="@centrosx.get(i)" cy="@centrosy.get(i)" r="10" stroke="black" stroke-width="3" fill="black" />
+					    		<polygon id="@i" onclick="location.href='jugar/@i'" class="polygonStyle" fill-opacity="0.0" points="@coordenadas.get(i)" />
+					    	}
+				    	}
+				    }
+			    }
+			</svg>
+		</div>
 	</div>
 </body>
 </html>
