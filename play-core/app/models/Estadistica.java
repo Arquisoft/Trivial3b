@@ -25,7 +25,7 @@ public class Estadistica extends Model implements Serializable{
 	private int aciertos;
 	private int fallos;
 
-	public Estadistica(String usuario, String questionId, String category, int aciertos, int fallos) {
+	public Estadistica(String usuario, String question, String category, int aciertos, int fallos) {
 		super();
 		this.usuario = usuario;
 		this.question = question;
