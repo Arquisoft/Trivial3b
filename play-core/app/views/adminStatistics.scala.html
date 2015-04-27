@@ -1,31 +1,38 @@
+@import game._ 
+@(game: GameService)
 <!DOCTYPE html>
 <html>
 <head>
-<title>Inicio</title>
+<title>Estadisticas</title>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("javascripts/TableFilter/filtergrid.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
+<script src="@routes.Assets.at("javascripts/TableFilter/tableFilter_all.js")"></script>
+
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
 
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 
 				<a class="navbar-brand" href="#">Trivial3b</a>
@@ -38,5 +45,33 @@
 			</div>
 		</div>
 	</nav>
+	<br>
+	<br>
+	<br>
+	<p align="center">Para filtrar, introduzca en el campo de texto su busqueda y pulse enter</p>
+	
+	<table id="estadisticas">
+		<thead>
+			<tr>
+				<th>Usuario</th>
+				<th>Pregunta</th>
+				<th>Aciertos</th>
+				<th>Fallos</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for(estadistica <- game.getAllEstadisticas()){
+			<tr>
+				<td>@estadistica.getUsuario()</td>
+				<td>@estadistica.getQuestion()</td>
+				<td>@estadistica.getAciertos()</td>
+				<td>@estadistica.getFallos()</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+	<script language="javascript" type="text/javascript">  
+    	var tf = setFilterGrid("estadisticas");  
+	</script>   
 </body>
 </html>

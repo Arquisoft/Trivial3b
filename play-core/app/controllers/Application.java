@@ -16,6 +16,8 @@ import play.mvc.Security;
 import views.html.*;
 import controllers.authenticators.AdminSecured;
 import controllers.authenticators.ClientSecured;
+import com.fasterxml.jackson.databind.JsonNode;
+import play.libs.Json;
 
 public class Application extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
@@ -37,8 +39,9 @@ public class Application extends Controller {
 
 	@Security.Authenticated(AdminSecured.class)
 	public static Result showAdminStatistics() {
-
-		return ok(adminStatistics.render());
+		JsonNode node=Json.toJson(game);
+		GameService gameWeb=Json.fromJson(node, GameServiceImpl.class);
+		return ok(adminStatistics.render(gameWeb));
 	}
 
 	public static Result authenticate() {

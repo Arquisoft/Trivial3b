@@ -37,6 +37,27 @@ public class Estadistica extends Model implements Serializable{
 	public static void addEstadistica(Estadistica estadistica) {
 		estadistica.save();
 	}
+	
+	public String getUsuario(){
+		return usuario;
+	}
+	
+	public String getQuestion(){
+		return question;
+	}
+	
+	public int getAciertos(){
+		return aciertos;
+	}
+	
+	public int getFallos(){
+		return fallos;
+	}
+	
+	
+	public static List<Estadistica> obtenerTodasEstadisticas() {
+		return finder.findList();
+	}
 
 	public static List<Estadistica> obtenerEstadisticas(String usuario,
 			int pregunta) {

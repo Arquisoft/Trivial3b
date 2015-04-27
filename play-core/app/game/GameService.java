@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Player;
 import models.Pregunta;
+import models.Estadistica;
 import controllers.MongoQuestions;
 
 
@@ -121,5 +122,7 @@ public interface GameService {
 	public void setPlayers(List<Player> players);
 
 	public void setDiceNumber(int diceNumber);
+	
+	public List<Estadistica> getAllEstadisticas();
 
 }

@@ -8,6 +8,7 @@ import java.util.Random;
 
 import models.Player;
 import models.Pregunta;
+import models.Estadistica;
 import controllers.MongoQuestions;
 
 
@@ -327,4 +328,10 @@ public class GameServiceImpl implements GameService,Serializable {
 		return false;
 
 	}
+	
+	@Override
+	public List<Estadistica> getAllEstadisticas(){
+		return Estadistica.obtenerTodasEstadisticas();
+	}
+
 }
