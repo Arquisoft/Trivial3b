@@ -19,42 +19,61 @@ import play.test.TestBrowser;
 
 public class IntegrationTest {
 
-    /**
-     * add your integration test here
-     * in this example we just check if the welcome page is being shown
-     */
-    @Test
-    public void test() {
-        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
-            public void invoke(TestBrowser browser) {
-                browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("<html>");
-              //  browser.$("Registrarse").click();
-              //  browser.click("Registrarse");
-            //    assertThat(browser.url()).isEqualTo("http://localhost:3333/register");
-            }
-        });
-    }
+	/**
+	 * add your integration test here in this example we just check if the
+	 * welcome page is being shown
+	 */
+	@Test
+	public void test() {
+		running(testServer(3333, fakeApplication(inMemoryDatabase())),
+				HTMLUNIT, new Callback<TestBrowser>() {
+					public void invoke(TestBrowser browser) {
+						browser.goTo("http://localhost:3333");
+						assertThat(browser.pageSource()).contains("<html>");
+						// browser.$("Registrarse").click();
+						// browser.click("Registrarse");
+						// assertThat(browser.url()).isEqualTo("http://localhost:3333/register");
+					}
+				});
+	}
 
-    @Test
-    public void testGameService() {
-        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
-            public void invoke(TestBrowser browser) {
+	@Test
+	public void testGameService() {
+		running(testServer(3333, fakeApplication(inMemoryDatabase())),
+				HTMLUNIT, new Callback<TestBrowser>() {
+					public void invoke(TestBrowser browser) {
 
-              GameService game = GameFactory.newGameService(1);
-              assertNull(game.CurrentTurnPlayer());
-          	
-          	for(int i=1;i<7;i++){
-          			assertTrue(game.addPlayer(new Player("jugador"+i,"jugador"+i)));
-          			assertEquals(i, game.getPlayers().size());
-          	}
-          	
-          	assertFalse(game.addPlayer(new Player("error","error")));
-          	
-          	assertEquals(game.getPlayers().get(0), game.CurrentTurnPlayer());
-          	
-            }
-        });
-    }
-    
+						GameService game = GameFactory.newGameService(1);
+						assertNull(game.CurrentTurnPlayer());
+
+						for (int i = 1; i < 7; i++) {
+							assertTrue(game.addPlayer(new Player("jugador" + i,
+									"jugador" + i)));
+							assertEquals(i, game.getPlayers().size());
+						}
+
+						assertFalse(game
+								.addPlayer(new Player("error", "error")));
+
+						assertEquals(game.getPlayers().get(0),
+								game.CurrentTurnPlayer());
+
+						// comprobamos qu el partida no finalizo
+						assertFalse(game.partidaFinalizada());
+						// comprobamos qu eel jugador actual puede tirar el dado
+						assertTrue(game.canThrowDice());
+
+						// Tiramos el dado
+						int a = game.throwDice();
+						assertTrue(0 <= a);
+						assertTrue(6 >= a);
+
+						assertFalse(game.canThrowDice());
+						assertNull(game.throwDice());
+
+					}
+
+				});
+	}
+
 }
