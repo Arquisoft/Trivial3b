@@ -58,12 +58,16 @@ public class Juego extends Controller {
 		return ok(findGame.render(salas));
 	}
 	public static Result redirectIndex(){
+		Player player=new Player();
+		player=Player.get(session("id"));
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages));
+				centrosximages, centrosyimages,player.getId()));
 	}
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex(Integer tablero) throws IOException {
 		game=null;
+		Player playert=new Player();
+		playert=Player.get(session("id"));
 		SecureRandom random = new SecureRandom();
 		String id=new BigInteger(130, random).toString(32);
 		for(String key:salas.keySet()){
@@ -83,20 +87,30 @@ public class Juego extends Controller {
 			leerTablero(tablero);
 		}
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages));
+				centrosximages, centrosyimages,playert.getId()));
 	}
 	public static Result joinGame(String id){
+		boolean isPlaying=false;
 		for(String key:salas.keySet()){
 			if(id.equals(salas.get(key).getId())){
+				for(Player p:salas.get(key).getPlayers()){
+					if(p.getId().equals(session("id"))){
+						isPlaying=true;
+					}
+				}
+				if(!isPlaying){
 				Player player=new Player();
 				player=Player.get(session("id"));
 				salas.get(key).addPlayer(player);
 				game=salas.get(key);
 				leerTablero(game.getTipo());
+				}
+				else{
+					badRequest();
+				}
 			}
 		}
-		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages));
+		return redirect("/indexr/");
 	}
 	public static List<String> getCoordenadas() {
 		String fichero = FileUtil

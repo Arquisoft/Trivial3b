@@ -1,5 +1,5 @@
 @import game._
-@(coordenadas: List[String], game: GameService, centrosx: List[String], centrosy: List[String], centrosximages: List[String], centrosyimages: List[String])
+@(coordenadas: List[String], game: GameService, centrosx: List[String], centrosy: List[String], centrosximages: List[String], centrosyimages: List[String],usuario: String)
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +41,6 @@
 			</div>
 		</div>
 	</nav>
-
 	<div class="primerElemento">
 		@if(game.getQuestionGiven()!=null){
 		<script type="text/javascript">
@@ -68,7 +67,6 @@
 			</div>
 		</div>
 		}
-
 		<div class="divPlayers">
 			@for(player <- game.getPlayers()){
 			<div class="players">
@@ -96,7 +94,7 @@
 					<label class="alignLabel">@game.getDiceNumber()</label>
 
 					<button class="btn btn-primary" value="Tirar Dado" type="submit"
-						@if(!game.canThrowDice()){disabled="disabled"}>Tirar Dado</button>
+						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>Tirar Dado</button>
 
 				</form>
 			</div>
