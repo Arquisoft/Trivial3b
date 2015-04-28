@@ -1,4 +1,4 @@
-@import game._ 
+@import game._
 @(game: GameService)
 <!DOCTYPE html>
 <html>
@@ -13,13 +13,11 @@
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("javascripts/TableFilter/filtergrid.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 
-<script src="@routes.Assets.at("javascripts/TableFilter/tableFilter_all.js")"></script>
+<script src="@routes.Assets.at("javascripts/TableFilter/tablefilter_all_min.js")"></script>
 
 </head>
 <body>
@@ -49,7 +47,7 @@
 	<br>
 	<br>
 	<p align="center">Para filtrar, introduzca en el campo de texto su busqueda y pulse enter</p>
-	
+
 	<table id="estadisticas">
 		<thead>
 			<tr>
@@ -70,8 +68,8 @@
 			}
 		</tbody>
 	</table>
-	<script language="javascript" type="text/javascript">  
-    	var tf = setFilterGrid("estadisticas");  
-	</script>   
+	<script language="javascript" type="text/javascript">
+    	var tf = setFilterGrid("estadisticas");
+	</script>
 </body>
 </html>

@@ -22,7 +22,7 @@ import play.libs.Json;
 public class Application extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
 	public static GameService game=new GameServiceImpl();
-	
+
 	public static Result showLogin() {
 		cargarDatos();
 		return ok(login.render(Form.form(Login.class)));
@@ -76,11 +76,9 @@ public class Application extends Controller {
 		return redirect(routes.Application.showLogin());
 	}
 
-	
-	private static boolean primeraVez = true; //TEMPORAL
 	private static void cargarDatos() {
-		
-		if(primeraVez) {
+
+		if(Player.get("admin") == null) {
 			Player p0 = new Player("admin", "admin");
 			p0.save();
 			Player p1 = new Player("usuario1", "usuario1");
@@ -107,11 +105,9 @@ public class Application extends Controller {
 			e8.save();
 			Estadistica e9 = new Estadistica(p3.getId(), "P0003", Category.HISTORIA.toString(), 0, 0);
 			e9.save();
-			
-			primeraVez = false;
 		}
 	}
-	
+
 	public static class Login {
 		public String id;
 		public String password;
