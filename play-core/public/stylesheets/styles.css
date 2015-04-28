@@ -7,6 +7,10 @@
 	margin-top: 5em;
 }
 
+.modal-footer {
+	display: table;
+}
+
 .loginCentrado {
 	margin-top: 10em;
 }
@@ -37,17 +41,21 @@
 	border-radius: 70px
 }
 
-.players {
+.divPlayers {
+	margin-left: 1em;
+	margin-rigth: 1em;
 	width: 25%;
 	font-size: 250%;
-	display: inline-block;
+	display: inline-table;
 }
 
 .gameBoard {
 	text-align: center;
+	float: left;
+	margin-left: 13em;
 }
 
-.gameBoard > svg {
+.gameBoard>svg {
 	width: 540px;
 	height: 540px;
 }
@@ -61,4 +69,5 @@
 .rightFloated {
 	float: right;
 	margin-right: 25px;
+	text-align: center;
 }
