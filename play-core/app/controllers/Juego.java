@@ -3,12 +3,13 @@ package controllers;
 import game.GameService;
 import game.GameServiceImpl;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.Player;
 import play.Logger;
@@ -16,20 +17,19 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import util.FileUtil;
+import views.html.findGame;
 import views.html.index;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
-	static Socket so;
-	DataInputStream entrada;
-	static DataOutputStream mensaje;
 	public static Integer tipoTablero;
+	public static Map<String,GameService> salas=new HashMap<String,GameService>();
 	public  static List<String> coordenadas = new ArrayList<String>();
 	public  static List<String> centrosx = new ArrayList<String>();
 	public  static List<String> centrosy = new ArrayList<String>();
 	public  static List<String> centrosximages = new ArrayList<String>();
 	public  static List<String> centrosyimages = new ArrayList<String>();
-	public  static GameService game = new GameServiceImpl();
+	public  static GameService game;
 
 	public static Result jugar(Integer posicion) {
 		game.moveTo(game.getCasilla(posicion + 1));
@@ -44,6 +44,9 @@ public class Juego extends Controller {
 
 	public static Result respuestaCorrecta() {
 		game.respuestaCorrecta();
+		if(game.partidaFinalizada()){
+			//Borrar la partida actual para dicho usuario
+		}
 		return redirect("/indexr/");
 	}
 
@@ -51,22 +54,50 @@ public class Juego extends Controller {
 		game.respuestaIncorrecta();
 		return redirect("/indexr/");
 	}
+	public static Result findGame(){
+		return ok(findGame.render(salas));
+	}
 	public static Result redirectIndex(){
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
 				centrosximages, centrosyimages));
 	}
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex(Integer tablero) throws IOException {
-		game=new GameServiceImpl();
-		game.setTablero(tablero);
-		Player player=new Player();
-		player=Player.get(session("id"));
-		game.addPlayer(player);
-		leerTablero(tablero);
+		game=null;
+		SecureRandom random = new SecureRandom();
+		String id=new BigInteger(130, random).toString(32);
+		for(String key:salas.keySet()){
+			if(key.equals(session("id"))){
+				game=salas.get(key);
+				leerTablero(game.getTipo());
+			}
+		}
+		if(game==null){
+			game=new GameServiceImpl();
+			salas.put(session("id"), game);
+			game.setTablero(tablero);
+			game.setId(id);
+			Player player=new Player();
+			player=Player.get(session("id"));
+			game.addPlayer(player);
+			leerTablero(tablero);
+		}
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
 				centrosximages, centrosyimages));
 	}
-
+	public static Result joinGame(String id){
+		for(String key:salas.keySet()){
+			if(id.equals(salas.get(key).getId())){
+				Player player=new Player();
+				player=Player.get(session("id"));
+				salas.get(key).addPlayer(player);
+				game=salas.get(key);
+				leerTablero(game.getTipo());
+			}
+		}
+		return ok(index.render(coordenadas, game, centrosx, centrosy,
+				centrosximages, centrosyimages));
+	}
 	public static List<String> getCoordenadas() {
 		String fichero = FileUtil
 				.getFile("public/resources/botonesCircular.txt");

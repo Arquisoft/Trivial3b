@@ -70,6 +70,7 @@ public class Application extends Controller {
 
 	public static Result logout() {
 		session().clear();
+		session().remove("id");
 		return redirect(routes.Application.showLogin());
 	}
 

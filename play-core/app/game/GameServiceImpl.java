@@ -19,7 +19,7 @@ public class GameServiceImpl implements GameService,Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int TIPO_GRAFO = 1;
     private static final int MAX_PLAYERS = 6;
-
+    private String id;
     private Random rand = new Random();
     private MongoQuestions mongoQuestions = new MongoQuestions();
 
@@ -355,6 +355,16 @@ public class GameServiceImpl implements GameService,Serializable {
 		setTipo(tipo);
 		tablero= Tablero.getTablero(tipo);
 		
+	}
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
+	}
+	@Override
+	public void setId(String id) {
+		// TODO Auto-generated method stub
+		this.id=id;
 	}
 
 }
