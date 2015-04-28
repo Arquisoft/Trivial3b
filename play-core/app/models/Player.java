@@ -57,7 +57,14 @@ public class Player extends Model implements Serializable{
 		categorias.add(Category.HISTORIA);
 		categorias.add(Category.ARTEYLITERATURA);
 	}
-
+	public Player(){
+		categorias.add(Category.CIENCIAYTECNOLOGIA);
+		categorias.add(Category.DEPORTES);
+		categorias.add(Category.ESPECTACULOSYENTRETENIMIENTO);
+		categorias.add(Category.GEOGRAFIA);
+		categorias.add(Category.HISTORIA);
+		categorias.add(Category.ARTEYLITERATURA);
+	}
 	public static Player authenticate(String id, String password) {
 
 		Player user = get(id);

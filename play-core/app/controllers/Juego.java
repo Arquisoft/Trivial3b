@@ -35,36 +35,39 @@ public class Juego extends Controller {
 	public final static List<String> centrosy = new ArrayList<String>();
 	public final static List<String> centrosximages = new ArrayList<String>();
 	public final static List<String> centrosyimages = new ArrayList<String>();
-	public final static GameService game = new GameServiceImpl();
+	public  static GameService game = new GameServiceImpl();
 
 	public static Result jugar(Integer posicion) {
 		game.moveTo(game.getCasilla(posicion + 1));
-		return redirect("/index/"+tipoTablero);
+		return redirect("/indexr/");
 	}
 
 	public static Result tirar() {
 		game.throwDice();
 		game.move();
-		return redirect("/index/"+tipoTablero);
+		return redirect("/indexr/");
 	}
 
 	public static Result respuestaCorrecta() {
 		game.respuestaCorrecta();
-		return redirect("/index/"+tipoTablero);
+		return redirect("/indexr/");
 	}
 
 	public static Result respuestaIncorrecta() {
 		game.respuestaIncorrecta();
-		return redirect("/index/"+tipoTablero);
+		return redirect("/indexr/");
 	}
-
+	public static Result redirectIndex(){
+		return ok(index.render(coordenadas, game, centrosx, centrosy,
+				centrosximages, centrosyimages));
+	}
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex(Integer tablero) throws IOException {
+		game=new GameServiceImpl();
 		game.setTablero(tablero);
-		if (game.getPlayers().size() == 0) {
-			game.addPlayer(new Player("f", "f"));
-			game.addPlayer(new Player("cristian", "cris"));
-		}
+		Player player=new Player();
+		player=Player.get(session("id"));
+		game.addPlayer(player);
 		leerTablero(tablero);
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
 				centrosximages, centrosyimages));
@@ -81,15 +84,19 @@ public class Juego extends Controller {
 
 	public static void leerTablero(Integer tablero) {
 		tipoTablero=tablero;
+		String fichero=null;
+		String[] lineas=null;
+		String[] lineas2=null;
+		String fichero2=null;
 		switch (tablero) {
 		case 1:
-			String fichero = FileUtil
+			fichero = FileUtil
 					.getFile("public/resources/botonesCircular.txt");
-			String[] lineas = fichero.split("[\n]");
+			lineas = fichero.split("[\n]");
 			for (int i = 0; i < lineas.length; i++)
 				coordenadas.add(lineas[i]);
-			String fichero2 = FileUtil.getFile("public/resources/centros.txt");
-			String[] lineas2 = fichero2.split("[\n]");
+			fichero2 = FileUtil.getFile("public/resources/centros.txt");
+			lineas2 = fichero2.split("[\n]");
 			for (int i = 0; i < lineas2.length; i++) {
 				String[] datos = lineas2[i].trim().split(",");
 				centrosx.add(datos[0]);
@@ -100,6 +107,25 @@ public class Juego extends Controller {
 				centrosy.add(datos[1]);
 			}
 			break;
+		case 2:
+			fichero = FileUtil
+			.getFile("public/resources/botonesCuadrado.txt");
+			lineas = fichero.split("[\n]");
+			for (int i = 0; i < lineas.length; i++)
+				coordenadas.add(lineas[i]);
+			fichero2 = FileUtil.getFile("public/resources/centrosCuadrado.txt");
+			lineas2 = fichero2.split("[\n]");
+			for (int i = 0; i < lineas2.length; i++) {
+				String[] datos = lineas2[i].trim().split(",");
+				centrosx.add(datos[0]);
+				int centro = Integer.parseInt(datos[0]);
+				int centroy = Integer.parseInt(datos[1]);
+				centrosximages.add(String.valueOf(centro - 19));
+				centrosyimages.add(String.valueOf(centroy - 34));
+				centrosy.add(datos[1]);
+			}
+			break;
+		
 		}
 	}
 }

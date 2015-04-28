@@ -10,12 +10,12 @@ POST	/register					controllers.Application.register()
 GET		/choice						controllers.Application.showChoice()
 
 #FALTA: POST	/choice		...
-
+GET		/indexr/					controllers.Juego.redirectIndex()
 GET		/index/:i					controllers.Juego.showIndex(i:Integer)
 GET		/admin						controllers.Application.showAdminStatistics()
 GET		/logout						controllers.Application.logout()
 POST 	/tirar                      controllers.Juego.tirar()
-GET 	/index/jugar/:i                   controllers.Juego.jugar(i:Integer)
+GET 	/indexr/jugar/:i                   controllers.Juego.jugar(i:Integer)
 GET 	/respuestaIncorrecta        controllers.Juego.respuestaIncorrecta()
 GET 	/respuestaCorrecta          controllers.Juego.respuestaCorrecta()
 
