@@ -16,6 +16,9 @@ public interface GameService {
 	 */
 	boolean partidaFinalizada();
 	public List<Casilla> getMoves();
+	public Integer getTipo();
+	public void setTipo(Integer tipo);
+	public void setTablero(int tipo);
 	/**
 	 * Devuelve al ganador si lo hay, o null si no
 	 */

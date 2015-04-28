@@ -104,7 +104,12 @@
 
 		<div class="gameBoard">
 			<svg>
+			@if(game.getTipo()==1){
 				<image usemap="#mapa" height="540" width="540" xlink:href="@routes.Assets.at("images/trivial5.jpg")" />
+				}
+			@if(game.getTipo()!=1){
+				<image usemap="#mapa" height="540" width="540" xlink:href="@routes.Assets.at("images/trivial4.jpg")" />
+				}
 				<!-- Imagenes @for(player<-game.getPlayers()){
 				<image x="player.getPosition().getId()*60" y="0" height="20" usemap="#mapa" width="20" xlink:href="@routes.Assets.at("images/cienciasbn.png")" />
 				}-->

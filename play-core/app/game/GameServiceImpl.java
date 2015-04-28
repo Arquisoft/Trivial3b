@@ -26,7 +26,11 @@ public class GameServiceImpl implements GameService,Serializable {
     // Tablero y jugadores
     private List<Player> players = new ArrayList<Player>();
     private Graph<Casilla> tablero;
-    private List<Casilla> moves;
+    private Integer tipo;
+   
+
+
+	private List<Casilla> moves;
     // Estado actual
     private int activePlayer;
     private boolean diceThrown;
@@ -36,7 +40,7 @@ public class GameServiceImpl implements GameService,Serializable {
     public int getDiceNumber() {
 		return diceNumber;
 	}
-
+    
 
 	private Pregunta questionGiven;
 
@@ -48,9 +52,9 @@ public class GameServiceImpl implements GameService,Serializable {
     
 
     public GameServiceImpl(int var) {
+    	setTipo(var);
         tablero = Tablero.getTablero(var);
     }
-
     public GameServiceImpl() {
         this(TIPO_GRAFO);
     }
@@ -332,6 +336,25 @@ public class GameServiceImpl implements GameService,Serializable {
 	@Override
 	public List<Estadistica> getAllEstadisticas(){
 		return Estadistica.obtenerTodasEstadisticas();
+	}
+
+	@Override
+	public Integer getTipo() {
+		// TODO Auto-generated method stub
+		return tipo;
+	}
+
+	@Override
+	public void setTipo(Integer tipo) {
+		// TODO Auto-generated method stub
+		this.tipo=tipo;
+	}
+	@Override
+	public void setTablero(int tipo) {
+		// TODO Auto-generated method stub
+		setTipo(tipo);
+		tablero= Tablero.getTablero(tipo);
+		
 	}
 
 }

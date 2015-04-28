@@ -40,11 +40,10 @@
 		</div>
 	</nav>
 
-	<div class="col-xs-10 col-xs-offset-1 primerElemento">
+	<div class="col-xs-10 col-xs-offset-1 primerElemento" ng-app="test">
 		<h3>Hola @session.get("id")!</h3>
 		<br />
 
-		<form>
 			<h4>Elige un modo de juego:</h4>
 			<select id="modo">
 				<option>Multijugador en local</option>
@@ -52,12 +51,10 @@
 			</select>
 
 			<h4>Elige un tablero</h4>
-			<select id="tablero">
-				<option>Tablero cuadrado</option>
-				<option>Tablero circular</option>
-			</select> <br /> <br />
-			<button type="submit" class="btn btn-primary">Jugar</button>
-		</form>
+			<select id="tablero" ng-model="currentValue" ng-options="item.name for item in opciones"
+			ng-change="change(currentValue)">
+			</select>
+			<button type="submit" class="btn btn-primary" ng-click="redirect()">Jugar</button>
 		<br />
 
 		<div class="row">
@@ -74,5 +71,26 @@
 			</div>
 		</div>
 	</div>
+	<!--Angular JS-->
+	<script>
+			var app = angular.module('test', [])
+
+			app.run(function($rootScope,$window) {
+				$rootScope.tablero=1;
+				$rootScope.opciones=[{name:"Tablero Cuadrado"}, {name:"Tablero Circular"}];
+				$rootScope.currentValue = $rootScope.opciones[1];
+				$rootScope.change= function(currentValue){
+					if(currentValue==$rootScope.opciones[0]){
+					$rootScope.tablero=2;
+					}
+					else{
+						$rootScope.tablero=1;
+					}
+				};
+				$rootScope.redirect=function(){
+					$window.location.href='/index/'+$rootScope.tablero;
+				};
+			})
+		</script>
 </body>
 </html>

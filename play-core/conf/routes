@@ -11,11 +11,11 @@ GET		/choice						controllers.Application.showChoice()
 
 #FALTA: POST	/choice		...
 
-GET		/index						controllers.Juego.showIndex()
+GET		/index/:i					controllers.Juego.showIndex(i:Integer)
 GET		/admin						controllers.Application.showAdminStatistics()
 GET		/logout						controllers.Application.logout()
 POST 	/tirar                      controllers.Juego.tirar()
-GET 	/jugar/:i                   controllers.Juego.jugar(i:Integer)
+GET 	/index/jugar/:i                   controllers.Juego.jugar(i:Integer)
 GET 	/respuestaIncorrecta        controllers.Juego.respuestaIncorrecta()
 GET 	/respuestaCorrecta          controllers.Juego.respuestaCorrecta()
 

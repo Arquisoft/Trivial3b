@@ -54,7 +54,7 @@ public class Application extends Controller {
 			if(loginForm.get().id.equals("admin"))
 				return redirect(routes.Application.showAdminStatistics());
 			else
-				return redirect(routes.Juego.showIndex());
+				return redirect(routes.Application.showChoice());
 		}
 	}
 

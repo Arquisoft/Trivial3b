@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import play.mvc.Result;
 import controllers.Application;
+import controllers.Juego;
 import play.test.FakeRequest;
 
 /**
