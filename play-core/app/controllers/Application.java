@@ -38,9 +38,7 @@ public class Application extends Controller {
 
 	@Security.Authenticated(AdminSecured.class)
 	public static Result showAdminStatistics() {
-		JsonNode node=Json.toJson(game);
-		GameService gameWeb=Json.fromJson(node, GameServiceImpl.class);
-		return ok(adminStatistics.render(gameWeb));
+		return ok(adminStatistics.render(game));
 	}
 
 	public static Result authenticate() {

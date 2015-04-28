@@ -6,23 +6,17 @@ import game.GameServiceImpl;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 import models.Player;
 import play.Logger;
-import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import util.FileUtil;
 import views.html.index;
-
-import com.fasterxml.jackson.databind.JsonNode;
-
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
