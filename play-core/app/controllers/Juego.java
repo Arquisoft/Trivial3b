@@ -30,11 +30,11 @@ public class Juego extends Controller {
 	DataInputStream entrada;
 	static DataOutputStream mensaje;
 	public static Integer tipoTablero;
-	public final static List<String> coordenadas = new ArrayList<String>();
-	public final static List<String> centrosx = new ArrayList<String>();
-	public final static List<String> centrosy = new ArrayList<String>();
-	public final static List<String> centrosximages = new ArrayList<String>();
-	public final static List<String> centrosyimages = new ArrayList<String>();
+	public  static List<String> coordenadas = new ArrayList<String>();
+	public  static List<String> centrosx = new ArrayList<String>();
+	public  static List<String> centrosy = new ArrayList<String>();
+	public  static List<String> centrosximages = new ArrayList<String>();
+	public  static List<String> centrosyimages = new ArrayList<String>();
 	public  static GameService game = new GameServiceImpl();
 
 	public static Result jugar(Integer posicion) {
@@ -83,13 +83,18 @@ public class Juego extends Controller {
 	}
 
 	public static void leerTablero(Integer tablero) {
-		tipoTablero=tablero;
 		String fichero=null;
 		String[] lineas=null;
 		String[] lineas2=null;
 		String fichero2=null;
+		coordenadas=new ArrayList<String>();
+		centrosx=new ArrayList<String>();
+		centrosy=new ArrayList<String>();
+		centrosximages=new ArrayList<String>();
+		centrosyimages=new ArrayList<String>();
 		switch (tablero) {
 		case 1:
+			Logger.info("circulo");
 			fichero = FileUtil
 					.getFile("public/resources/botonesCircular.txt");
 			lineas = fichero.split("[\n]");
@@ -108,6 +113,7 @@ public class Juego extends Controller {
 			}
 			break;
 		case 2:
+			Logger.info("cuadrado");
 			fichero = FileUtil
 			.getFile("public/resources/botonesCuadrado.txt");
 			lineas = fichero.split("[\n]");
