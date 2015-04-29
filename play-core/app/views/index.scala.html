@@ -1,7 +1,7 @@
 @import game._
 @(coordenadas: List[String], game: GameService, centrosx: List[String], centrosy: List[String], centrosximages: List[String], centrosyimages: List[String],usuario: String)
 <!DOCTYPE html>
-<html>
+<html ng-app="index">
 <head>
 <title>Inicio</title>
 
@@ -17,7 +17,6 @@
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap-dialog.js")"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-<<<<<<< HEAD
 <script src="@routes.Assets.at("javascripts/jquery.progressTimer.min.js")"></script>
 <script>
 var app = angular.module('index', [])
@@ -32,8 +31,6 @@ app.run(function($rootScope,$interval,$location) {
 	 setInterval($rootScope.refresh, 5000);
 })
 </script>
-=======
->>>>>>> 016c6e9b5a1f7c67a5fb0e787b459713f2e47ebe
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
