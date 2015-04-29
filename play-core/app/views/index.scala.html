@@ -1,7 +1,7 @@
 @import game._
 @(coordenadas: List[String], game: GameService, centrosx: List[String], centrosy: List[String], centrosximages: List[String], centrosyimages: List[String],usuario: String)
 <!DOCTYPE html>
-<html>
+<html ng-app="index">
 <head>
 <title>Inicio</title>
 
@@ -17,6 +17,19 @@
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap-dialog.js")"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script>
+var app = angular.module('index', [])
+
+app.run(function($rootScope,$interval,$location) {
+	$rootScope.refresh=function()
+	{
+		if(!@game.CurrentTurnPlayer().getId().equals(usuario)){
+		   window.location.reload();
+		}
+	}
+	 setInterval($rootScope.refresh, 5000);
+})
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -42,7 +55,7 @@
 		</div>
 	</nav>
 	<div class="primerElemento">
-		@if(game.getQuestionGiven()!=null){
+		@if(game.getQuestionGiven()!=null && game.CurrentTurnPlayer().getId().equals(usuario)){
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#dialog").modal("show");
@@ -67,6 +80,7 @@
 			</div>
 		</div>
 		}
+		<div class="alert alert-danger">Turno del jugador @game.CurrentTurnPlayer().getId()</div>
 		<div class="divPlayers">
 			@for(player <- game.getPlayers()){
 			<div class="players">
@@ -92,7 +106,6 @@
 			<div class="rightFloated">
 				<form action="/tirar" method="post">
 					<label class="alignLabel">@game.getDiceNumber()</label>
-
 					<button class="btn btn-primary" value="Tirar Dado" type="submit"
 						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>Tirar Dado</button>
 
@@ -123,7 +136,7 @@
 					    }
 				    }
 			    }
-				@if(game.getMoves()!=null && game.canMove()){
+				@if(game.getMoves()!=null && game.canMove() && game.CurrentTurnPlayer().getId().equals(usuario)){
 					@for(i <- 0 until coordenadas.size()){
 						@for(casilla <- game.getMoves()){
 							@if(i+1 == casilla.getId()){
