@@ -22,7 +22,6 @@ import views.html.*;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
-	public static Integer tipoTablero;
 	public static Map<String,GameService> salas=new HashMap<String,GameService>();
 	public  static List<String> coordenadas = new ArrayList<String>();
 	public  static List<String> centrosx = new ArrayList<String>();
