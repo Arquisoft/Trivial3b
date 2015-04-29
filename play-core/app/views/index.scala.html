@@ -21,8 +21,8 @@
 	var acierto = new Audio();
 	var fallo = new Audio();
 
-	acierto.src = "/sounds/Acierto.mp3";
-	fallo.src = "/sounds/Fallo.mp3";
+	acierto.src = "@routes.Assets.at("/sounds/Acierto.mp3")";
+	fallo.src = "@routes.Assets.at("/sounds/Fallo.mp3")";
 
 	function playAcierto() {
 		acierto.play(); // Play button sound now
