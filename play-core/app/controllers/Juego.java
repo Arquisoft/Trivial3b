@@ -54,7 +54,10 @@ public class Juego extends Controller {
 
 	public static Result respuestaIncorrecta() {
 		game.respuestaIncorrecta();
-		return redirect("/indexr/");
+		Player player=new Player();
+		player=Player.get(session("id"));
+		return ok(index.render(coordenadas, game, centrosx, centrosy,
+				centrosximages, centrosyimages,player.getId(),true));
 	}
 	public static Result findGame(){
 		return ok(findGame.render(salas));
@@ -70,7 +73,7 @@ public class Juego extends Controller {
 		Player player=new Player();
 		player=Player.get(session("id"));
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages,player.getId()));
+				centrosximages, centrosyimages,player.getId(),false));
 	}
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex(Integer tablero) throws IOException {
@@ -96,7 +99,7 @@ public class Juego extends Controller {
 			leerTablero(tablero);
 		}
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages,playert.getId()));
+				centrosximages, centrosyimages,playert.getId(),false));
 	}
 	public static Result joinGame(String id){
 		boolean isPlaying=false;
