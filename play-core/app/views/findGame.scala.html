@@ -35,13 +35,18 @@
 			</div>
 
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="/choice">Jugar</a></li>
+					<li><a href="/encurso">Partidas en curso</a></li>
+					<li><a href="/deleteGame">Eliminar Partida</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/logout">Cerrar sesión</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div class="panel panel-default">
+	<div id="panel" class="panel panel-default">
   <div class="panel-heading">Partidas</div>
   <div class="panel-body">
     @for(key<-salas.keySet()){

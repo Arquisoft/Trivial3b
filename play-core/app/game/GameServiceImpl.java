@@ -366,5 +366,16 @@ public class GameServiceImpl implements GameService,Serializable {
 		// TODO Auto-generated method stub
 		this.id=id;
 	}
+	@Override
+	public List<String> getAnswers() {
+		// TODO Auto-generated method stub
+		List<String> respuestas=new ArrayList<String>();
+		for(String respuesta:getQuestionGiven().getWrongAnswers()){
+			respuestas.add(respuesta);
+		}
+		respuestas.add(getQuestionGiven().getCorrectAnswer());
+		Collections.shuffle(respuestas);
+		return respuestas;
+	}
 
 }

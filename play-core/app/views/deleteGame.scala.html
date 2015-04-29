@@ -1,5 +1,7 @@
+@import game._
+@(salas: Map[String,GameService],usuario: String)
 <!DOCTYPE html>
-<html ng-app="test">
+<html>
 <head>
 <title>Inicio</title>
 
@@ -15,7 +17,6 @@
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap-dialog.js")"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-<script src="@routes.Assets.at("javascripts/choose.js")"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -32,50 +33,32 @@
 
 				<a class="navbar-brand" href="#">Trivial3b</a>
 			</div>
+
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="/choice">Jugar</a></li>
+					<li><a href="/findGame">Buscar Partida</a></li>
+					<li><a href="/encurso">Partidas en curso</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/logout">Cerrar sesión</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-left">
-					<li><a href="/encurso">Partidas en curso</a></li>
-					<li><a href="/findGame">Buscar Partida</a></li>
-					<li><a href="/deleteGame">Eliminar Partida</a></li>
-				</ul>
-			</div>
-			</div>
-	</nav>
-
-	<div class="col-xs-10 col-xs-offset-1 primerElemento">
-		<h3>Hola @session.get("id")!</h3>
-		<br />
-
-			<h4>Elige un modo de juego:</h4>
-			<select id="modo" ng-model="currentValue2" ng-options="item.name for item in opciones2"
-			ng-change="change2(currentValue2)">
-			</select>
-			<div ng-if="selecteable">
-			<h4>Elige un tablero</h4>
-			<select id="tablero" ng-model="currentValue" ng-options="item.name for item in opciones"
-			ng-change="change(currentValue)">
-			</select>
-			</div>
-			<button type="submit" class="btn btn-primary" ng-if="selecteable" ng-click="redirect()">Jugar</button>
-			<button type="submit" class="btn btn-primary" ng-if="!selecteable" ng-click="redirect2()">Buscar Partidas</button>
-		<br />
-
-		<div class="row">
-			<div class="col-xs-offset-1 col-xs-5 col-md-offset-2 col-md-4">
-				<a href="#" class="thumbnail">
-					<img src="@routes.Assets.at("images/trivial4.jpg")" alt="Tablero cuadrado">
-				</a>
-			</div>
-
-			<div class="col-xs-offset-1 col-xs-5 col-md-4">
-				<a href="#" class="thumbnail">
-					<img src="@routes.Assets.at("images/trivial5.jpg")" alt="Tablero circular">
-				</a>
 			</div>
 		</div>
-	</div>
-</body>
-</html>
+	</nav>
+	<div id="panel" class="panel panel-default">
+  <div class="panel-heading">Borrar partida en curso</div>
+  <div class="panel-body">
+    @for(key<-salas.keySet()){
+   		 @if(salas.get(key).getPlayers().get(0).getId().equals(usuario)){
+    	<button id="botonpanel" class="btn btn-default" onclick="location.href='borrar/@salas.get(key).getPlayers().get(0).getId()'">Borrar la partida: @salas.get(key).getId()  Creada por el usuario: @salas.get(key).getPlayers().get(0).getId()<br>
+    	Jugadores en la partida:@salas.get(key).getPlayers().size() /6
+    	</button>
+    	}
+    }
+    </div>
+    </div>
+  </div>
+</div>
+	</body>
+	</html>

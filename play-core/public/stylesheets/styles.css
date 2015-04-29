@@ -10,7 +10,9 @@
 .modal-footer {
 	display: table;
 }
-
+.panel{
+	margin-top:5%;
+}
 .loginCentrado {
 	margin-top: 10em;
 }

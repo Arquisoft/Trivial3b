@@ -21,6 +21,7 @@ public interface GameService {
 	public void setTablero(int tipo);
 	public String getId();
 	public void setId(String id);
+	public List<String> getAnswers();
 	/**
 	 * Devuelve al ganador si lo hay, o null si no
 	 */

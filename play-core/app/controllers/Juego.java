@@ -18,7 +18,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import util.FileUtil;
 import views.html.findGame;
-import views.html.index;
+import views.html.*;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
@@ -41,7 +41,9 @@ public class Juego extends Controller {
 		game.move();
 		return redirect("/indexr/");
 	}
-
+	public static Result misPartidas(){
+		return ok(games.render(salas,session("id")));
+	}
 	public static Result respuestaCorrecta() {
 		game.respuestaCorrecta();
 		if(game.partidaFinalizada()){
@@ -57,6 +59,13 @@ public class Juego extends Controller {
 	}
 	public static Result findGame(){
 		return ok(findGame.render(salas));
+	}
+	public static Result deleteGame(){
+		return ok(deleteGame.render(salas,session("id")));
+	}
+	public static Result borrar(String id){
+		salas.remove(id);
+		return ok(deleteGame.render(salas, session("id")));
 	}
 	public static Result redirectIndex(){
 		Player player=new Player();
