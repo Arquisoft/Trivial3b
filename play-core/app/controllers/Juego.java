@@ -54,7 +54,6 @@ public class Juego extends Controller {
 
 	public static Result respuestaIncorrecta() {
 		game.respuestaIncorrecta();
-		
 		return redirect("/indexr/");
 	}
 	public static Result findGame(){
@@ -79,7 +78,7 @@ public class Juego extends Controller {
 		Player playert=new Player();
 		playert=Player.get(session("id"));
 		SecureRandom random = new SecureRandom();
-		String id=new BigInteger(15, random).toString(32);
+		String id=new BigInteger(130, random).toString(32);
 		for(String key:salas.keySet()){
 			if(key.equals(session("id"))){
 				game=salas.get(key);
@@ -101,7 +100,6 @@ public class Juego extends Controller {
 	}
 	public static Result joinGame(String id){
 		boolean isPlaying=false;
-		Player player=null;
 		for(String key:salas.keySet()){
 			if(id.equals(salas.get(key).getId())){
 				for(Player p:salas.get(key).getPlayers()){
@@ -110,12 +108,15 @@ public class Juego extends Controller {
 					}
 				}
 				if(!isPlaying){
-				player=new Player();
+				Player player=new Player();
 				player=Player.get(session("id"));
 				salas.get(key).addPlayer(player);
-				}
 				game=salas.get(key);
 				leerTablero(game.getTipo());
+				}
+				else{
+					badRequest();
+				}
 			}
 		}
 		return redirect("/indexr/");
