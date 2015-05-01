@@ -31,6 +31,25 @@ app.run(function($rootScope,$interval,$location) {
 	 setInterval($rootScope.refresh, 5000);
 })
 </script>
+<script type="text/javascript">
+	var acierto = new Audio();
+	var fallo = new Audio();
+	
+	acierto.src = "@routes.Assets.at("/sounds/Acierto.mp3")";
+	fallo.src = "@routes.Assets.at("/sounds/Fallo.mp3")";
+
+	function playAcierto() {
+		acierto.play(); // Play button sound now
+		alert("Has acertado :D");
+
+	}
+
+	function playFallo() {
+		fallo.play(); // Play button sound now
+		alert("Ohhhhhh! Has Fallado :(");
+
+	}
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -132,8 +151,8 @@ app.run(function($rootScope,$interval,$location) {
 				<form action="/tirar" method="post">
 					<label class="alignLabel">@game.getDiceNumber()</label>
 
-					<button class="btn btn-primary" value="Tirar Dado" type="submit"
-						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>Tirar Dado</button>
+					<input type=image src="@routes.Assets.at("images/dado.jpg")" value="Tirar Dado" type="submit"
+						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>
 
 				</form>
 			</div>

@@ -47,7 +47,7 @@
 	margin-left: 1em;
 	margin-rigth: 1em;
 	width: 25%;
-	font-size: 250%;
+	font-size: 300%;
 	display: inline-table;
 }
 
@@ -70,6 +70,6 @@
 
 .rightFloated {
 	float: right;
-	margin-right: 25px;
-	text-align: center;
+	margin-right: 125px;
 }
+

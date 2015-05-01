@@ -9,14 +9,15 @@ import javax.persistence.Id;
 import play.db.ebean.Model;
 
 @Entity
-public class Estadistica extends Model implements Serializable{
+public class Estadistica extends Model implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	//Si no funcionan los ids, descomentar y quitar el idUsuario y el de pregunta
-//	@Id
-//	private long id;
-	
+
+	// Si no funcionan los ids, descomentar y quitar el idUsuario y el de
+	// pregunta
+	// @Id
+	// private long id;
+
 	@Id
 	private String usuario;
 	@Id
@@ -25,7 +26,8 @@ public class Estadistica extends Model implements Serializable{
 	private int aciertos;
 	private int fallos;
 
-	public Estadistica(String usuario, String question, String category, int aciertos, int fallos) {
+	public Estadistica(String usuario, String question, String category,
+			int aciertos, int fallos) {
 		super();
 		this.usuario = usuario;
 		this.question = question;
@@ -37,32 +39,35 @@ public class Estadistica extends Model implements Serializable{
 	public static void addEstadistica(Estadistica estadistica) {
 		estadistica.save();
 	}
-	
-	public String getUsuario(){
+
+	public String getUsuario() {
 		return usuario;
 	}
-	
-	public String getQuestion(){
+
+	public String getQuestion() {
 		return question;
 	}
-	
-	public int getAciertos(){
+
+	public int getAciertos() {
 		return aciertos;
 	}
-	
-	public int getFallos(){
+
+	public int getFallos() {
 		return fallos;
 	}
-	
-	
+
+	public String getCategoria() {
+		return category.toLowerCase();
+	}
+
 	public static List<Estadistica> obtenerTodasEstadisticas() {
 		return finder.findList();
 	}
 
 	public static List<Estadistica> obtenerEstadisticas(String usuario,
 			int pregunta) {
-		return finder.where().eq("usuario", usuario)
-				.conjunction().where().eq("questionId", pregunta).findList();
+		return finder.where().eq("usuario", usuario).conjunction().where()
+				.eq("questionId", pregunta).findList();
 	}
 
 	private static Finder<Integer, Estadistica> finder = new Finder<Integer, Estadistica>(
