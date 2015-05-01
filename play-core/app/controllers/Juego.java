@@ -16,9 +16,12 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import play.mvc.WebSocket;
 import util.FileUtil;
+import views.html.deleteGame;
 import views.html.findGame;
-import views.html.*;
+import views.html.games;
+import views.html.index;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
@@ -34,7 +37,6 @@ public class Juego extends Controller {
 		game.moveTo(game.getCasilla(posicion + 1));
 		return redirect("/indexr/");
 	}
-
 	public static Result tirar() {
 		game.throwDice();
 		game.move();
@@ -56,7 +58,7 @@ public class Juego extends Controller {
 		Player player=new Player();
 		player=Player.get(session("id"));
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages,player.getId(),true));
+				centrosximages, centrosyimages,session("id"),true));
 	}
 	public static Result findGame(){
 		return ok(findGame.render(salas));
@@ -67,6 +69,18 @@ public class Juego extends Controller {
 	public static Result borrar(String id){
 		salas.remove(id);
 		return ok(deleteGame.render(salas, session("id")));
+	}
+	public static Result wsJs() {
+	    return ok(views.js.ws.render());
+	}
+	public static WebSocket<String> wsInterface(){
+	    return new WebSocket<String>(){
+	            
+	        // called when websocket handshake is done
+	        public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out){
+	                SimpleChat.start(in, out);
+	        }
+	    };   
 	}
 	public static Result redirectIndex(){
 		Player player=new Player();

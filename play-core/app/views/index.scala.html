@@ -1,7 +1,7 @@
 @import game._
 @(coordenadas: List[String], game: GameService, centrosx: List[String], centrosy: List[String], centrosximages: List[String], centrosyimages: List[String],usuario: String,condicion: Boolean)
 <!DOCTYPE html>
-<html ng-app="index">
+<html>
 <head>
 <title>Inicio</title>
 
@@ -18,19 +18,6 @@
 <script src="@routes.Assets.at("javascripts/bootstrap-dialog.js")"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 <script src="@routes.Assets.at("javascripts/jquery.progressTimer.min.js")"></script>
-<script>
-var app = angular.module('index', [])
-
-app.run(function($rootScope,$interval,$location) {
-	$rootScope.refresh=function()
-	{
-		if(!@game.CurrentTurnPlayer().getId().equals(usuario)){
-		   window.location.reload();
-		}
-	}
-	 setInterval($rootScope.refresh, 5000);
-})
-</script>
 <script type="text/javascript">
 	var acierto = new Audio();
 	var fallo = new Audio();
@@ -40,16 +27,15 @@ app.run(function($rootScope,$interval,$location) {
 
 	function playAcierto() {
 		acierto.play(); // Play button sound now
-		alert("Has acertado :D");
 
 	}
 
 	function playFallo() {
 		fallo.play(); // Play button sound now
-		alert("Ohhhhhh! Has Fallado :(");
 
 	}
 </script>
+<script type="text/javascript" charset="utf-8" src="@routes.Juego.wsJs()"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -116,7 +102,7 @@ app.run(function($rootScope,$interval,$location) {
 							onclick="location.href='/respuestaCorrecta';playAcierto();">@game.getQuestionGiven().getCorrectAnswer()</button>
 						}
 						@if(!respuesta.equals(game.getQuestionGiven().getCorrectAnswer())){
-						<button class="btn btn-default" type="submit"
+						<button id="fallo" class="btn btn-default" type="submit"
 							onclick="location.href='/respuestaIncorrecta';playFallo();">@respuesta</button>
 							}
 						}
@@ -181,7 +167,7 @@ app.run(function($rootScope,$interval,$location) {
 					    }
 				    }
 			    }
-				@if(game.getMoves()!=null && game.canMove()){
+				@if(game.getMoves()!=null && game.canMove() && game.CurrentTurnPlayer().getId().equals(usuario)){
 					@for(i <- 0 until coordenadas.size()){
 						@for(casilla <- game.getMoves()){
 							@if(i+1 == casilla.getId()){

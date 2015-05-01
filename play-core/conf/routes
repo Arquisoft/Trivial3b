@@ -8,7 +8,8 @@ POST	/							controllers.Application.authenticate()
 GET		/register					controllers.Application.showRegister()
 POST	/register					controllers.Application.register()
 GET		/choice						controllers.Application.showChoice()
-
+GET /assets.javascript.ws.js     controllers.Juego.wsJs()
+GET /wsInterface                controllers.Juego.wsInterface()
 #FALTA: POST	/choice		...
 GET		/indexr/					controllers.Juego.redirectIndex()
 GET		/index/:i					controllers.Juego.showIndex(i:Integer)
