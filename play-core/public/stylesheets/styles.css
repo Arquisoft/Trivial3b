@@ -7,12 +7,22 @@
 	margin-top: 5em;
 }
 
+.primerElementoChoice {
+	margin-top: 5em;
+	display: table;
+	margin-left: 40%;
+	margin-right: 35%;
+	text-align: center;
+}
+
 .modal-footer {
 	display: table;
 }
-.panel{
-	margin-top:5%;
+
+.panel {
+	margin-top: 5%;
 }
+
 .loginCentrado {
 	margin-top: 10em;
 }
@@ -73,3 +83,14 @@
 	margin-right: 125px;
 }
 
+.image1 {
+	max-width: 300px;
+	float: left;
+	margin-left: 300px;
+}
+
+.image2 {
+	max-width: 300px;
+	float: right;
+	margin-right: 300px;
+}

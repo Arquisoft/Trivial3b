@@ -11,23 +11,25 @@
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/styles.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap-dialog.js")"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 <script src="@routes.Assets.at("javascripts/choose.js")"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
 
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 
 				<a class="navbar-brand" href="#">Trivial3b</a>
@@ -42,39 +44,45 @@
 					<li><a href="/deleteGame">Eliminar Partida</a></li>
 				</ul>
 			</div>
-			</div>
+		</div>
 	</nav>
 
-	<div class="col-xs-10 col-xs-offset-1 primerElemento">
+	<div class="primerElementoChoice">
 		<h3>Hola @session.get("id")!</h3>
 		<br />
 
-			<h4>Elige un modo de juego:</h4>
-			<select id="modo" ng-model="currentValue2" ng-options="item.name for item in opciones2"
+		<h4>Elige un modo de juego:</h4>
+		<select id="modo" ng-model="currentValue2"
+			ng-options="item.name for item in opciones2"
 			ng-change="change2(currentValue2)">
-			</select>
-			<div ng-if="selecteable">
+		</select>
+		<div ng-if="selecteable">
 			<h4>Elige un tablero</h4>
-			<select id="tablero" ng-model="currentValue" ng-options="item.name for item in opciones"
-			ng-change="change(currentValue)">
+			<select id="tablero" ng-model="currentValue"
+				ng-options="item.name for item in opciones"
+				ng-change="change(currentValue)">
 			</select>
-			</div>
-			<button type="submit" class="btn btn-primary" ng-if="selecteable" ng-click="redirect()">Jugar</button>
-			<button type="submit" class="btn btn-primary" ng-if="!selecteable" ng-click="redirect2()">Buscar Partidas</button>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-primary" ng-if="selecteable"
+			ng-click="redirect()">Jugar</button>
+		<br>
+		<button type="submit" class="btn btn-primary" ng-if="!selecteable"
+			ng-click="redirect2()">Buscar Partidas</button>
 		<br />
+	</div>
+	<br>
+	<div class="rowChoice">
+		<div class="image1">
+			<a href="#" class="thumbnail"> <img src="@routes.Assets.at("
+				images/trivial4.jpg")" alt="Tablero cuadrado">
+			</a>
+		</div>
 
-		<div class="row">
-			<div class="col-xs-offset-1 col-xs-5 col-md-offset-2 col-md-4">
-				<a href="#" class="thumbnail">
-					<img src="@routes.Assets.at("images/trivial4.jpg")" alt="Tablero cuadrado">
-				</a>
-			</div>
-
-			<div class="col-xs-offset-1 col-xs-5 col-md-4">
-				<a href="#" class="thumbnail">
-					<img src="@routes.Assets.at("images/trivial5.jpg")" alt="Tablero circular">
-				</a>
-			</div>
+		<div class="image2">
+			<a href="#" class="thumbnail"> <img src="@routes.Assets.at("
+				images/trivial5.jpg")" alt="Tablero circular">
+			</a>
 		</div>
 	</div>
 </body>
