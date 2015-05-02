@@ -71,7 +71,7 @@ $(function(){
     	var carga=datosGlobales.split("!");
     	for(i=0;i<carga.length;i++){
     		var datosL=carga[i].split("%");
-    	if(datosL[1]!=undefined){
+    	if(datosL[1]!=undefined || datosGlobales!=undefined){
     	var nodoPadre=document.getElementById("contenedor");
 		var div1=document.createElement("div");
 		if(datosL[0]==datosL[2]){
