@@ -103,7 +103,7 @@
 							onclick="location.href='/respuestaCorrecta';playAcierto();">@game.getQuestionGiven().getCorrectAnswer()</button>
 						}
 						@if(!respuesta.equals(game.getQuestionGiven().getCorrectAnswer())){
-						<button id="fallo" class="btn btn-default" type="submit"
+						<button id="fallo" class="btn btn-default" data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" type="submit"
 							onclick="location.href='/respuestaIncorrecta';playFallo();">@respuesta</button>
 							}
 						}
@@ -138,7 +138,7 @@
 				<form action="/tirar" method="post">
 					<label class="alignLabel">@game.getDiceNumber()</label>
 
-					<input type=image src="@routes.Assets.at("images/dado.jpg")" value="Tirar Dado" type="submit"
+					<input id="dado" type=image src="@routes.Assets.at("images/dado.jpg")" value="Tirar Dado" type="submit"
 						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>
 
 				</form>
@@ -202,7 +202,7 @@
                     <div class="input-group">
                         <input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Escribe tu mensaje aqui" />
                         <span class="input-group-btn">
-                        <button class="btn btn-primary btn-sm" data-game="@game.CurrentTurnPlayer()" data-usuario="@usuario" id="btn-chat">Enviar</button>
+                        <button class="btn btn-primary btn-sm" data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" id="btn-chat">Enviar</button>
                         </span>
                     </div>
                 </div>
