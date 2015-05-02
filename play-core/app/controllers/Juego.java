@@ -94,7 +94,7 @@ public class Juego extends Controller {
 		Player playert=new Player();
 		playert=Player.get(session("id"));
 		SecureRandom random = new SecureRandom();
-		String id=new BigInteger(130, random).toString(32);
+		String id=new BigInteger(15, random).toString(32);
 		for(String key:salas.keySet()){
 			if(key.equals(session("id"))){
 				game=salas.get(key);
