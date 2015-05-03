@@ -25,118 +25,130 @@ import views.html.index;
 import controllers.authenticators.ClientSecured;
 
 public class Juego extends Controller {
-	public static Map<String,GameService> salas=new HashMap<String,GameService>();
-	public  static List<String> coordenadas = new ArrayList<String>();
-	public  static List<String> centrosx = new ArrayList<String>();
-	public  static List<String> centrosy = new ArrayList<String>();
-	public  static List<String> centrosximages = new ArrayList<String>();
-	public  static List<String> centrosyimages = new ArrayList<String>();
-	public  static GameService game;
+	public static final Map<String, GameService> salas = new HashMap<String, GameService>();
+	static List<String> coordenadas = new ArrayList<String>();
+	static List<String> centrosx = new ArrayList<String>();
+	static List<String> centrosy = new ArrayList<String>();
+	static List<String> centrosximages = new ArrayList<String>();
+	static List<String> centrosyimages = new ArrayList<String>();
+	static GameService game;
 
 	public static Result jugar(Integer posicion) {
 		game.moveTo(game.getCasilla(posicion + 1));
 		return redirect("/indexr/");
 	}
+
 	public static Result tirar() {
 		game.throwDice();
 		game.move();
 		return redirect("/indexr/");
 	}
-	public static Result misPartidas(){
-		return ok(games.render(salas,session("id")));
+
+	public static Result misPartidas() {
+		return ok(games.render(salas, session("id")));
 	}
+
 	public static Result respuestaCorrecta() {
 		game.respuestaCorrecta();
-		if(game.partidaFinalizada()){
-			//Borrar la partida actual para dicho usuario
+		if (game.partidaFinalizada()) {
+			// Borrar la partida actual para dicho usuario
 		}
 		return redirect("/indexr/");
 	}
 
 	public static Result respuestaIncorrecta() {
 		game.respuestaIncorrecta();
-		Player player=new Player();
-		player=Player.get(session("id"));
+		Player player = new Player();
+		player = Player.get(session("id"));
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages,session("id"),true));
+				centrosximages, centrosyimages, session("id"), true));
 	}
-	public static Result findGame(){
+
+	public static Result findGame() {
 		return ok(findGame.render(salas));
 	}
-	public static Result deleteGame(){
-		return ok(deleteGame.render(salas,session("id")));
+
+	public static Result deleteGame() {
+		return ok(deleteGame.render(salas, session("id")));
 	}
-	public static Result borrar(String id){
+
+	public static Result borrar(String id) {
 		salas.remove(id);
 		return ok(deleteGame.render(salas, session("id")));
 	}
+
 	public static Result wsJs() {
-	    return ok(views.js.ws.render());
+		return ok(views.js.ws.render());
 	}
-	public static WebSocket<String> wsInterface(){
-	    return new WebSocket<String>(){
-	            
-	        // called when websocket handshake is done
-	        public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out){
-	                SimpleChat.start(in, out);
-	        }
-	    };   
+
+	public static WebSocket<String> wsInterface() {
+		return new WebSocket<String>() {
+
+			// called when websocket handshake is done
+			public void onReady(WebSocket.In<String> in,
+					WebSocket.Out<String> out) {
+				SimpleChat.start(in, out);
+			}
+		};
 	}
-	public static Result redirectIndex(){
-		Player player=new Player();
-		player=Player.get(session("id"));
+
+	public static Result redirectIndex() {
+		Player player = new Player();
+		player = Player.get(session("id"));
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages,player.getId(),false));
+				centrosximages, centrosyimages, player.getId(), false));
 	}
+
 	@Security.Authenticated(ClientSecured.class)
 	public static Result showIndex(Integer tablero) throws IOException {
-		game=null;
-		Player playert=new Player();
-		playert=Player.get(session("id"));
+		game = null;
+		Player playert = new Player();
+		playert = Player.get(session("id"));
 		SecureRandom random = new SecureRandom();
-		String id=new BigInteger(15, random).toString(32);
-		for(String key:salas.keySet()){
-			if(key.equals(session("id"))){
-				game=salas.get(key);
+		String id = new BigInteger(15, random).toString(32);
+		for (String key : salas.keySet()) {
+			if (key.equals(session("id"))) {
+				game = salas.get(key);
 				leerTablero(game.getTipo());
 			}
 		}
-		if(game==null){
-			game=new GameServiceImpl();
+		if (game == null) {
+			game = new GameServiceImpl();
 			salas.put(session("id"), game);
 			game.setTablero(tablero);
 			game.setId(id);
-			Player player=new Player();
-			player=Player.get(session("id"));
+			Player player = new Player();
+			player = Player.get(session("id"));
 			game.addPlayer(player);
 			leerTablero(tablero);
 		}
 		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages,playert.getId(),false));
+				centrosximages, centrosyimages, playert.getId(), false));
 	}
-	public static Result joinGame(String id){
-		boolean isPlaying=false;
-		for(String key:salas.keySet()){
-			if(id.equals(salas.get(key).getId())){
-				for(Player p:salas.get(key).getPlayers()){
-					if(p.getId().equals(session("id"))){
-						isPlaying=true;
+
+	public static Result joinGame(String id) {
+		boolean isPlaying = false;
+		for (String key : salas.keySet()) {
+			if (id.equals(salas.get(key).getId())) {
+				for (Player p : salas.get(key).getPlayers()) {
+					if (p.getId().equals(session("id"))) {
+						isPlaying = true;
 					}
 				}
-				if(!isPlaying){
-				Player player=new Player();
-				player=Player.get(session("id"));
-				salas.get(key).addPlayer(player);
-				game=salas.get(key);
-				leerTablero(game.getTipo());
-				}
-				else{
+				if (!isPlaying) {
+					Player player = new Player();
+					player = Player.get(session("id"));
+					salas.get(key).addPlayer(player);
+					game = salas.get(key);
+					leerTablero(game.getTipo());
+				} else {
 					badRequest();
 				}
 			}
 		}
 		return redirect("/indexr/");
 	}
+
 	public static List<String> getCoordenadas() {
 		String fichero = FileUtil
 				.getFile("public/resources/botonesCircular.txt");
@@ -147,20 +159,19 @@ public class Juego extends Controller {
 	}
 
 	public static void leerTablero(Integer tablero) {
-		String fichero=null;
-		String[] lineas=null;
-		String[] lineas2=null;
-		String fichero2=null;
-		coordenadas=new ArrayList<String>();
-		centrosx=new ArrayList<String>();
-		centrosy=new ArrayList<String>();
-		centrosximages=new ArrayList<String>();
-		centrosyimages=new ArrayList<String>();
+		String fichero = null;
+		String[] lineas = null;
+		String[] lineas2 = null;
+		String fichero2 = null;
+		coordenadas = new ArrayList<String>();
+		centrosx = new ArrayList<String>();
+		centrosy = new ArrayList<String>();
+		centrosximages = new ArrayList<String>();
+		centrosyimages = new ArrayList<String>();
 		switch (tablero) {
 		case 1:
 			Logger.info("circulo");
-			fichero = FileUtil
-					.getFile("public/resources/botonesCircular.txt");
+			fichero = FileUtil.getFile("public/resources/botonesCircular.txt");
 			lineas = fichero.split("[\n]");
 			for (int i = 0; i < lineas.length; i++)
 				coordenadas.add(lineas[i]);
@@ -178,8 +189,7 @@ public class Juego extends Controller {
 			break;
 		case 2:
 			Logger.info("cuadrado");
-			fichero = FileUtil
-			.getFile("public/resources/botonesCuadrado.txt");
+			fichero = FileUtil.getFile("public/resources/botonesCuadrado.txt");
 			lineas = fichero.split("[\n]");
 			for (int i = 0; i < lineas.length; i++)
 				coordenadas.add(lineas[i]);
@@ -195,7 +205,7 @@ public class Juego extends Controller {
 				centrosy.add(datos[1]);
 			}
 			break;
-		
+
 		}
 	}
 }

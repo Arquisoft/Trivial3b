@@ -1,13 +1,16 @@
 import static org.fest.assertions.Assertions.assertThat;
-import static play.test.Helpers.*;
 import static play.mvc.Http.Status.OK;
+import static play.test.Helpers.GET;
+import static play.test.Helpers.callAction;
+import static play.test.Helpers.charset;
+import static play.test.Helpers.contentAsString;
+import static play.test.Helpers.status;
 
 import org.junit.Test;
 
 import play.mvc.Result;
-import controllers.Application;
-import controllers.Juego;
 import play.test.FakeRequest;
+import controllers.Application;
 
 /**
  * 
@@ -31,13 +34,13 @@ public class ApplicationTest {
 		assertThat(contentAsString(result)).contains("Bienvenido");
 	}
 
-//	@Test
-//	public void testCallLogin() {
-//		Result result = callAction(
-//				controllers.routes.ref.Application.showLogin(),
-//				new FakeRequest(GET, "/"));
-//		assertThat(status(result)).isEqualTo(OK);
-//	}
+	@Test
+	public void testCallLogin() {
+		Result result = callAction(
+				controllers.routes.ref.Application.showLogin(),
+				new FakeRequest(GET, "/"));
+		assertThat(status(result)).isEqualTo(OK);
+	}
 
 	@Test
 	public void testRegister() {

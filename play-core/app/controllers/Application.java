@@ -21,7 +21,7 @@ import play.libs.Json;
 
 public class Application extends Controller {
 	public static List<String> coordenadas = new ArrayList<String>();
-	public static GameService game=new GameServiceImpl();
+	public static final GameService game = new GameServiceImpl();
 
 	public static Result showLogin() {
 		return ok(login.render(Form.form(Login.class)));
@@ -49,7 +49,7 @@ public class Application extends Controller {
 			session().clear();
 			session("id", loginForm.get().id);
 
-			if(loginForm.get().id.equals("admin"))
+			if (loginForm.get().id.equals("admin"))
 				return redirect(routes.Application.showAdminStatistics());
 			else
 				return redirect(routes.Application.showChoice());

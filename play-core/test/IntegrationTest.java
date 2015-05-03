@@ -8,8 +8,13 @@ import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
 import static play.test.Helpers.testServer;
+import game.Casilla;
 import game.GameFactory;
 import game.GameService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Player;
 
 import org.junit.Test;
@@ -68,9 +73,49 @@ public class IntegrationTest {
 						assertTrue(0 <= a);
 						assertTrue(6 >= a);
 
+						game.setDiceNumber(1);
 						assertFalse(game.canThrowDice());
 						assertNull(game.throwDice());
 
+						// tratamos de movernos por el tablero
+						assertTrue(game.canMove());
+
+						List<Casilla> lista = game.move();
+						assertFalse(lista == null);
+						assertEquals(lista, game.getMoves());
+
+						assertFalse(game.moveTo(new Casilla()));
+						assertTrue(game.moveTo(lista.get(0)));
+
+						assertEquals(game.getAnswers().size(), 4);
+						game.respuestaCorrecta();
+						Player p = game.CurrentTurnPlayer();
+						// comprobamos que no tiene quesitos
+						assertEquals(p.numeroQuesitos(), 0);
+						game.respuestaIncorrecta();
+						assertTrue(p.equals(game.CurrentTurnPlayer()));
+
+						// volvemos a tirar y a fallar para que finalice el
+						// turno
+						game.throwDice();
+						game.setDiceNumber(2);
+						lista = game.move();
+						assertTrue(game.moveTo(lista.get(0)));
+						assertEquals(game.getAnswers().size(), 4);
+
+						game.respuestaIncorrecta();
+
+						// creamos un juego con el otro tablero
+						GameService game2 = GameFactory.newGameService(2);
+						List<Player> jugadores = new ArrayList<Player>();
+
+						for (int i = 1; i < 7; i++) {
+							jugadores.add(new Player("jugador" + i, "jugador"
+									+ i));
+						}
+						game2.setPlayers(jugadores);
+						assertEquals(jugadores.size(), game2.getPlayers()
+								.size());
 					}
 
 				});

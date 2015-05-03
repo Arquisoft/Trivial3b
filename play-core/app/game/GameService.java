@@ -7,29 +7,36 @@ import models.Pregunta;
 import models.Estadistica;
 import controllers.MongoQuestions;
 
-
-
 public interface GameService {
 
 	/**
 	 * Devuelve true si la partida ya finalizo
 	 */
 	boolean partidaFinalizada();
+
 	public List<Casilla> getMoves();
+
 	public Integer getTipo();
+
 	public void setTipo(Integer tipo);
+
 	public void setTablero(int tipo);
+
 	public String getId();
+
 	public void setId(String id);
+
 	public List<String> getAnswers();
+
 	/**
 	 * Devuelve al ganador si lo hay, o null si no
 	 */
 	int getDiceNumber();
+
 	/**
 	 * Metodo que añade un jugador a la partida y lo coloca en la casilla de
 	 * salida
-	 *
+	 * 
 	 * @param player
 	 *            jugador nuevo.
 	 */
@@ -52,9 +59,8 @@ public interface GameService {
 
 	/**
 	 * Tira el dado y devuelve el valor para mostrarlo (entre 1 y 6).
-	 *
-	 * Para obtener la lista de posibles movimientos llamar a
-	 * {@link #move()}
+	 * 
+	 * Para obtener la lista de posibles movimientos llamar a {@link #move()}
 	 */
 	Integer throwDice();
 
@@ -66,14 +72,14 @@ public interface GameService {
 	/**
 	 * Obtiene la lista de movimientos posibles para el jugador actual, o null
 	 * si no es el momento de mover
-	 *
+	 * 
 	 */
 	List<Casilla> move();
 
 	/**
 	 * Cambia la posicion de un jugador al final del turno, devuelve true si es
 	 * posible el movimiento
-	 *
+	 * 
 	 * @param casilla
 	 *            , nueva casilla en la que se va a situar el jugador.
 	 */
@@ -83,36 +89,29 @@ public interface GameService {
 	 * Metodo que obtiene una pregunta a partir de una casilla, o null si no es
 	 * posible en este momento
 	 */
-	
 
 	/**
 	 * Llamar a este metodo cuando la respuesta sea correcta
 	 */
 	void respuestaCorrecta();
 
-	boolean userExists(String user, String pass);
-
-	boolean isAdmin(String user, String pass);
-
 	/**
 	 * Llamar a este metodo cuando la respuesta sea incorrecta
 	 */
 	void respuestaIncorrecta();
 
-	boolean registerUser(String user, String pass);
-
 	Casilla getCasilla(int i);
-	
-	
 
 	public MongoQuestions getMongoQuestions();
 
 	public void setMongoQuestions(MongoQuestions mongoQuestions);
+
 	public int getActivePlayer();
 
 	public void setActivePlayer(int activePlayer);
 
 	public boolean isDiceThrown();
+
 	public void setDiceThrown(boolean diceThrown);
 
 	public Pregunta getQuestionGiven();
@@ -128,7 +127,7 @@ public interface GameService {
 	public void setPlayers(List<Player> players);
 
 	public void setDiceNumber(int diceNumber);
-	
+
 	public List<Estadistica> getAllEstadisticas();
 
 }
