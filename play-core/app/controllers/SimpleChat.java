@@ -23,7 +23,7 @@ public class SimpleChat{
         
         in.onClose(new Callback0(){
             public void invoke(){
-                SimpleChat.notifyAll("A connection closed");
+                
             }
         });
     }

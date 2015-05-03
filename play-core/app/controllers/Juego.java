@@ -58,10 +58,7 @@ public class Juego extends Controller {
 
 	public static Result respuestaIncorrecta() {
 		game.respuestaIncorrecta();
-		Player player = new Player();
-		player = Player.get(session("id"));
-		return ok(index.render(coordenadas, game, centrosx, centrosy,
-				centrosximages, centrosyimages, session("id"), true));
+		return redirect("/indexr/");
 	}
 
 	public static Result findGame() {

@@ -281,7 +281,7 @@ public class GameServiceImpl implements GameService, Serializable {
 
 			// Guardar estadisticas en segundo plano
 			// guardaEstadisticas(true, player.getUsername(), questionGiven);
-
+			
 			// Pasamos el turno
 			nextTurn();
 
@@ -299,12 +299,12 @@ public class GameServiceImpl implements GameService, Serializable {
 	}
 
 	private void resetTurn() {
-		this.setDiceThrown(false);
+		diceThrown = false;
 		questionGiven = null;
 	}
 
 	private void nextTurn() {
-		this.setActivePlayer(activePlayer++);
+		activePlayer++;
 		activePlayer %= players.size();
 	}
 

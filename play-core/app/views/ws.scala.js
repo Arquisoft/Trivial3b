@@ -49,29 +49,45 @@ $(function(){
     		sessionStorage.setItem("datosGlobales", datosGlobales);
     	}
     	else{
-    	sessionStorage.setItem("datosGlobales", datosGlobales);
-        location.href="/indexr/";
+        location.href="/respuestaIncorrecta";
     	}
     }
     
     socket.onmessage = writeMessages;
     
-    $('#fallo').click(function(event){
-            socket.send("Turno");   
+    $('.fallo').click(function(event){
+    	var usuario = $(this).data('usuario');
+		var game=$(this).data('game');
+    	socket.send(usuario+"%"+"El "+usuario+" ha fallado"+"%"+game+"%"+"Chat");
+        socket.send("Turno");  
+    });
+    $('#logout').click(function(event){
+    	sessionStorage.removeItem("datosGlobales");
+    });
+    $('#acierto').click(function(event){
+    	var usuario = $(this).data('usuario');
+		var quesito=$(this).data('quesito');
+		var categoria=$(this).data('categoria');
+		if(quesito=="QUESITO"){
+			socket.send(usuario+"%"+"El "+usuario+" ha conseguido el quesito de "+categoria+"%"+""+"%"+"Chat");
+		}
+		else{
+			socket.send(usuario+"%"+"El "+usuario+" ha acertado"+"%"+""+"%"+"Chat");
+		}
     });
     $('#btn-chat').click(function(event){
     		var usuario = $('#btn-chat').data('usuario');
     		var game=$('#btn-chat').data('game');
     		var texto=document.getElementById("btn-input").value;
-    		socket.send(usuario+"%"+texto+"%"+game);
+    		socket.send(usuario+"%"+texto+"%"+game+"%"+"Chat");
     		document.getElementById("btn-input").value="";
     });
     $(document).ready(function(event){
     	if(datosGlobales!=""){
     	var carga=datosGlobales.split("!");
-    	for(i=0;i<carga.length;i++){
+    	for(i=0;i<(carga.length-1);i++){
     		var datosL=carga[i].split("%");
-    	if(datosL[1]!=undefined || datosGlobales!=undefined){
+    	if(datosL[2]!=undefined || datosGlobales!=undefined){
     	var nodoPadre=document.getElementById("contenedor");
 		var div1=document.createElement("div");
 		if(datosL[0]==datosL[2]){

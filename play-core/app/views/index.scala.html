@@ -62,7 +62,7 @@
 					<li><a href="/deleteGame">Eliminar Partida</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/logout">Cerrar sesión</a></li>
+					<li><a id="logout" href="/logout">Cerrar sesión</a></li>
 				</ul>
 			</div>
 		</div>
@@ -99,11 +99,11 @@
 					<div class="modal-footer">
 						@for(respuesta <- game.getAnswers()){
 						@if(respuesta.equals(game.getQuestionGiven().getCorrectAnswer())){
-							<button class="btn btn-default" type="submit"
+							<button id="acierto" class="btn btn-default acierto" type="submit" data-usuario="@usuario" data-categoria="@game.CurrentTurnPlayer().getPosition().getCategoria()"data-quesito="@game.CurrentTurnPlayer().getPosition().getTipo()"
 							onclick="location.href='/respuestaCorrecta';playAcierto();">@game.getQuestionGiven().getCorrectAnswer()</button>
 						}
 						@if(!respuesta.equals(game.getQuestionGiven().getCorrectAnswer())){
-						<button id="fallo" class="btn btn-default" data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" type="submit"
+						<button id="fallo" data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" class="btn btn-default fallo" data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" type="submit"
 							onclick="location.href='/respuestaIncorrecta';playFallo();">@respuesta</button>
 							}
 						}
