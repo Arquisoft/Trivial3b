@@ -1,0 +1,36 @@
+La aplicación, en un primer paso, se encarga de leer ficheros con los enunciados y respuestas de preguntas, procesas dichas preguntas indicando si hay errores o son correctas y guardarlas un fichero intermedio de salida.
+En un segundo paso, se encarga de subir esas preguntas (una vez el operario las haya revisado, si así lo desea) a una base de datos MongoDB.
+
+1-Implementación del sistema
+  a.	Requerimientos de hardware:
+  b.	Ordenador.
+b)	Requerimientos de software:
+  a.	Sistema operativo con Java 1.7+.
+  b.	Una base MongoDB en local (Para usar el guardado en base de datos)
+
+2-Ingresando al sistema. 
+Ejecuta la aplicación trivial3b.jar, a través de la ventana de comandos con la orden java –jar trivial3b.jar <modo> <parámetros>.
+
+3-Funcionalidad general.
+La forma de utilizar esta aplicación es la misma que cualquier otra de tipo bash, ésta, en concreto, precisa de al menos tres parámetros para funcionar correctamente. El formato de entrada sería: 
+Uso: java -jar extract.jar <modo> <parámetros>
+
+Modos:
+ - extract: Extrae las preguntas a un fichero de salida
+	 - Parámetros: <entrada> <formato-entrada> <salida> <formato-salida>
+	 Los formatos de entrada son: gift, xml
+	 Los formatos de salida son: json
+
+ - upload: Sube las preguntas extraídas a la base de datos
+	 - Parámetros: <entrada> <servidor>
+	 El servidor es de tipo url:puerto
+	 En caso de omisión se supondrá localhost:27017
+	 
+El significado de dichos parámetros es el siguiente:
+  •	entrada: Ubicación del fichero en el cuál se encuentran las preguntas.
+  •	formato-entrada: Formato del fichero de entrada.
+  •	fichero-salida: En caso de salida a fichero, para indicar la ruta del fichero de salida.
+  •	formato-salida: formato del fichero en el que queremos que la aplicación nos devuelva las preguntas (de momento solo está JSON).
+Una vez ejecutado dicho comando con el primero de los modos, el programa se encarga de generar la salida con el formato correspondiente y de guardarla en un fichero.
+Cuando el usuario lo vea oportuno, con el segundo de los modos es posible guardar los datos de ese fichero en una base de datos MongoDB en formato JSON.
+Si alguna de las preguntas procesadas tiene un formato incorrecto o algún fallo (p ej.: no tiene respuesta correcta) la aplicación generará un mensaje de error e ignorará la pregunta, pero seguirá con el procesamiento del resto de preguntas.
