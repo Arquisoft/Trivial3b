@@ -1,6 +1,5 @@
 package cucumber;
 
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import cucumber.api.CucumberOptions;
@@ -12,9 +11,4 @@ import cucumber.api.junit.Cucumber;
 			features 	= "test/cucumber/features/"
 )
 public class TestCucumber {
-	
-	@BeforeClass
-	public static void startAppliaction() {
-		
-	}
 }
