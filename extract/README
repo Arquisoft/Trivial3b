@@ -31,6 +31,8 @@ El significado de dichos parámetros es el siguiente:
   •	formato-entrada: Formato del fichero de entrada.
   •	fichero-salida: En caso de salida a fichero, para indicar la ruta del fichero de salida.
   •	formato-salida: formato del fichero en el que queremos que la aplicación nos devuelva las preguntas (de momento solo está JSON).
+
+
 Una vez ejecutado dicho comando con el primero de los modos, el programa se encarga de generar la salida con el formato correspondiente y de guardarla en un fichero.
 Cuando el usuario lo vea oportuno, con el segundo de los modos es posible guardar los datos de ese fichero en una base de datos MongoDB en formato JSON.
 Si alguna de las preguntas procesadas tiene un formato incorrecto o algún fallo (p ej.: no tiene respuesta correcta) la aplicación generará un mensaje de error e ignorará la pregunta, pero seguirá con el procesamiento del resto de preguntas.
