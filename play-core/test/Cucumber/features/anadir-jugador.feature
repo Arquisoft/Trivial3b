@@ -1,7 +1,7 @@
 # language: es
-Característica: Añadir jugadores
+CaracterÃ­stica: AÃ±adir jugadores
 
 Escenario: Crear el primer usuario
-    Dada un juego creado
+    Dado un juego creado
     Cuando creo un jugador de nombre "Usuario1" y pass "Usuario1"
     Entonces el jugador actual es "Usuario1"

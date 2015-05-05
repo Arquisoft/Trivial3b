@@ -1,4 +1,4 @@
-package es.uniovi.asw.game.graph;
+package graph;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;

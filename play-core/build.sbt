@@ -25,4 +25,3 @@ findbugsSettings
 findbugsReportType := Some(de.johoop.findbugs4sbt.ReportType.Html)
 
 herokuAppName in Compile := "trivial3b"
-
