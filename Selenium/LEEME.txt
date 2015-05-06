@@ -1,6 +1,0 @@
-En: http://www.seleniumhq.org/download/
-estan los (jar): Selenium Client & WebDriver Language Bindings
-para poder ejecutarlo desde java
-
-Mi eclipse me da problemas, pero tal cual esta solo deberia ser: bton.Der>Run as>Junit test
-(La primera vez tarda unos minutos)
