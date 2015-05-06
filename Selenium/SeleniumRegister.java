@@ -8,8 +8,12 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import play.test.*;
+import play.mvc.*;
+import play.mvc.Http.*;
+import models.*;
 
-public class SeleniumRegister {
+public class SeleniumRegister extends FunctionalTest{
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
