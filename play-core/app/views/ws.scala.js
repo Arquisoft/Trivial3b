@@ -82,6 +82,17 @@ $(function(){
     		socket.send(usuario+"%"+texto+"%"+game+"%"+"Chat");
     		document.getElementById("btn-input").value="";
     });
+    $('#btn-input').keyup(function(event){
+    var charCode = (event.which) ? event.which : event.keyCode ;
+    	if(charCode==13){
+    		var usuario = $('#btn-input').data('usuario');
+    		var game=$('#btn-input').data('game');
+    		var texto=document.getElementById("btn-input").value;
+    		socket.send(usuario+"%"+texto+"%"+game+"%"+"Chat");
+    		document.getElementById("btn-input").value="";
+    		
+    	}
+    });
     $(document).ready(function(event){
     	if(datosGlobales!=""){
     	var carga=datosGlobales.split("!");

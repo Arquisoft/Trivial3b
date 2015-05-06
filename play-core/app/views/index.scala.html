@@ -200,7 +200,7 @@
                 </div>
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Escribe tu mensaje aqui" />
+                        <input id="btn-input"  data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" type="text" class="form-control input-sm chat_input" placeholder="Escribe tu mensaje aqui" />
                         <span class="input-group-btn">
                         <button class="btn btn-primary btn-sm" data-game="@game.CurrentTurnPlayer().getId()" data-usuario="@usuario" id="btn-chat">Enviar</button>
                         </span>

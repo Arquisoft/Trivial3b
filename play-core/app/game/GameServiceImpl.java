@@ -150,8 +150,7 @@ public class GameServiceImpl implements GameService, Serializable {
 
 			Player player = CurrentTurnPlayer();
 
-			// Guardar estadisticas en segundo plano
-			// guardaEstadisticas(true, player.getUsername(), questionGiven);
+			guardaEstadisticas(true, player.getId(), questionGiven);
 
 			// Si es una pregunta de quesito, lo añadimos
 			if (player.getPosition().getTipo().equals(TipoCasilla.QUESITO)) {
@@ -166,49 +165,25 @@ public class GameServiceImpl implements GameService, Serializable {
 		}
 	}
 
-	// private void guardaEstadisticas(final boolean resultado, final String
-	// user,
-	// final Pregunta question) {
-	// if (saveStats) {
-	// try {
-	// new Thread(new Runnable() {
-	// @Override
-	// public void run() {
-	// // Almacenar en base de datos estadisticas pregunta
-	// // EstadisticasJugadorDao ejDao =
-	// persistencia.createEstadisticasJugadorDao();
-	// // JugadorDao jugadorDao = persistencia.createJugadorDao();
-	// // PreguntaDao preguntaDao = persistencia.createPreguntaDao();
-	// // String id = question.getId();
-	//
-	// Map<String, Object> pregunta = preguntaDao.findById(id);
-	// if (pregunta == null) {
-	// preguntaDao.insertar(question);
-	// pregunta = preguntaDao.findById(id);
-	// preguntaDao.guardarResultado(pregunta, resultado);
-	// } else
-	// preguntaDao.guardarResultado(pregunta, resultado);
-	//
-	// // Almacenar estadisticas jugador
-	// int idJugador = jugadorDao.getIdByLogin(user);
-	// pregunta = ejDao.findByJyP(idJugador, id);
-	// if (pregunta == null) {
-	// ejDao.insertar(idJugador, id);
-	// pregunta = ejDao.findByJyP(idJugador, id);
-	// ejDao.guardarResultado(pregunta, resultado);
-	// } else
-	// ejDao.guardarResultado(pregunta, resultado);
-	// }
-	// }).start();
-	// } catch (Exception e) {
-	// saveStats = false;
-	// JOptionPane.showMessageDialog(null,
-	// "Error al guardar las estadisticas, "
-	// + "se han desabilitado durante esta partida");
-	// e.printStackTrace();
-	// }
-	// }
-	// }
+	private void guardaEstadisticas(final boolean resultado, final String user, final Pregunta question) {
+		
+		
+		if (saveStats) {
+			try {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+
+						Estadistica.updateEstadistica(user, question.getQuestion(), question.getCategory().toString(), resultado);
+					}
+				}).start();
+			} catch (Exception e) {
+				saveStats = false;
+
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public MongoQuestions getMongoQuestions() {
@@ -279,8 +254,10 @@ public class GameServiceImpl implements GameService, Serializable {
 	public void respuestaIncorrecta() {
 		if (CurrentTurnPlayer() != null && diceThrown && questionGiven != null) {
 
+			Player player = CurrentTurnPlayer();
+
 			// Guardar estadisticas en segundo plano
-			// guardaEstadisticas(true, player.getUsername(), questionGiven);
+			guardaEstadisticas(false, player.getId(), questionGiven);
 			
 			// Pasamos el turno
 			nextTurn();

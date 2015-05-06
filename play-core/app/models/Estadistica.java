@@ -3,8 +3,8 @@ package models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 import play.db.ebean.Model;
 
@@ -13,15 +13,8 @@ public class Estadistica extends Model implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	// Si no funcionan los ids, descomentar y quitar el idUsuario y el de
-	// pregunta
-	// @Id
-	// private long id;
-
-	@Id
-	private String usuario;
-	@Id
-	private String question;
+	@EmbeddedId 
+	public EstadisticaKey key;
 	private String category;
 	private int aciertos;
 	private int fallos;
@@ -29,8 +22,7 @@ public class Estadistica extends Model implements Serializable {
 	public Estadistica(String usuario, String question, String category,
 			int aciertos, int fallos) {
 		super();
-		this.usuario = usuario;
-		this.question = question;
+		this.key = new EstadisticaKey(usuario, question);
 		this.category = category;
 		this.aciertos = aciertos;
 		this.fallos = fallos;
@@ -41,11 +33,11 @@ public class Estadistica extends Model implements Serializable {
 	}
 
 	public String getUsuario() {
-		return usuario;
+		return key.usuario;
 	}
 
 	public String getQuestion() {
-		return question;
+		return key.question;
 	}
 
 	public int getAciertos() {
@@ -70,6 +62,28 @@ public class Estadistica extends Model implements Serializable {
 				.eq("questionId", pregunta).findList();
 	}
 
-	private static Finder<Integer, Estadistica> finder = new Finder<Integer, Estadistica>(
-			Integer.class, Estadistica.class);
+	public static void updateEstadistica(String idUsuario, String idPregunta, String category, boolean acierto) {
+		List<Estadistica> lista = finder.where().eq("question", idPregunta).conjunction().eq("usuario", idUsuario).findList();
+		Estadistica e = (lista.isEmpty()) ? null : lista.get(0);
+		if(e == null) {
+			e = new Estadistica(idUsuario, idPregunta, category, 0, 0);
+			e.save();
+		}
+		if(acierto)
+			e.incrementarAcierto();
+		else 
+			e.incrementarFallo();
+		e.update();
+	}
+
+	private void incrementarFallo() {
+		fallos++;
+	}
+
+	private void incrementarAcierto() {
+		aciertos++;
+	}
+
+	private static Finder<EstadisticaKey, Estadistica> finder = new Finder<EstadisticaKey, Estadistica>(
+			EstadisticaKey.class, Estadistica.class);
 }
