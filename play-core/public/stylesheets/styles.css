@@ -54,6 +54,7 @@
 }
 
 .divPlayers {
+	padding-right: 15px;
 	margin-left: 70%;
 	margin-rigth: 1em;
 	font-size: 300%;
@@ -64,11 +65,13 @@
 
 .chat {
 	bottom:0em;
+	display: table-cell;
+    max-width: 400px;	
 }
 
 .gameBoard {
 	text-align: center;
-	margin-left: 0em;
+	padding-left: 10px;
 	float: left;
 }
 
@@ -83,9 +86,21 @@
 	margin-bottom: unset;
 }
 
+.dado {
+	font-size: 150%;
+	border-style: ridge; 
+	border-width: 4px;	
+	border-color: silver;
+	margin: 15px; 	
+	
+}
+
+.imagenDado {
+	margin-top: 10px;
+}
+
 .rightFloated {
-	float: right;
-	margin-right: 125px;
+	text-align: center;	
 }
 
 .image1 {

@@ -133,16 +133,7 @@
 					</div>
 				</div>
 			</div>
-			}
-			<div class="rightFloated">
-				<form action="/tirar" method="post">
-					<label class="alignLabel">@game.getDiceNumber()</label>
-
-					<input id="dado" type=image src="@routes.Assets.at("images/dado.jpg")" value="Tirar Dado" type="submit"
-						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>
-
-				</form>
-			</div>
+			}			
 		</div>
 
 		<div class="gameBoard">
@@ -185,7 +176,16 @@
 		</div>
 	</div>
 	<div class=chat>
-	<div class="col-xs-5 col-md-3" id="chat_window_1">
+	<div class="rightFloated">
+				<form action="/tirar" method="post">
+					<div class=dado>
+					<input class="imagenDado" type=image src="@routes.Assets.at("images/dado.jpg")" value="Tirar Dado" type="submit"
+						@if(!game.canThrowDice() || !game.CurrentTurnPlayer().getId().equals(usuario)){disabled="disabled"}>
+					<label class="alignLabel">@game.getDiceNumber()</label>						
+					</div>
+				</form>
+	</div>
+	<div id="chat_window_1">
         <div class="col-xs-12 col-md-12">
         	<div class="panel panel-default">
                 <div class="panel-heading top-bar">
