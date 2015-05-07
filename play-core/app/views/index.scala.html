@@ -112,30 +112,6 @@
 			</div>
 		</div>
 		}
-		<div class="divPlayers">
-			@for(player <- game.getPlayers()){
-			<div class="players">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						@player.getId()
-						<div class="row">
-							@for(k<-0 until player.getCategorias().size()){
-							@if(player.getQuesitos().get(player.getCategorias().get(k))==null){
-							<div class="col-xs-4">
-								<img alt="" src="@routes.Assets.at("images/figuritabn"+(k+1)+".png")">
-							</div>
-							} else {
-							<div class="col-xs-4">
-								<img alt="" src="@routes.Assets.at("images/figurita"+(k+1)+".png")">
-							</div>
-							} }
-						</div>
-					</div>
-				</div>
-			</div>
-			}			
-		</div>
-
 		<div class="gameBoard">
 			<svg>
 			@if(game.getTipo()==1){
@@ -173,6 +149,29 @@
 				    }
 			    }			  
 			</svg>
+		</div>
+		<div class="divPlayers">
+		@for(player <- game.getPlayers()){
+			<div class="players">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						@player.getId()
+						<div class="row">
+							@for(k<-0 until player.getCategorias().size()){
+							@if(player.getQuesitos().get(player.getCategorias().get(k))==null){
+							<div class="col-xs-4">
+								<img alt="" src="@routes.Assets.at("images/figuritabn"+(k+1)+".png")">
+							</div>
+							} else {
+							<div class="col-xs-4">
+								<img alt="" src="@routes.Assets.at("images/figurita"+(k+1)+".png")">
+							</div>
+							} }
+						</div>
+					</div>
+				</div>
+			</div>
+			}			
 		</div>
 	</div>
 	<div class=chat>

@@ -5,6 +5,8 @@
 
 .primerElemento {
 	margin-top: 5em;
+	text-align: center;
+	
 }
 
 .primerElementoChoice {
@@ -53,20 +55,22 @@
 	border-radius: 70px
 }
 
-.divPlayers {
+.divPlayers {	
+	border-style: ridge; 
+	border-width: 4px;	
+	border-color: silver;
 	padding-right: 15px;
-	margin-left: 70%;
-	margin-rigth: 1em;
+	padding-left: 15px;
 	font-size: 300%;
-	width:30%;
-	heigth:15%;
-	position:absolute;
+	margin-left: 15px;
+	float: right;
 }
 
 .chat {
 	bottom:0em;
 	display: table-cell;
-    max-width: 400px;	
+    max-width: 420px;	
+    float: none;
 }
 
 .gameBoard {
