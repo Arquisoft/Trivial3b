@@ -1,38 +1,22 @@
 package cucumber.steps;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import game.GameFactory;
 import game.GameService;
 import models.Player;
+import server.StartTestServer;
+import cucumber.api.java.Before;
 import cucumber.api.java.es.Cuando;
 import cucumber.api.java.es.Dado;
 import cucumber.api.java.es.Entonces;
 
-import cucumber.api.java.Before;
-import play.test.TestBrowser;
-import play.test.TestServer;
-import static play.test.Helpers.*;
-
 public class GameSteps {
-	
-    public static int PORT = 3334;
-    private static TestServer TEST_SERVER;
-    private static boolean initialised = false;
 
-    @Before
-    public void before() {
-        if (!initialised) {
-            TEST_SERVER = testServer(PORT, fakeApplication(inMemoryDatabase()));
-            start(TEST_SERVER);
-            initialised = true;
-            Runtime.getRuntime().addShutdownHook(new Thread() {
-                @Override
-                public void run() {
-                    TEST_SERVER.stop();
-                }
-            });
-        }
-    }
+	@Before
+	public void before() {
+		StartTestServer.initServer();
+	}
 
 	private GameService game;
 
@@ -51,7 +35,7 @@ public class GameSteps {
 	public void el_jugador_actual_es(String nombre) throws Throwable {
 		assertEquals(nombre, game.CurrentTurnPlayer().getId());
 	}
-	
+
 	@Entonces("^el jugador actual no es \"(.*?)\"$")
 	public void el_jugador_actual_o_es(String nombre) throws Throwable {
 		assertNotEquals(nombre, game.CurrentTurnPlayer().getId());
